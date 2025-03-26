@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>about d.r. albright</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, height=device-height">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
@@ -248,15 +248,31 @@
             body {
                 padding: 30px 10px 10px 10px;
                 min-height: 100vh;
+                min-height: -webkit-fill-available;
                 overflow-y: auto;
                 -webkit-overflow-scrolling: touch;
             }
 
+            html {
+                height: -webkit-fill-available;
+            }
+
+            .container {
+                width: 95%;
+                height: auto;
+                min-height: 85vh;
+                min-height: -webkit-fill-available;
+                margin: 10px auto;
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+
             .content {
+                position: relative;
+                height: auto;
+                min-height: 85vh;
                 -webkit-overflow-scrolling: touch;
                 overflow-y: auto;
                 touch-action: pan-y;
-                height: 92%;
                 width: 92%;
                 padding: 4%;
                 -webkit-transform: translateZ(0);
