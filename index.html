@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>about d.r. albright</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
 
         body {
             margin: 0;
-            padding: 0;
+            padding: 35px 20px 20px 20px;
             background: var(--bg-color);
             display: flex;
             justify-content: center;
@@ -27,7 +27,6 @@
             width: 100%;
             font-family: 'VT323', monospace;
             position: relative;
-            padding: 20px;
             box-sizing: border-box;
             overflow-x: hidden;
         }
@@ -53,7 +52,7 @@
         .container {
             width: 100%;
             max-width: 800px;
-            height: 90vh;
+            min-height: 90vh;
             display: flex;
             gap: 2px;
             background: var(--bg-color);
@@ -68,11 +67,12 @@
         .container::before {
             content: "ACCESS FILE | D.R. ALBRIGHT";
             position: absolute;
-            top: -25px;
+            top: -30px;
             left: 10px;
             color: var(--primary-color);
             font-family: 'Press Start 2P', cursive;
             font-size: 0.7rem;
+            padding: 5px 0;
         }
 
         /* Add terminal status indicator */
@@ -113,7 +113,8 @@
 
         .terminal-prompt {
             font-family: 'Press Start 2P', cursive;
-            font-size: 0.5rem;
+            font-size: 0.75rem;
+            
             color: var(--primary-color);
             opacity: 0.8;
             animation: type-text 1.5s steps(40, end);
@@ -201,7 +202,7 @@
             justify-content: flex-start;
             align-items: flex-start;
             padding: 3%;
-            overflow-y: scroll;
+            overflow-y: auto;
             -webkit-overflow-scrolling: touch;
             overscroll-behavior: contain;
             color: var(--text-color);
@@ -214,7 +215,10 @@
             scrollbar-width: thin;
             scrollbar-color: var(--primary-color) rgba(255, 152, 0, 0.1);
             -webkit-appearance: none;
+            appearance: none;
             touch-action: pan-y;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
         }
 
         @supports (-webkit-touch-callout: none) {
@@ -231,28 +235,49 @@
             }
         }
 
-        .section:hover .content {
+        .section:hover .content,
+        .section.active .content {
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
             touch-action: pan-y;
         }
 
-        /* Ensure content is scrollable on mobile */
+        /* Mobile-specific styles */
         @media (max-width: 768px) {
+            body {
+                padding: 30px 10px 10px 10px;
+                min-height: 100vh;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
             .content {
                 -webkit-overflow-scrolling: touch;
-                overflow-y: scroll;
+                overflow-y: auto;
                 touch-action: pan-y;
                 height: 92%;
                 width: 92%;
                 padding: 4%;
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+            }
+            
+            /* Remove hover effects on mobile */
+            .section:hover .content {
+                opacity: 0;
+                visibility: hidden;
             }
 
-            .section:hover .content {
+            /* Show content only when active class is present */
+            .section.active .content {
                 opacity: 1;
                 visibility: visible;
-                pointer-events: auto;
+            }
+
+            .container::before {
+                top: -25px;
+                font-size: 0.6rem;
             }
         }
 
@@ -338,12 +363,6 @@
         .content li {
             font-size: 1rem;
             list-style-type: none;
-        }
-
-        .section:hover .content {
-            opacity: 0.5;
-            animation: fade-in 0.4s ease;
-            visibility: visible; /* Show content on hover */
         }
 
         .section:hover .section-title {
@@ -435,7 +454,7 @@
 
             .game-box-art {
                 width: 70px;
-                height: 93px;
+                height: auto;
             }
 
             .game-list li {
@@ -1251,45 +1270,36 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const container = document.querySelector('.container');
+        document.addEventListener('DOMContentLoaded', () => {
             const sections = document.querySelectorAll('.section');
             const gameItems = document.querySelectorAll('.game-list li');
-            const boxDisplay = document.querySelector('.game-box-display');
             
-            // Random flicker effect
-            setInterval(() => {
-                if (Math.random() > 0.98) {
-                    container.style.opacity = '0.95';
-                    setTimeout(() => {
-                        container.style.opacity = '1';
-                    }, 50);
-                }
-            }, 2000);
-            
-            function switchBoxArt(boxArt) {
-                boxDisplay.classList.add('switching');
-                setTimeout(() => {
-                    boxDisplay.innerHTML = `<img src="images/${boxArt}" alt="Game Box Art">`;
-                    boxDisplay.style.opacity = '1';
-                    setTimeout(() => {
-                        boxDisplay.classList.remove('switching');
-                    }, 300);
-                }, 150);
+            // Function to deactivate all sections
+            function deactivateAllSections() {
+                sections.forEach(s => s.classList.remove('active'));
             }
-            
+
             // Add both mouse and touch events for sections
             sections.forEach(section => {
                 const handleInteraction = () => {
                     const content = section.querySelector('.content');
+                    
+                    // For mobile: toggle active state
+                    if (window.innerWidth <= 768) {
+                        if (!section.classList.contains('active')) {
+                            deactivateAllSections();
+                            section.classList.add('active');
+                        }
+                    }
+
                     if (content.style.opacity !== '1') {
                         content.style.opacity = '0';
                         setTimeout(() => {
                             content.style.opacity = '1';
                             if (section.querySelector('.section-title').textContent === 'Published Games') {
                                 const firstGame = section.querySelector('.game-list li');
-                                const firstBoxArt = firstGame.getAttribute('data-boxart');
-                                if (firstBoxArt && !boxDisplay.querySelector('img')) {
+                                const firstBoxArt = firstGame?.getAttribute('data-boxart');
+                                if (firstBoxArt && boxDisplay?.querySelector('img') === null) {
                                     switchBoxArt(firstBoxArt);
                                 }
                             }
@@ -1297,26 +1307,24 @@
                     }
                 };
 
-                section.addEventListener('mouseenter', handleInteraction);
+                // Desktop hover
+                section.addEventListener('mouseenter', (e) => {
+                    if (window.innerWidth > 768) {
+                        handleInteraction();
+                    }
+                });
+
+                // Mobile touch
                 section.addEventListener('touchstart', (e) => {
                     e.preventDefault();
                     handleInteraction();
                 });
-            });
 
-            // Add both mouse and touch events for game items
-            gameItems.forEach(item => {
-                const handleGameInteraction = () => {
-                    const boxArt = item.getAttribute('data-boxart');
-                    if (boxArt) {
-                        switchBoxArt(boxArt);
+                // Close on touch outside
+                document.addEventListener('touchstart', (e) => {
+                    if (window.innerWidth <= 768 && !section.contains(e.target)) {
+                        section.classList.remove('active');
                     }
-                };
-
-                item.addEventListener('mouseenter', handleGameInteraction);
-                item.addEventListener('touchstart', (e) => {
-                    e.preventDefault();
-                    handleGameInteraction();
                 });
             });
         });
