@@ -195,7 +195,8 @@
             justify-content: flex-start;
             align-items: flex-start;
             padding: 5%;
-            overflow-y: auto;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch; /* Enable momentum scrolling on iOS */
             color: var(--text-color);
             opacity: 0;
             transition: opacity 0.4s ease;
