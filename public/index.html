@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>about d.r. albright</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #000000;
+            --primary-color: #e68a00;     /* Changed to green terminal color */
+            --secondary-color: #ff9800;   /* Darker green for secondary elements */
+            --dim-color: #ff9800;         /* Very dark green for subtle elements */
+            --text-color: #ff9800;        /* Green text */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100vw;
+            font-family: 'VT323', monospace;
+            position: relative;
+        }
+
+        /* Add subtle CRT scan lines effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                rgba(18, 16, 16, 0) 50%, 
+                rgba(0, 0, 0, 0.25) 50%
+            );
+            background-size: 100% 4px;
+            z-index: 2;
+            pointer-events: none;
+            opacity: 0.15;
+        }
+
+        .container {
+            width: 90vw;
+            height: 80vh;
+            display: flex;
+            gap: 2px;
+            background: var(--bg-color);
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .container::before {
+            content: "ACCESS PERSONNEL FILE | D.R. ALBRIGHT";
+            position: absolute;
+            top: -25px;
+            left: 10px;
+            color: var(--primary-color);
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.7rem;
+        }
+
+        /* Add terminal status indicator */
+        .container::after {
+            position: absolute;
+            top: -25px;
+            right: 10px;
+            color: var(--primary-color);
+            font-family: 'VT323', monospace;
+            font-size: 0.7rem;
+            animation: terminal-blink 4s infinite;
+        }
+
+        @keyframes terminal-blink {
+            0%, 97%, 100% { opacity: 1; }
+            98%, 99% { opacity: 0.8; }
+        }
+
+ 
+
+        .terminal-header {
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+        }
+
+        .terminal-line {
+            width: 80%;
+            height: 1px;
+            background-color: var(--primary-color);
+        }
+
+        .terminal-prompt {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.5rem;
+            color: var(--primary-color);
+            opacity: 0.8;
+            animation: type-text 1.5s steps(40, end);
+        }
+
+        @keyframes type-text {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        .section {
+            flex: 1;
+            transition: flex 0.6s cubic-bezier(0.22, 1, 0.36, 1), border 0.3s ease;
+            position: relative;
+            border: 1px solid var(--dim-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--bg-color);
+            max-width: 800px;
+        }
+
+        .section:nth-child(1) { background: var(--bg-color); }
+        .section:nth-child(2) { background: var(--bg-color); }
+        .section:nth-child(3) { background: var(--bg-color); }
+        .section:nth-child(4) { background: var(--bg-color); }
+        .section:nth-child(5) { background: var(--bg-color); }
+
+        /* Add hover effects */
+        .section:hover {
+            flex: 6;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        /* Add top bar to each section like in the main page cabinets */
+        .section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            opacity: 0.5;
+        }
+
+        .section:hover::before {
+            opacity: 1;
+        }
+
+        .section-title {
+            position: absolute;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            font-size: clamp( 2vh, 2.5vh, 3vh);
+            color: var(--primary-color);
+            font-family: 'Press Start 2P', cursive;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .content {
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: 5%;
+            overflow-y: auto;
+            color: var(--text-color);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            font-family: 'VT323', monospace;
+            gap: 1vh;
+            visibility: hidden;
+            overflow-x: hidden;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) rgba(255, 152, 0, 0.1);
+        }
+
+        /* Style the scrollbar */
+        .content::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .content::-webkit-scrollbar-track {
+            background: rgba(255, 152, 0, 0.1);
+            border-left: 1px solid rgba(255, 152, 0, 0.2);
+        }
+
+        .content::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 0;
+            border-right: 1px solid rgba(0, 0, 0, 0.8);
+            box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Hide horizontal scrollbar */
+        .content {
+            overflow-x: hidden;
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: var(--primary-color) rgba(255, 152, 0, 0.1); /* Firefox */
+        }
+
+        /* For all elements - hide horizontal scrollbar */
+        * {
+            scrollbar-width: thin;
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+
+        /* Hide horizontal scrollbar for Chrome, Safari and Opera */
+        *::-webkit-scrollbar-horizontal {
+            display: none;
+        }
+
+        /* Terminal-style blinking cursor for scrollbar */
+        .content::-webkit-scrollbar-thumb:active {
+            background: #ffffff;
+            transition: background 0.1s;
+        }
+
+        /* Terminal-style scrollbar button styling */
+        .content::-webkit-scrollbar-button {
+            height: 4px;
+            background-color: var(--primary-color);
+            border: 1px solid rgba(0, 0, 0, 0.8);
+        }
+
+        /* Auto-scaling typography based on container height */
+        .content h2 {
+            font-size: 1.25rem;
+            color: var(--secondary-color);
+            font-family: 'VT323', monospace;
+            font-weight: bold;
+        }
+
+        .content h3 {
+            font-size: 1rem;
+            color: var(--secondary-color);
+            font-family: 'VT323', monospace;
+            font-weight: bold;
+        }
+
+        .content p, .content li {
+            font-size: 0.75rem;
+            width: 100%;
+            color: var(--text-color);
+        }
+
+        /* Ensure lists fit */
+        .content ul {
+            width: 100%;
+            padding-left: 1.2rem;
+            margin: 0;
+        }
+
+        .content li {
+            font-size: 0.7rem;
+            line-height: 1.4;
+            list-style-type: none;
+        }
+
+        .section:hover .content {
+            opacity: 1;
+            animation: fade-in 0.4s ease;
+            visibility: visible; /* Show content on hover */
+        }
+
+        .section:hover .section-title {
+            opacity: 0;
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Media queries for different screen sizes */
+        @media (max-height: 600px) {
+            .content h2 { font-size: 0.8rem; }
+            .content h3 { font-size: 0.7rem; }
+            .content p, .content li { font-size: 0.65rem; }
+        }
+
+        @media (max-width: 768px) {
+            .section:hover {
+                flex: 12;
+            }
+            
+            .content h2 { font-size: 0.7rem; }
+            .content h3 { font-size: 0.6rem; }
+            .content p, .content li { 
+                font-size: 0.6rem;
+                line-height: 1.3;
+            }
+            
+            .container {
+                width: 95vw;
+            }
+            
+            .content {
+                width: 95%;
+                padding: 2.5%;
+            }
+            
+            .content ul {
+                padding-left: 0.8rem;
+            }
+        }
+        
+        /* Additional mobile optimizations */
+        @media (max-width: 480px) {
+            .container {
+                width: 98vw;
+                height: 85vh;
+            }
+            
+            .section-title {
+                font-size: clamp(1.5vh, 2vh, 2.5vh);
+            }
+            
+            .content {
+                width: 98%;
+                padding: 1%;
+            }
+            
+            .content ul {
+                padding-left: 0.5rem;
+            }
+            
+            .game-title-line {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .game-platform {
+                margin-left: 12px;
+                display: block;
+            }
+            
+            .content li {
+                word-break: break-word;
+            }
+            
+            .terminal-prompt {
+                font-size: 0.4rem;
+            }
+
+            .portrait-frame {
+                height: 300px;
+            }
+        }
+
+        /* Ensure text doesn't overflow containers */
+        .content p, .content li, .content h2, .content h3, .game-title-line, .game-platform, .game-role {
+            max-width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .main-title {
+            font-size: 2.5vh;
+            margin: 0;
+            color: var(--secondary-color);
+        }
+
+        .studio-title {
+            font-size: 2vh;
+            color: var(--primary-color);
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        .role-title {
+            font-size: 1.8vh;
+            color: var(--dim-color);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .project-item {
+            font-size: 1.8vh;
+            color: var(--text-color);
+            line-height: 1.3;
+        }
+
+        /* Let the project container fill available space */
+        .project-container {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Add styling for social links */
+        .social-links {
+            padding-top: 1vh;
+            display: flex;
+            flex-direction: column;
+            gap: 1vh;
+        }
+
+        .social-links p {
+            color: var(--secondary-color);
+            font-family: 'VT323', monospace;
+            font-size: 0.7rem;
+            margin-bottom: 1vh;
+        }
+
+        .social-links-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .social-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 3px 6px;
+            border: 2px solid var(--primary-color);
+            font-family: 'VT323', monospace;
+            font-size: 0.75rem;
+            transition: all 0.2s ease;
+            background-color: var(--bg-color);
+            text-align: center;
+            flex: 1;
+            min-width: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 10px var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .social-links-container {
+                flex-direction: column;
+            }
+            
+            .social-links a {
+                width: 100%;
+            }
+        }
+
+        /* Back button */
+        .back-btn {
+            position: relative;
+            padding: 8px 15px;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            font-family: 'VT323', monospace;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            z-index: 10;
+        }
+
+        .back-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        /* Add styles for game list */
+        .game-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+            font-family: 'VT323', monospace;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .game-list li {
+            margin-bottom: 0;
+            position: relative;
+            padding: 8px;
+            white-space: normal;
+            overflow: visible;
+            text-overflow: clip;
+            transition: all 0.2s ease;
+            border-radius: 2px;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .game-list li:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .game-list li a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-family: 'VT323', monospace;
+            position: relative;
+            padding-left: 0;
+            line-height: 1.6;
+            pointer-events: none;
+        }
+
+        .game-list li:hover a, 
+        .game-list li:hover .game-platform, 
+        .game-list li:hover .game-role {
+            color: var(--bg-color);
+        }
+
+        .game-list li a::before {
+            content: "$ ";
+            opacity: 0.7;
+        }
+
+        /* Add styles for box art display */
+        .games-container {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            position: relative;
+        }
+
+        .games-list-container {
+            flex: 1;
+            max-width: 70%;
+        }
+
+        .game-box-display {
+            width: auto;
+            height: 320px;
+            position: sticky;
+            top: 20px;
+            border: 1px solid var(--primary-color);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--bg-color);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .game-box-display::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+     
+            background: linear-gradient(
+                transparent 0%,
+                rgba(178, 107, 1, 0.25) 50%,
+                transparent 100%
+            );
+            background-size: 100% 4px;
+            animation: scanlines 8s linear infinite;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .game-box-display::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-color);
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .game-box-display.switching::after {
+            animation: glitch-switch 0.3s steps(2) forwards;
+        }
+
+        @keyframes scanlines {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+
+        @keyframes glitch-switch {
+            0% { opacity: 0; }
+            10% { opacity: 0.1; }
+            20% { opacity: 0; }
+            30% { opacity: 0.3; }
+            40% { opacity: 0; }
+            50% { opacity: 0.2; }
+            60% { opacity: 0; }
+            70% { opacity: 0.4; }
+            80% { opacity: 0; }
+            90% { opacity: 0.3; }
+            100% { opacity: 0; }
+        }
+
+        .game-box-display img {
+            max-width: 100%;
+            max-height: 100%;
+            opacity: 0.7;
+            object-fit: contain;
+            filter: sepia(100%) hue-rotate(5deg) saturate(400%) brightness(80%) contrast(110%);
+            position: relative;
+            z-index: 0;
+            transition: transform 0.3s ease;
+            image-rendering: pixelated; /* For Chrome/Edge */
+            image-rendering: -moz-crisp-edges; /* For Firefox */
+            image-rendering: crisp-edges; /* Future standard */
+            transform: scale(0.9999); /* Force pixelation in some browsers */
+            transition: transform 0.3s ease;
+        }
+
+        .game-box-display.switching img {
+            animation: image-glitch 0.3s steps(2);
+        }
+
+        @keyframes image-glitch {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-2px); }
+            100% { transform: translateX(0); }
+        }
+
+        @media (max-width: 768px) {
+            .games-container {
+                flex-direction: column;
+            }
+            
+            .games-list-container {
+                max-width: 100%;
+            }
+            
+            .game-box-display {
+                display: none;
+            }
+        }
+
+        /* Add styles for skills grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 1rem;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0.25rem;
+            transition: all 0.2s ease;
+        }
+
+        .skill-icon {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+            transition: all 0.2s ease;
+        }
+
+        .skill-icon img {
+            width: 20px;
+            height: 20px;
+            filter: brightness(0) saturate(100%) invert(65%) sepia(21%) saturate(7076%) hue-rotate(360deg) brightness(102%) contrast(106%);
+            transition: all 0.2s ease;
+        }
+
+        .skill-item:hover .skill-icon img {
+            transform: translateY(-2px);
+            filter: brightness(0) saturate(100%) invert(65%) sepia(21%) saturate(7076%) hue-rotate(360deg) brightness(102%) contrast(106%) drop-shadow(0 0 5px var(--primary-color));
+        }
+
+        .skill-name {
+            font-size: 0.6rem;
+            color: var(--text-color);
+        }
+
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+                gap: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .skills-grid {
+                grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+                gap: 0.5rem;
+            }
+            
+            .skill-item {
+                padding: 0.15rem;
+            }
+
+            .skill-icon img {
+                width: 16px;
+                height: 16px;
+            }
+
+            .skill-name {
+                font-size: 0.5rem;
+            }
+        }
+
+        .profile-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .profile-info {
+            flex: 1;
+            max-width: 65%;
+        }
+
+        .profile-portrait {
+            flex: 0 0 auto;
+            width: 30%;
+            min-width: 200px;
+        }
+
+        .portrait-frame {
+            width: 100%;
+            height: 400px;
+
+            overflow: hidden;
+        }
+
+        .portrait-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
+                flex-direction: column;
+            }
+            
+            .profile-info {
+                max-width: 100%;
+            }
+            
+            .profile-portrait {
+                width: 100%;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="terminal-header">
+            <a href="index.html" class="back-btn">RETURN</a>
+        </div>
+        <div class="section">
+            <span class="section-title">D.R. Albright</span>
+            <div class="content">
+                <div class="terminal-prompt">ACCESSING PROFILE DATA</div>
+                <div class="profile-container">
+                    <div class="profile-info">
+                        <h2>D.R. Albright</h2>
+                        <h3>Video Game Developer | Software Generalist </h3>
+                        <p>> Proven track record of 25 years in game development, contributing to 20+ AAA titles and flagship franchises like <strong>Need for Speed</strong>, <strong>Medal of Honor</strong>, <strong>SOCOM</strong> at <strong>EA, THQ, Zipper Interactive, and Snowblind Studios.</strong> Founded <strong>Signal Studios</strong>, leading to the creation and release of 8 original games, including the award-nominated and multi-million selling <strong>Toy Soldiers</strong>. <strong>Signal Studios</strong> was recognized as one of the top 30 game development studios worldwide in 2011...</p>
+                        <h2>Status</h2>
+                        <p>> Signal closed its doors due to a combination of my own mistakes and a few external factors. About the same time Signal ended, A.I. pivoted from being stupid to useful. So what now?</p>
+                        <p>> Exploring employment opportunities, game development projects, web-based projects, A.I. integration and development. Still hoping for a Toy Soldiers sequel. <p>In the meantime, I'll just keep adding to the <a href="index.html" style="color: var(--primary-color); text-decoration: none;"><strong>SLOPCADE</strong></a>.</p>
+                    </div>
+
+                    <div class="profile-portrait">
+                        <div class="portrait-frame">
+                            <iframe 
+                                src="ascii/portrait.html" 
+                                class="portrait-iframe"
+                                scrolling="no"
+                                frameborder="0">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <p> Please feel free to reach out with any questions, commments, or opportunities:</p>
+                    <div class="social-links-container">
+                        <a href="https://twitter.com/ToySoldiersGame" target="_blank">TOY SOLDIERS X</a>
+                        <a href="https://twitter.com/dr_albright_3" target="_blank">PERSONAL X</a>
+                        <a href="https://github.com/mostlypeaceful" target="_blank">GITHUB</a>
+                        <a href="docs/DouglasRAlbright.md" download="DouglasRAlbright_Resume.md">DOWNLOAD RESUME</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <span class="section-title">Experience</span>
+            <div class="content">
+                <div class="terminal-prompt">ACCESSING PROFESSIONAL EXPERIENCE DATA</div>
+                <h2>Signal Studios (2007-2023)</h2>
+                <h3>Founder | President | Creative Director | Developer</h3>
+                <ul>
+                    <li>> Founded and led Signal Studios. Shipped 8 original titles including the hit franchise Toy Soldiers resulting in over 3 million units sold, 2 DICE Strategy GOTY nominations, and more than 15 million downloads across XBL, PSN, Nintendo, and Steam</li>
+                    <li>> Built Signal into a 55-person multi-project studio with $40 million in revenue</li>
+                    <li>> Secured project funding and managed partnerships with industry leaders and Fortune 500 companies including Microsoft, Ubisoft, Gungho of America, IGT, Tilting Point Media, and Facebook</li>
+                    <li>> Directed all aspects of technical, design, and visual development using our proprietary engine (Sig Engine) and industry-standard engines (Unity, Unreal Engine)</li>
+                </ul>
+
+                <h3>Lead and Senior Roles (1999-2007)</h3>
+                <h3>EA  | Zipper | Snowblind | THQ | Amaze | Newlands and Co.</h3>
+                <ul>
+                    <li>> Managed creative pipelines across multiple studios</li>
+                    <li>> Developed 3D environments and assets for large AAA franchises such as Need for Speed, Medal of Honor, and SOCOM</li>
+                    <li>> Led the development of art tools and techniques for Snowblind Engine on Xbox 360, PS3, and PC</li>
+                    <li>> Built art and design team from ground up at THQ Seattle</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <span class="section-title">Skills</span>
+            <div class="content">
+                <div class="terminal-prompt">ACCESSING SKILLS DATA</div>
+                <h2>Professional & Technical Expertise</h2>
+                
+                <h3>Development & Tools</h3>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <i class="skill-icon fab fa-unity"></i>
+                        <span class="skill-name">Unity</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">
+                            <img src="images/unreal.webp" alt="Unreal Engine">
+                        </div>
+                        <span class="skill-name">Unreal</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="skill-icon fab fa-js"></i>
+                        <span class="skill-name">JavaScript</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="skill-icon fab fa-react"></i>
+                        <span class="skill-name">React</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="skill-icon fab fa-html5"></i>
+                        <span class="skill-name">HTML</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="skill-icon fab fa-css3-alt"></i>
+                        <span class="skill-name">CSS</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="skill-icon fab fa-github"></i>
+                        <span class="skill-name">Git</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="skill-icon fas fa-code"></i>
+                        <span class="skill-name">C#</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="skill-icon fas fa-cube"></i>
+                        <span class="skill-name">Maya</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="skill-icon fas fa-paint-brush"></i>
+                        <span class="skill-name">Adobe</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="skill-icon fas fa-drafting-compass"></i>
+                        <span class="skill-name">Autodesk</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="skill-icon fab fa-xbox"></i>
+                        <span class="skill-name">Xbox</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="skill-icon fab fa-playstation"></i>
+                        <span class="skill-name">PlayStation</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="skill-icon fas fa-gamepad"></i>
+                        <span class="skill-name">Nintendo</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="skill-icon fab fa-steam"></i>
+                        <span class="skill-name">Steam</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="skill-icon fas fa-mobile-alt"></i>
+                        <span class="skill-name">Mobile</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="skill-icon fas fa-cubes"></i>
+                        <span class="skill-name">Zbrush</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="skill-icon fas fa-terminal"></i>
+                        <span class="skill-name">Cursor</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="skill-icon fas fa-robot"></i>
+                        <span class="skill-name">Claude</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="skill-icon fas fa-brain"></i>
+                        <span class="skill-name">Gemini</span>
+                    </div>
+                    <div class="skill-item">
+                        <i class="skill-icon fas fa-microchip"></i>
+                        <span class="skill-name">Ollama</span>
+                    </div>
+                </div>
+
+                <h3>Leadership & Management</h3>
+                <ul>
+                    <li>> Game Production and Pipelines</li>
+                    <li>> Creative and Design Direction</li>
+                    <li>> Multi-Platform Release Processes</li>
+                    <li>> Software Team Leadership and Communication</li>
+                    <li>> Creative Studio and Project Management</li>
+                    <li>> Publisher Partnerships</li>
+                    <li>> 3D & 2D Development and Direction</li>
+                    <li>> AI Development and Integration</li>
+                    <li>> Concept to Release</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <span class="section-title">Published Games</span>
+            <div class="content">
+                <div class="terminal-prompt">ACCESSING PROJECTS DATA</div>
+                <h2>Projects by Platform & Role</h2>
+                <div class="games-container">
+                    <div class="games-list-container">
+                        <ul class="game-list">
+                            <li onclick="window.open('https://store.playstation.com/en-us/product/UP6345-CUSA24211_00-TOYSOLDIERSHDPS4', '_blank')" data-boxart="toysoldiers.webp">
+                                <div class="game-title-line">
+                                    <a>Toy Soldiers: HD</a>
+                                    <span class="game-platform">[Nintendo Switch | PS4 | X1 | Steam]</span>
+                                </div>
+                                <span class="game-role">Creator, Developer</span>
+                            </li>
+                            <li onclick="window.open('https://store.steampowered.com/app/262120/Toy_Soldiers_Complete/', '_blank')" data-boxart="tscomplete.webp">
+                                <div class="game-title-line">
+                                    <a>Toy Soldiers: Complete</a>
+                                    <span class="game-platform">[Steam]</span>
+                                </div>
+                                <span class="game-role">Owner, Creator, Developer</span>
+                            </li>
+                            <li onclick="window.open('https://store.steampowered.com/app/98300/Toy_Soldiers/', '_blank')" data-boxart="toysoldiers360.webp">
+                                <div class="game-title-line">
+                                    <a>Toy Soldiers</a>
+                                    <span class="game-platform">[Xbox 360 | Steam]</span>
+                                </div>
+                                <span class="game-role">Owner, Creator, Developer</span>
+                            </li>
+                            <li onclick="window.open('https://youtu.be/tIfU0cyX4jg', '_blank')" data-boxart="warchest.webp">
+                                <div class="game-title-line">
+                                    <a>Toy Soldiers: Warchest</a>
+                                    <span class="game-platform">[X1 | PS4 | Steam]</span>
+                                </div>
+                                <span class="game-role">Executive Producer, Developer</span>
+                            </li>
+                            <li onclick="window.open('https://store.steampowered.com/app/307880/Savage_Lands/', '_blank')" data-boxart="savagelands.webp">
+                                <div class="game-title-line">
+                                    <a>Savage Lands</a>
+                                    <span class="game-platform">[Steam]</span>
+                                </div>
+                                <span class="game-role">Executive Producer, Developer</span>
+                            </li>
+                            <li onclick="window.open('https://store.steampowered.com/app/2113570/Ascend_Reborn/', '_blank')" data-boxart="ascendreborn.webp">
+                                <div class="game-title-line">
+                                    <a>Ascend: Hand of Kul</a>
+                                    <span class="game-platform">[Xbox 360 | Steam]</span>
+                                </div>
+                                <span class="game-role">Creator, Owner, Developer</span>
+                            </li>
+                            <li onclick="window.open('https://www.metacritic.com/game/xbox-360/toy-soldiers-cold-war', '_blank')" data-boxart="coldwar.webp">
+                                <div class="game-title-line">
+                                    <a>Toy Soldiers: Cold War</a>
+                                    <span class="game-platform">[Xbox 360]</span>
+                                </div>
+                                <span class="game-role">Creator, Owner, Developer</span>
+                            </li>
+                            <li onclick="window.open('https://apps.apple.com/us/app/the-sleeping-prince-gameclub/id642606469', '_blank')" data-boxart="sleepingprince.webp">
+                                <div class="game-title-line">
+                                    <a>Sleeping Prince</a>
+                                    <span class="game-platform">[iOS | Android]</span>
+                                </div>
+                                <span class="game-role">Executive Producer</span>
+                            </li>
+                            <li onclick="window.open('https://www.imdb.com/title/tt0823153/', '_blank')" data-boxart="justiceleague.webp">
+                                <div class="game-title-line">
+                                    <a>Justice League Heroes</a>
+                                    <span class="game-platform">[PS2 | PSP | Xbox]</span>
+                                </div>
+                                <span class="game-role">Lead Environment Artist</span>
+                            </li>
+                            <li onclick="window.open('https://www.metacritic.com/game/socom-u-s-navy-seals-fireteam-bravo/', '_blank')" data-boxart="socomfireteambravo.webp">
+                                <div class="game-title-line">
+                                    <a>SOCOM: Fireteam Bravo</a>
+                                    <span class="game-platform">[PSP]</span>
+                                </div>
+                                <span class="game-role">Lead Artist</span>
+                            </li>
+                            <li onclick="window.open('https://www.gamespot.com/games/red-faction-ii/', '_blank')" data-boxart="redfaction2.webp">
+                                <div class="game-title-line">
+                                    <a>Red Faction II</a>
+                                    <span class="game-platform">[GC | Xbox | PC]</span>
+                                </div>
+                                <span class="game-role">Lead Artist</span>
+                            </li>
+                            <li onclick="window.open('https://www.metacritic.com/game/summoner-a-goddess-reborn/', '_blank')" data-boxart="summoner2.webp">
+                                <div class="game-title-line">
+                                    <a>Summoner II: A Goddess Reborn</a>
+                                    <span class="game-platform">[GC]</span>
+                                </div>
+                                <span class="game-role">Lead Artist</span>
+                            </li>
+                            <li onclick="window.open('https://www.ea.com/games/need-for-speed/need-for-speed-hot-pursuit-remastered', '_blank')" data-boxart="nfshp2.webp">
+                                <div class="game-title-line">
+                                    <a>Need for Speed: Hot Pursuit 2</a>
+                                    <span class="game-platform">[GC | Xbox | PC | PS2]</span>
+                                </div>
+                                <span class="game-role">Environment Artist</span>
+                            </li>
+                            <li onclick="window.open('https://www.ea.com/games/medal-of-honor/medal-of-honor-pacific-assault', '_blank')" data-boxart="moh.webp">
+                                <div class="game-title-line">
+                                    <a>Medal of Honor: Pacific Assault</a>
+                                    <span class="game-platform">[PC]</span>
+                                </div>
+                                <span class="game-role">CG Artist III</span>
+                            </li>
+                            <li onclick="window.open('https://www.metacritic.com/game/socom-3-u-s-navy-seals/', '_blank')" data-boxart="socom.webp">
+                                <div class="game-title-line">
+                                    <a>SOCOM III</a>
+                                    <span class="game-platform">[PS2]</span>
+                                </div>
+                                <span class="game-role">Team Artist</span>
+                            </li>
+                            <li onclick="window.open('https://en.wikipedia.org/wiki/Azurik:_Rise_of_Perathia', '_blank')" data-boxart="azurik.webp">
+                                <div class="game-title-line">
+                                    <a>Azurik: Rise of Perathia</a>
+                                    <span class="game-platform">[Xbox]</span>
+                                </div>
+                                <span class="game-role">Environment Artist</span>
+                            </li>
+                            <li onclick="window.open('https://www.metacritic.com/game/harry-potter-and-the-prisoner-of-azkaban/', '_blank')" data-boxart="hp.webp">
+                                <div class="game-title-line">
+                                    <a>Harry Potter and the Prisoner of Azkaban</a>
+                                    <span class="game-platform">[PS2 | GC | Xbox | PC]</span>
+                                </div>
+                                <span class="game-role">Prop Artist</span>
+                            </li>
+                            <li onclick="window.open('https://store.steampowered.com/app/314160/Microsoft_Flight_Simulator_X_Steam_Edition/', '_blank')" data-boxart="flightsim.webp">
+                                <div class="game-title-line">
+                                    <a>Microsoft Flight Sim X</a>
+                                    <span class="game-platform">[PC]</span>
+                                </div>
+                                <span class="game-role">Contract Artist</span>
+                            </li>
+                            <li onclick="window.open('https://www.ddo.com/home', '_blank')" data-boxart="dnd.webp">
+                                <div class="game-title-line">
+                                    <a>Dungeons and Dragons: Stormreach</a>
+                                    <span class="game-platform">[PC]</span>
+                                </div>
+                                <span class="game-role">Contract Artist</span>
+                            </li>
+                            <li onclick="window.open('https://www.metacritic.com/game/sega-rally-revo/', '_blank')" data-boxart="sega.webp">
+                                <div class="game-title-line">
+                                    <a>Sega Rally Revo</a>
+                                    <span class="game-platform">[PS3 | PSP | Xbox 360 | PC]</span>
+                                </div>
+                                <span class="game-role">Contract Artist</span>
+                            </li>
+                            <li onclick="window.open('https://en.wikipedia.org/wiki/Star_Trek:_Legacy', '_blank')" data-boxart="startrek.webp">
+                                <div class="game-title-line">
+                                    <a>Star Trek Legacy</a>
+                                    <span class="game-platform">[Xbox 360 | PC]</span>
+                                </div>
+                                <span class="game-role">Contract Artist</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="game-box-display">
+                        <!-- Box art will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            const sections = document.querySelectorAll('.section');
+            const gameItems = document.querySelectorAll('.game-list li');
+            const boxDisplay = document.querySelector('.game-box-display');
+            
+            // Random flicker effect
+            setInterval(() => {
+                if (Math.random() > 0.98) {
+                    container.style.opacity = '0.95';
+                    setTimeout(() => {
+                        container.style.opacity = '1';
+                    }, 50);
+                }
+            }, 2000);
+            
+            function switchBoxArt(boxArt) {
+                boxDisplay.classList.add('switching');
+                setTimeout(() => {
+                    boxDisplay.innerHTML = `<img src="images/${boxArt}" alt="Game Box Art">`;
+                    boxDisplay.style.opacity = '1';
+                    setTimeout(() => {
+                        boxDisplay.classList.remove('switching');
+                    }, 300);
+                }, 150);
+            }
+            
+            // Add terminal-style loading effect when hovering sections
+            sections.forEach(section => {
+                section.addEventListener('mouseenter', () => {
+                    const content = section.querySelector('.content');
+                    // Only trigger the opacity animation if it's not already visible
+                    if (content.style.opacity !== '1') {
+                        content.style.opacity = '0';
+                        setTimeout(() => {
+                            content.style.opacity = '1';
+                            // If this is the Published Games section, show the first game's box art
+                            if (section.querySelector('.section-title').textContent === 'Published Games') {
+                                const firstGame = section.querySelector('.game-list li');
+                                const firstBoxArt = firstGame.getAttribute('data-boxart');
+                                if (firstBoxArt && !boxDisplay.querySelector('img')) {
+                                    switchBoxArt(firstBoxArt);
+                                }
+                            }
+                        }, 200);
+                    }
+                });
+            });
+
+            // Handle game box art display
+            gameItems.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    const boxArt = item.getAttribute('data-boxart');
+                    if (boxArt) {
+                        switchBoxArt(boxArt);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
