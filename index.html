@@ -832,9 +832,6 @@
 <body>
 
     <div class="container">
-        <div class="terminal-header">
-            <a href="index.html" class="back-btn">RETURN</a>
-        </div>
         <div class="section">
             <span class="section-title">D.R. Albright</span>
             <div class="content">
@@ -1201,16 +1198,14 @@
                 }, 150);
             }
             
-            // Add terminal-style loading effect when hovering sections
+            // Add both mouse and touch events for sections
             sections.forEach(section => {
-                section.addEventListener('mouseenter', () => {
+                const handleInteraction = () => {
                     const content = section.querySelector('.content');
-                    // Only trigger the opacity animation if it's not already visible
                     if (content.style.opacity !== '1') {
                         content.style.opacity = '0';
                         setTimeout(() => {
                             content.style.opacity = '1';
-                            // If this is the Published Games section, show the first game's box art
                             if (section.querySelector('.section-title').textContent === 'Published Games') {
                                 const firstGame = section.querySelector('.game-list li');
                                 const firstBoxArt = firstGame.getAttribute('data-boxart');
@@ -1220,16 +1215,28 @@
                             }
                         }, 200);
                     }
+                };
+
+                section.addEventListener('mouseenter', handleInteraction);
+                section.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    handleInteraction();
                 });
             });
 
-            // Handle game box art display
+            // Add both mouse and touch events for game items
             gameItems.forEach(item => {
-                item.addEventListener('mouseenter', () => {
+                const handleGameInteraction = () => {
                     const boxArt = item.getAttribute('data-boxart');
                     if (boxArt) {
                         switchBoxArt(boxArt);
                     }
+                };
+
+                item.addEventListener('mouseenter', handleGameInteraction);
+                item.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    handleGameInteraction();
                 });
             });
         });
