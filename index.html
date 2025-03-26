@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>about d.r. albright</title>
+    <title>d.r. albright</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -109,6 +109,18 @@
             color: var(--primary-color);
             opacity: 0.8;
             animation: type-text 1.5s steps(40, end);
+        }
+
+        .terminal-prompt::after {
+            content: "...";
+            animation: dots 1.5s infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: "."; }
+            40% { content: ".."; }
+            60% { content: "..."; }
+            80%, 100% { content: ""; }
         }
 
         @keyframes type-text {
@@ -243,21 +255,21 @@
 
         /* Auto-scaling typography based on container height */
         .content h2 {
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             color: var(--secondary-color);
             font-family: 'VT323', monospace;
             font-weight: bold;
         }
 
         .content h3 {
-            font-size: 1rem;
+            font-size: 1.25rem;
             color: var(--secondary-color);
             font-family: 'VT323', monospace;
             font-weight: bold;
         }
 
         .content p, .content li {
-            font-size: 0.75rem;
+            font-size: 1rem;
             width: 100%;
             color: var(--text-color);
         }
@@ -270,13 +282,12 @@
         }
 
         .content li {
-            font-size: 0.7rem;
-            line-height: 1.4;
+            font-size: 1rem;
             list-style-type: none;
         }
 
         .section:hover .content {
-            opacity: 1;
+            opacity: 0.5;
             animation: fade-in 0.4s ease;
             visibility: visible; /* Show content on hover */
         }
@@ -292,9 +303,9 @@
 
         /* Media queries for different screen sizes */
         @media (max-height: 600px) {
-            .content h2 { font-size: 0.8rem; }
-            .content h3 { font-size: 0.7rem; }
-            .content p, .content li { font-size: 0.65rem; }
+            .content h2 { font-size: 1.25rem; }
+            .content h3 { font-size: 1rem; }
+            .content p, .content li { font-size: 0.75rem; }
         }
 
         @media (max-width: 768px) {
@@ -302,11 +313,11 @@
                 flex: 12;
             }
             
-            .content h2 { font-size: 0.7rem; }
-            .content h3 { font-size: 0.6rem; }
+            .content h2 { font-size: 1.25rem; }
+            .content h3 { font-size: 1rem; }
             .content p, .content li { 
-                font-size: 0.6rem;
-                line-height: 1.3;
+                font-size: 0.75rem;
+           
             }
             
             .container {
@@ -517,6 +528,7 @@
         .game-list li:hover {
             background-color: var(--primary-color);
             border-color: var(--primary-color);
+            opacity: 0.75;
         }
 
         .game-list li a {
@@ -526,7 +538,7 @@
             font-family: 'VT323', monospace;
             position: relative;
             padding-left: 0;
-            line-height: 1.6;
+            line-height: 1;
             pointer-events: none;
         }
 
@@ -628,7 +640,7 @@
         .game-box-display img {
             max-width: 100%;
             max-height: 100%;
-            opacity: 0.7;
+            opacity: 0.6;
             object-fit: contain;
             filter: sepia(100%) hue-rotate(5deg) saturate(400%) brightness(80%) contrast(110%);
             position: relative;
@@ -656,6 +668,7 @@
         @media (max-width: 768px) {
             .games-container {
                 flex-direction: column;
+                position: relative;
             }
             
             .games-list-container {
@@ -663,7 +676,38 @@
             }
             
             .game-box-display {
-                display: none;
+                display: block;
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 200px;
+                height: auto;
+                margin: 10px;
+                z-index: 2;
+            }
+
+            .game-box-display img {
+                max-width: 200px;
+                opacity: 0.8;
+            }
+
+            .games-list-container {
+                padding-right: 140px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .game-box-display {
+                width: 150px;
+                height: auto;
+            }
+
+            .game-box-display img {
+                width: 150px;
+            }
+
+            .games-list-container {
+                padding-right: 110px;
             }
         }
 
@@ -801,7 +845,7 @@
                         <p>> Proven track record of 25 years in game development, contributing to 20+ AAA titles and flagship franchises like <strong>Need for Speed</strong>, <strong>Medal of Honor</strong>, <strong>SOCOM</strong> at <strong>EA, THQ, Zipper Interactive, and Snowblind Studios.</strong> Founded <strong>Signal Studios</strong>, leading to the creation and release of 8 original games, including the award-nominated and multi-million selling <strong>Toy Soldiers</strong>. <strong>Signal Studios</strong> was recognized as one of the top 30 game development studios worldwide in 2011...</p>
                         <h2>Status</h2>
                         <p>> Signal closed its doors due to a combination of my own mistakes and a few external factors. About the same time Signal ended, A.I. pivoted from being stupid to useful. So what now?</p>
-                        <p>> Exploring employment opportunities, game development projects, web-based projects, A.I. integration and development. Still hoping for a Toy Soldiers sequel. <p>In the meantime, I'll just keep adding to the <a href="index.html" style="color: var(--primary-color); text-decoration: none;"><strong>SLOPCADE</strong></a>.</p>
+                        <p>> Exploring employment opportunities, game development projects, web-based projects, A.I. integration and development. Still hoping for a Toy Soldiers sequel. <p>In the meantime, I'll just keep adding to the <strong>SLOPCADE</strong></a>.</p>
                     </div>
 
                     <div class="profile-portrait">
@@ -844,7 +888,7 @@
                 <h3>EA  | Zipper | Snowblind | THQ | Amaze | Newlands and Co.</h3>
                 <ul>
                     <li>> Managed creative pipelines across multiple studios</li>
-                    <li>> Developed 3D environments and assets for large AAA franchises such as Need for Speed, Medal of Honor, and SOCOM</li>
+                    <li>> Developed 3D worlds and assets for large AAA franchises such as Need for Speed, Medal of Honor, and SOCOM</li>
                     <li>> Led the development of art tools and techniques for Snowblind Engine on Xbox 360, PS3, and PC</li>
                     <li>> Built art and design team from ground up at THQ Seattle</li>
                 </ul>
