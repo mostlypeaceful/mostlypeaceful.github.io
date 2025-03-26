@@ -10,7 +10,7 @@
     <style>
         :root {
             --bg-color: #000000;
-            --primary-color: #e68a00;     /* Changed to green terminal color */
+            --primary-color: #ff9800;     /* Changed to green terminal color */
             --secondary-color: #ff9800;   /* Darker green for secondary elements */
             --dim-color: #ff9800;         /* Very dark green for subtle elements */
             --text-color: #ff9800;        /* Green text */
@@ -22,11 +22,14 @@
             background: var(--bg-color);
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
-            width: 100vw;
+            width: 100%;
             font-family: 'VT323', monospace;
             position: relative;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-x: hidden;
         }
 
         /* Add subtle CRT scan lines effect */
@@ -48,8 +51,9 @@
         }
 
         .container {
-            width: 90vw;
-            height: 80vh;
+            width: 100%;
+            max-width: 800px;
+            height: 90vh;
             display: flex;
             gap: 2px;
             background: var(--bg-color);
@@ -57,10 +61,12 @@
             box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
             position: relative;
             z-index: 1;
+            margin: 0 auto;
+            box-sizing: border-box;
         }
 
         .container::before {
-            content: "ACCESS PERSONNEL FILE | D.R. ALBRIGHT";
+            content: "ACCESS FILE | D.R. ALBRIGHT";
             position: absolute;
             top: -25px;
             left: 10px;
@@ -188,15 +194,16 @@
 
         .content {
             position: absolute;
-            width: 90%;
-            height: 90%;
+            width: 94%;
+            height: 94%;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: flex-start;
-            padding: 5%;
+            padding: 3%;
             overflow-y: scroll;
-            -webkit-overflow-scrolling: touch; /* Enable momentum scrolling on iOS */
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
             color: var(--text-color);
             opacity: 0;
             transition: opacity 0.4s ease;
@@ -206,16 +213,59 @@
             overflow-x: hidden;
             scrollbar-width: thin;
             scrollbar-color: var(--primary-color) rgba(255, 152, 0, 0.1);
+            -webkit-appearance: none;
+            touch-action: pan-y;
         }
 
-        /* Style the scrollbar */
+        @supports (-webkit-touch-callout: none) {
+            /* iOS-specific scroll fixes */
+            .content {
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+                touch-action: pan-y;
+            }
+
+            .section:hover .content {
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+            }
+        }
+
+        .section:hover .content {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            touch-action: pan-y;
+        }
+
+        /* Ensure content is scrollable on mobile */
+        @media (max-width: 768px) {
+            .content {
+                -webkit-overflow-scrolling: touch;
+                overflow-y: scroll;
+                touch-action: pan-y;
+                height: 92%;
+                width: 92%;
+                padding: 4%;
+            }
+
+            .section:hover .content {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+            }
+        }
+
+        /* Ensure scrollbar styles work on mobile webkit */
         .content::-webkit-scrollbar {
+            -webkit-appearance: none;
             width: 5px;
         }
 
         .content::-webkit-scrollbar-track {
             background: rgba(255, 152, 0, 0.1);
             border-left: 1px solid rgba(255, 152, 0, 0.2);
+            -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.5);
         }
 
         .content::-webkit-scrollbar-thumb {
@@ -223,6 +273,7 @@
             border-radius: 0;
             border-right: 1px solid rgba(0, 0, 0, 0.8);
             box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.8);
+            -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.8);
         }
 
         /* Hide horizontal scrollbar */
@@ -280,7 +331,7 @@
         /* Ensure lists fit */
         .content ul {
             width: 100%;
-            padding-left: 1.2rem;
+            padding-left: 1rem;
             margin: 0;
         }
 
@@ -306,9 +357,9 @@
 
         /* Media queries for different screen sizes */
         @media (max-height: 600px) {
-            .content h2 { font-size: 1.25rem; }
-            .content h3 { font-size: 1rem; }
-            .content p, .content li { font-size: 0.75rem; }
+            .content h2 { font-size: 1.5rem; }
+            .content h3 { font-size: 1.25rem; }
+            .content p, .content li { font-size: 1rem; }
         }
 
         @media (max-width: 768px) {
@@ -316,15 +367,17 @@
                 flex: 12;
             }
             
-            .content h2 { font-size: 1.25rem; }
-            .content h3 { font-size: 1rem; }
+            .content h2 { font-size: 1.5rem; }
+            .content h3 { font-size: 1.25rem; }
             .content p, .content li { 
-                font-size: 0.75rem;
+                font-size: 1rem;
            
             }
             
             .container {
-                width: 95vw;
+                width: 95%;
+                height: 95vh;
+                margin: 10px auto;
             }
             
             .content {
@@ -333,19 +386,20 @@
             }
             
             .content ul {
-                padding-left: 0.8rem;
+                padding-left: 0.25rem;
             }
         }
         
         /* Additional mobile optimizations */
         @media (max-width: 480px) {
             .container {
-                width: 98vw;
-                height: 85vh;
+                width: 98%;
+                height: 98vh;
+                margin: 5px auto;
             }
             
             .section-title {
-                font-size: clamp(1.5vh, 2vh, 2.5vh);
+                font-size: clamp(1vh, 1.5vh, 2vh);
             }
             
             .content {
@@ -354,7 +408,7 @@
             }
             
             .content ul {
-                padding-left: 0.5rem;
+                padding-left: 0.25rem;
             }
             
             .game-title-line {
@@ -363,7 +417,7 @@
             }
             
             .game-platform {
-                margin-left: 12px;
+    
                 display: block;
             }
             
@@ -377,6 +431,16 @@
 
             .portrait-frame {
                 height: 300px;
+            }
+
+            .game-box-art {
+                width: 70px;
+                height: 93px;
+            }
+
+            .game-list li {
+                padding: 4px;
+                gap: 6px;
             }
         }
 
@@ -414,7 +478,7 @@
         .project-item {
             font-size: 1.8vh;
             color: var(--text-color);
-            line-height: 1.3;
+            line-height: 1;
         }
 
         /* Let the project container fill available space */
@@ -525,13 +589,21 @@
             transition: all 0.2s ease;
             border-radius: 2px;
             cursor: pointer;
-            border: 1px solid transparent;
+            border: 1px solid var(--dim-color);
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            background: var(--bg-color);
         }
 
-        .game-list li:hover {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-            opacity: 0.75;
+        .game-info {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
         }
 
         .game-list li a {
@@ -541,84 +613,68 @@
             font-family: 'VT323', monospace;
             position: relative;
             padding-left: 0;
-            line-height: 1;
+            line-height: 1.1;
             pointer-events: none;
+            font-size: 1rem;
+            margin-bottom: 1px;
         }
 
-        .game-list li:hover a, 
-        .game-list li:hover .game-platform, 
-        .game-list li:hover .game-role {
-            color: var(--bg-color);
+        .game-platform {
+            font-size: 0.85rem;
+            line-height: 1.1;
+            margin-bottom: 1px;
         }
 
-        .game-list li a::before {
-            content: "$ ";
+        .game-role {
+            font-size: 0.75rem;
+            line-height: 1.1;
             opacity: 0.7;
         }
 
-        /* Add styles for box art display */
-        .games-container {
-            display: flex;
-            gap: 20px;
-            width: 100%;
-            position: relative;
-        }
-
-        .games-list-container {
-            flex: 1;
-            max-width: 70%;
-        }
-
-        .game-box-display {
-            width: auto;
-            height: 320px;
-            position: sticky;
-            top: 20px;
+        .game-box-art {
+            width: 90px;
+            height: 120px;
             border: 1px solid var(--primary-color);
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
             background: var(--bg-color);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 1;
+            position: relative;
+            flex-shrink: 0;
         }
 
-        .game-box-display::before {
+        .game-box-art img {
+            max-width: 100%;
+            max-height: 100%;
+            opacity: 0.85;
+            object-fit: contain;
+            filter: sepia(100%) hue-rotate(5deg) saturate(500%) brightness(85%) contrast(130%);
+            position: relative;
+            z-index: 0;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+            transform: scale(0.9999);
+        }
+
+        .game-box-art::before {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-     
             background: linear-gradient(
                 transparent 0%,
-                rgba(178, 107, 1, 0.25) 50%,
+                rgba(178, 107, 1, 0.4) 50%,
                 transparent 100%
             );
-            background-size: 100% 4px;
-            animation: scanlines 8s linear infinite;
+            background-size: 100% 3px;
+            animation: scanlines 6s linear infinite;
             pointer-events: none;
             z-index: 2;
-        }
-
-        .game-box-display::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--primary-color);
-            opacity: 0;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .game-box-display.switching::after {
-            animation: glitch-switch 0.3s steps(2) forwards;
+            opacity: 0.8;
         }
 
         @keyframes scanlines {
@@ -626,91 +682,39 @@
             100% { background-position: 0 100%; }
         }
 
-        @keyframes glitch-switch {
-            0% { opacity: 0; }
-            10% { opacity: 0.1; }
-            20% { opacity: 0; }
-            30% { opacity: 0.3; }
-            40% { opacity: 0; }
-            50% { opacity: 0.2; }
-            60% { opacity: 0; }
-            70% { opacity: 0.4; }
-            80% { opacity: 0; }
-            90% { opacity: 0.3; }
-            100% { opacity: 0; }
-        }
-
-        .game-box-display img {
-            max-width: 100%;
-            max-height: 100%;
-            opacity: 0.6;
-            object-fit: contain;
-            filter: sepia(100%) hue-rotate(5deg) saturate(400%) brightness(80%) contrast(110%);
-            position: relative;
-            z-index: 0;
-            transition: transform 0.3s ease;
-            image-rendering: pixelated; /* For Chrome/Edge */
-            image-rendering: -moz-crisp-edges; /* For Firefox */
-            image-rendering: crisp-edges; /* Future standard */
-            transform: scale(0.9999); /* Force pixelation in some browsers */
-            transition: transform 0.3s ease;
-        }
-
-        .game-box-display.switching img {
-            animation: image-glitch 0.3s steps(2);
-        }
-
-        @keyframes image-glitch {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-            75% { transform: translateX(-2px); }
-            100% { transform: translateX(0); }
-        }
-
         @media (max-width: 768px) {
-            .games-container {
-                flex-direction: column;
-                position: relative;
-            }
-            
-            .games-list-container {
-                max-width: 100%;
-            }
-            
-            .game-box-display {
-                display: block;
-                position: absolute;
-                top: 0;
-                right: 0;
-                width: 200px;
-                height: auto;
-                margin: 10px;
-                z-index: 2;
+            .game-box-art {
+                width: 80px;
+                height: 106px;
             }
 
-            .game-box-display img {
-                max-width: 200px;
-                opacity: 0.8;
+            .game-list li {
+                padding: 6px;
+                gap: 8px;
             }
 
-            .games-list-container {
-                padding-right: 140px;
+            .game-list li a {
+                font-size: 1rem;
+            }
+
+            .game-platform {
+                font-size: 0.8rem;
+            }
+
+            .game-role {
+                font-size: 0.7rem;
             }
         }
 
         @media (max-width: 480px) {
-            .game-box-display {
-                width: 150px;
-                height: auto;
+            .game-box-art {
+                width: 70px;
+                height: 93px;
             }
 
-            .game-box-display img {
-                width: 150px;
-            }
-
-            .games-list-container {
-                padding-right: 110px;
+            .game-list li {
+                padding: 4px;
+                gap: 6px;
             }
         }
 
@@ -785,48 +789,64 @@
 
         .profile-container {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+            flex-direction: column;
             gap: 2rem;
             width: 100%;
         }
 
         .profile-info {
             flex: 1;
-            max-width: 65%;
+            max-width: 100%;
+            order: 2;
         }
 
         .profile-portrait {
-            flex: 0 0 auto;
-            width: 30%;
-            min-width: 200px;
+            width: 100%;
+            order: 1;
         }
 
         .portrait-frame {
             width: 100%;
-            height: 400px;
-
+            height: 380px;
             overflow: hidden;
+            filter: brightness(2);
         }
 
         .portrait-iframe {
             width: 100%;
             height: 100%;
             border: none;
+            transform: scale(1.0);
         }
 
         @media (max-width: 768px) {
             .profile-container {
-                flex-direction: column;
+                gap: 1.5rem;
             }
             
-            .profile-info {
-                max-width: 100%;
+            .portrait-frame {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-container {
+                gap: 1rem;
             }
             
-            .profile-portrait {
+            .portrait-frame {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 840px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
                 width: 100%;
-                margin-top: 1rem;
+                margin: 0;
             }
         }
     </style>
@@ -1012,160 +1032,218 @@
                 <div class="terminal-prompt">ACCESSING PROJECTS DATA</div>
                 <h2>Projects by Platform & Role</h2>
                 <div class="games-container">
-                    <div class="games-list-container">
-                        <ul class="game-list">
-                            <li onclick="window.open('https://store.playstation.com/en-us/product/UP6345-CUSA24211_00-TOYSOLDIERSHDPS4', '_blank')" data-boxart="toysoldiers.webp">
-                                <div class="game-title-line">
-                                    <a>Toy Soldiers: HD</a>
-                                    <span class="game-platform">[Nintendo Switch | PS4 | X1 | Steam]</span>
-                                </div>
+                    <ul class="game-list">
+                        <li onclick="window.open('https://store.playstation.com/en-us/product/UP6345-CUSA24211_00-TOYSOLDIERSHDPS4', '_blank')">
+                            <div class="game-info">
+                                <a>Toy Soldiers: HD</a>
+                                <span class="game-platform">[Nintendo Switch | PS4 | X1 | Steam]</span>
                                 <span class="game-role">Creator, Developer</span>
-                            </li>
-                            <li onclick="window.open('https://store.steampowered.com/app/262120/Toy_Soldiers_Complete/', '_blank')" data-boxart="tscomplete.webp">
-                                <div class="game-title-line">
-                                    <a>Toy Soldiers: Complete</a>
-                                    <span class="game-platform">[Steam]</span>
-                                </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/toysoldiers.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                        <li onclick="window.open('https://store.steampowered.com/app/262120/Toy_Soldiers_Complete/', '_blank')" data-boxart="tscomplete.webp">
+                            <div class="game-info">
+                                <a>Toy Soldiers: Complete</a>
+                                <span class="game-platform">[Steam]</span>
                                 <span class="game-role">Owner, Creator, Developer</span>
-                            </li>
-                            <li onclick="window.open('https://store.steampowered.com/app/98300/Toy_Soldiers/', '_blank')" data-boxart="toysoldiers360.webp">
-                                <div class="game-title-line">
-                                    <a>Toy Soldiers</a>
-                                    <span class="game-platform">[Xbox 360 | Steam]</span>
-                                </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/tscomplete.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                        <li onclick="window.open('https://store.steampowered.com/app/98300/Toy_Soldiers/', '_blank')" data-boxart="toysoldiers360.webp">
+                            <div class="game-info">
+                                <a>Toy Soldiers</a>
+                                <span class="game-platform">[Xbox 360 | Steam]</span>
                                 <span class="game-role">Owner, Creator, Developer</span>
-                            </li>
-                            <li onclick="window.open('https://youtu.be/tIfU0cyX4jg', '_blank')" data-boxart="warchest.webp">
-                                <div class="game-title-line">
-                                    <a>Toy Soldiers: Warchest</a>
-                                    <span class="game-platform">[X1 | PS4 | Steam]</span>
-                                </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/toysoldiers360.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                        <li onclick="window.open('https://youtu.be/tIfU0cyX4jg', '_blank')" data-boxart="warchest.webp">
+                            <div class="game-info">
+                                <a>Toy Soldiers: Warchest</a>
+                                <span class="game-platform">[X1 | PS4 | Steam]</span>
                                 <span class="game-role">Executive Producer, Developer</span>
-                            </li>
-                            <li onclick="window.open('https://store.steampowered.com/app/307880/Savage_Lands/', '_blank')" data-boxart="savagelands.webp">
-                                <div class="game-title-line">
-                                    <a>Savage Lands</a>
-                                    <span class="game-platform">[Steam]</span>
-                                </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/warchest.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                        <li onclick="window.open('https://store.steampowered.com/app/307880/Savage_Lands/', '_blank')" data-boxart="savagelands.webp">
+                            <div class="game-info">
+                                <a>Savage Lands</a>
+                                <span class="game-platform">[Steam]</span>
                                 <span class="game-role">Executive Producer, Developer</span>
-                            </li>
-                            <li onclick="window.open('https://store.steampowered.com/app/2113570/Ascend_Reborn/', '_blank')" data-boxart="ascendreborn.webp">
-                                <div class="game-title-line">
-                                    <a>Ascend: Hand of Kul</a>
-                                    <span class="game-platform">[Xbox 360 | Steam]</span>
-                                </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/savagelands.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                        <li onclick="window.open('https://store.steampowered.com/app/2113570/Ascend_Reborn/', '_blank')" data-boxart="ascendreborn.webp">
+                            <div class="game-info">
+                                <a>Ascend: Hand of Kul</a>
+                                <span class="game-platform">[Xbox 360 | Steam]</span>
                                 <span class="game-role">Creator, Owner, Developer</span>
-                            </li>
-                            <li onclick="window.open('https://www.metacritic.com/game/xbox-360/toy-soldiers-cold-war', '_blank')" data-boxart="coldwar.webp">
-                                <div class="game-title-line">
-                                    <a>Toy Soldiers: Cold War</a>
-                                    <span class="game-platform">[Xbox 360]</span>
-                                </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/ascendreborn.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                        <li onclick="window.open('https://www.metacritic.com/game/xbox-360/toy-soldiers-cold-war', '_blank')" data-boxart="coldwar.webp">
+                            <div class="game-info">
+                                <a>Toy Soldiers: Cold War</a>
+                                <span class="game-platform">[Xbox 360]</span>
                                 <span class="game-role">Creator, Owner, Developer</span>
-                            </li>
-                            <li onclick="window.open('https://apps.apple.com/us/app/the-sleeping-prince-gameclub/id642606469', '_blank')" data-boxart="sleepingprince.webp">
-                                <div class="game-title-line">
-                                    <a>Sleeping Prince</a>
-                                    <span class="game-platform">[iOS | Android]</span>
-                                </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/coldwar.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                        <li onclick="window.open('https://apps.apple.com/us/app/the-sleeping-prince-gameclub/id642606469', '_blank')" data-boxart="sleepingprince.webp">
+                            <div class="game-info">
+                                <a>Sleeping Prince</a>
+                                <span class="game-platform">[iOS | Android]</span>
                                 <span class="game-role">Executive Producer</span>
-                            </li>
-                            <li onclick="window.open('https://www.imdb.com/title/tt0823153/', '_blank')" data-boxart="justiceleague.webp">
-                                <div class="game-title-line">
-                                    <a>Justice League Heroes</a>
-                                    <span class="game-platform">[PS2 | PSP | Xbox]</span>
-                                </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/sleepingprince.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                        <li onclick="window.open('https://www.imdb.com/title/tt0823153/', '_blank')" data-boxart="justiceleague.webp">
+                            <div class="game-info">
+                                <a>Justice League Heroes</a>
+                                <span class="game-platform">[PS2 | PSP | Xbox]</span>
                                 <span class="game-role">Lead Environment Artist</span>
-                            </li>
-                            <li onclick="window.open('https://www.metacritic.com/game/socom-u-s-navy-seals-fireteam-bravo/', '_blank')" data-boxart="socomfireteambravo.webp">
-                                <div class="game-title-line">
-                                    <a>SOCOM: Fireteam Bravo</a>
-                                    <span class="game-platform">[PSP]</span>
-                                </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/justiceleague.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                        <li onclick="window.open('https://www.metacritic.com/game/socom-u-s-navy-seals-fireteam-bravo/', '_blank')" data-boxart="socomfireteambravo.webp">
+                            <div class="game-info">
+                                <a>SOCOM: Fireteam Bravo</a>
+                                <span class="game-platform">[PSP]</span>
                                 <span class="game-role">Lead Artist</span>
-                            </li>
-                            <li onclick="window.open('https://www.gamespot.com/games/red-faction-ii/', '_blank')" data-boxart="redfaction2.webp">
-                                <div class="game-title-line">
-                                    <a>Red Faction II</a>
-                                    <span class="game-platform">[GC | Xbox | PC]</span>
-                                </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/socomfireteambravo.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                        <li onclick="window.open('https://www.gamespot.com/games/red-faction-ii/', '_blank')" data-boxart="redfaction2.webp">
+                            <div class="game-info">
+                                <a>Red Faction II</a>
+                                <span class="game-platform">[GC | Xbox | PC]</span>
                                 <span class="game-role">Lead Artist</span>
-                            </li>
-                            <li onclick="window.open('https://www.metacritic.com/game/summoner-a-goddess-reborn/', '_blank')" data-boxart="summoner2.webp">
-                                <div class="game-title-line">
-                                    <a>Summoner II: A Goddess Reborn</a>
-                                    <span class="game-platform">[GC]</span>
-                                </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/redfaction2.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                        <li onclick="window.open('https://www.metacritic.com/game/summoner-a-goddess-reborn/', '_blank')" data-boxart="summoner2.webp">
+                            <div class="game-info">
+                                <a>Summoner II: A Goddess Reborn</a>
+                                <span class="game-platform">[GC]</span>
                                 <span class="game-role">Lead Artist</span>
-                            </li>
-                            <li onclick="window.open('https://www.ea.com/games/need-for-speed/need-for-speed-hot-pursuit-remastered', '_blank')" data-boxart="nfshp2.webp">
-                                <div class="game-title-line">
-                                    <a>Need for Speed: Hot Pursuit 2</a>
-                                    <span class="game-platform">[GC | Xbox | PC | PS2]</span>
-                                </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/summoner2.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                        <li onclick="window.open('https://www.ea.com/games/need-for-speed/need-for-speed-hot-pursuit-remastered', '_blank')" data-boxart="nfshp2.webp">
+                            <div class="game-info">
+                                <a>Need for Speed: Hot Pursuit 2</a>
+                                <span class="game-platform">[GC | Xbox | PC | PS2]</span>
                                 <span class="game-role">Environment Artist</span>
-                            </li>
-                            <li onclick="window.open('https://www.ea.com/games/medal-of-honor/medal-of-honor-pacific-assault', '_blank')" data-boxart="moh.webp">
-                                <div class="game-title-line">
-                                    <a>Medal of Honor: Pacific Assault</a>
-                                    <span class="game-platform">[PC]</span>
-                                </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/nfshp2.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                        <li onclick="window.open('https://www.ea.com/games/medal-of-honor/medal-of-honor-pacific-assault', '_blank')" data-boxart="moh.webp">
+                            <div class="game-info">
+                                <a>Medal of Honor: Pacific Assault</a>
+                                <span class="game-platform">[PC]</span>
                                 <span class="game-role">CG Artist III</span>
-                            </li>
-                            <li onclick="window.open('https://www.metacritic.com/game/socom-3-u-s-navy-seals/', '_blank')" data-boxart="socom.webp">
-                                <div class="game-title-line">
-                                    <a>SOCOM III</a>
-                                    <span class="game-platform">[PS2]</span>
-                                </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/moh.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                        <li onclick="window.open('https://www.metacritic.com/game/socom-3-u-s-navy-seals/', '_blank')" data-boxart="socom.webp">
+                            <div class="game-info">
+                                <a>SOCOM III</a>
+                                <span class="game-platform">[PS2]</span>
                                 <span class="game-role">Team Artist</span>
-                            </li>
-                            <li onclick="window.open('https://en.wikipedia.org/wiki/Azurik:_Rise_of_Perathia', '_blank')" data-boxart="azurik.webp">
-                                <div class="game-title-line">
-                                    <a>Azurik: Rise of Perathia</a>
-                                    <span class="game-platform">[Xbox]</span>
-                                </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/socom.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                        <li onclick="window.open('https://en.wikipedia.org/wiki/Azurik:_Rise_of_Perathia', '_blank')" data-boxart="azurik.webp">
+                            <div class="game-info">
+                                <a>Azurik: Rise of Perathia</a>
+                                <span class="game-platform">[Xbox]</span>
                                 <span class="game-role">Environment Artist</span>
-                            </li>
-                            <li onclick="window.open('https://www.metacritic.com/game/harry-potter-and-the-prisoner-of-azkaban/', '_blank')" data-boxart="hp.webp">
-                                <div class="game-title-line">
-                                    <a>Harry Potter and the Prisoner of Azkaban</a>
-                                    <span class="game-platform">[PS2 | GC | Xbox | PC]</span>
-                                </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/azurik.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                        <li onclick="window.open('https://www.metacritic.com/game/harry-potter-and-the-prisoner-of-azkaban/', '_blank')" data-boxart="hp.webp">
+                            <div class="game-info">
+                                <a>Harry Potter and the Prisoner of Azkaban</a>
+                                <span class="game-platform">[PS2 | GC | Xbox | PC]</span>
                                 <span class="game-role">Prop Artist</span>
-                            </li>
-                            <li onclick="window.open('https://store.steampowered.com/app/314160/Microsoft_Flight_Simulator_X_Steam_Edition/', '_blank')" data-boxart="flightsim.webp">
-                                <div class="game-title-line">
-                                    <a>Microsoft Flight Sim X</a>
-                                    <span class="game-platform">[PC]</span>
-                                </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/hp.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                        <li onclick="window.open('https://store.steampowered.com/app/314160/Microsoft_Flight_Simulator_X_Steam_Edition/', '_blank')" data-boxart="flightsim.webp">
+                            <div class="game-info">
+                                <a>Microsoft Flight Sim X</a>
+                                <span class="game-platform">[PC]</span>
                                 <span class="game-role">Contract Artist</span>
-                            </li>
-                            <li onclick="window.open('https://www.ddo.com/home', '_blank')" data-boxart="dnd.webp">
-                                <div class="game-title-line">
-                                    <a>Dungeons and Dragons: Stormreach</a>
-                                    <span class="game-platform">[PC]</span>
-                                </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/flightsim.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                        <li onclick="window.open('https://www.ddo.com/home', '_blank')" data-boxart="dnd.webp">
+                            <div class="game-info">
+                                <a>Dungeons and Dragons: Stormreach</a>
+                                <span class="game-platform">[PC]</span>
                                 <span class="game-role">Contract Artist</span>
-                            </li>
-                            <li onclick="window.open('https://www.metacritic.com/game/sega-rally-revo/', '_blank')" data-boxart="sega.webp">
-                                <div class="game-title-line">
-                                    <a>Sega Rally Revo</a>
-                                    <span class="game-platform">[PS3 | PSP | Xbox 360 | PC]</span>
-                                </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/dnd.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                        <li onclick="window.open('https://www.metacritic.com/game/sega-rally-revo/', '_blank')" data-boxart="sega.webp">
+                            <div class="game-info">
+                                <a>Sega Rally Revo</a>
+                                <span class="game-platform">[PS3 | PSP | Xbox 360 | PC]</span>
                                 <span class="game-role">Contract Artist</span>
-                            </li>
-                            <li onclick="window.open('https://en.wikipedia.org/wiki/Star_Trek:_Legacy', '_blank')" data-boxart="startrek.webp">
-                                <div class="game-title-line">
-                                    <a>Star Trek Legacy</a>
-                                    <span class="game-platform">[Xbox 360 | PC]</span>
-                                </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/sega.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                        <li onclick="window.open('https://en.wikipedia.org/wiki/Star_Trek:_Legacy', '_blank')" data-boxart="startrek.webp">
+                            <div class="game-info">
+                                <a>Star Trek Legacy</a>
+                                <span class="game-platform">[Xbox 360 | PC]</span>
                                 <span class="game-role">Contract Artist</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="game-box-display">
-                        <!-- Box art will be displayed here -->
-                    </div>
+                            </div>
+                            <div class="game-box-art">
+                                <img src="images/startrek.webp" alt="Game Box Art">
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
