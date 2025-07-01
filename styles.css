@@ -469,25 +469,25 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    background: rgba(51, 128, 255, 0.85);
+    background: var(--neo-deep-black);
     backdrop-filter: blur(2px);
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .neo-game-item.active .neo-game-item-content {
-    background: rgba(51, 129, 255, 0.418);
+    background: var(--neo-deep-black);
     backdrop-filter: blur(0px);
 }
 
 .neo-game-item.prev .neo-game-item-content,
 .neo-game-item.next .neo-game-item-content {
-    background: rgba(51, 128, 255, 0.5);
+    background: var(--neo-deep-black);
     backdrop-filter: blur(4px);
 }
 
 .neo-game-item.far-left .neo-game-item-content,
 .neo-game-item.far-right .neo-game-item-content {
-    background: rgba(51, 128, 255, 0.25);
+    background: var(--neo-deep-black);
     backdrop-filter: blur(6px);
 }
 

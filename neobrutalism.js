@@ -672,219 +672,203 @@ class NeoBrutalism {
     }
 
     /* ========================================
-       SLOPCADE PREVIEW FUNCTIONALITY
+       SLOPCADE PREVIEW FUNCTIONALITY (MODAL)
     ======================================== */
     setupSlopcadePreview() {
-        const slopcadeItems = document.querySelectorAll('.slopcade-item');
+        const slopcadeItems = Array.from(document.querySelectorAll('.slopcade-item'));
         if (slopcadeItems.length === 0) return; // Only on slopcade page
-        
-        // Create a single preview element and append to body
-        const previewElement = document.createElement('div');
-        previewElement.className = 'slopcade-preview';
-        document.body.appendChild(previewElement);
-        
-        let activeItem = null;
-        
-        slopcadeItems.forEach(item => {
+
+        // Create modal overlay
+        const modal = document.createElement('div');
+        modal.className = 'slopcade-modal';
+        modal.style.cssText = `
+            position: fixed; left: 0; top: 0; width: 100vw; height: 100vh;
+            background: rgba(20, 0, 40, 0.97); z-index: 2147483647;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.2s;
+        `;
+        modal.innerHTML = `
+            <button class="slopcade-modal-close" style="position:absolute;top:24px;right:32px;font-size:2.5rem;background:none;border:none;color:#fff;z-index:2;cursor:pointer;"><i class="fas fa-times"></i></button>
+            <button class="slopcade-modal-arrow slopcade-modal-prev" style="position:absolute;left:24px;top:50%;transform:translateY(-50%);font-size:2.5rem;background:none;border:none;color:#fff;z-index:2;cursor:pointer;"><i class="fas fa-chevron-left"></i></button>
+            <button class="slopcade-modal-arrow slopcade-modal-next" style="position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:2.5rem;background:none;border:none;color:#fff;z-index:2;cursor:pointer;"><i class="fas fa-chevron-right"></i></button>
+            <div class="slopcade-modal-content" style="max-width:90vw;max-height:90vh;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;"></div>
+        `;
+        document.body.appendChild(modal);
+        const closeBtn = modal.querySelector('.slopcade-modal-close');
+        const prevBtn = modal.querySelector('.slopcade-modal-prev');
+        const nextBtn = modal.querySelector('.slopcade-modal-next');
+        const content = modal.querySelector('.slopcade-modal-content');
+
+        let currentIndex = -1;
+        let lastTouchTime = 0;
+        let lastTapTarget = null;
+        let preventOpen = false;
+        let longPressTimer = null;
+        let hintShown = false;
+        let hintTimeout = null;
+
+        // Helper: open modal for index
+        const openModal = (idx) => {
+            if (idx < 0 || idx >= slopcadeItems.length) return;
+            currentIndex = idx;
+            const item = slopcadeItems[idx];
             const img = item.querySelector('img');
             const video = item.querySelector('video');
-            if (!img && !video) return;
-            
-            // Skip text-only items (they don't have click functionality)
+            const caption = item.querySelector('.slopcade-caption')?.textContent || '';
+            content.innerHTML = '';
+            // Create a vertical flex container for media + caption
+            const vertical = document.createElement('div');
+            vertical.style.display = 'flex';
+            vertical.style.flexDirection = 'column';
+            vertical.style.alignItems = 'center';
+            vertical.style.justifyContent = 'center';
+            vertical.style.maxWidth = '90vw';
+            vertical.style.maxHeight = '80vh';
+            vertical.style.width = '100%';
+            vertical.style.height = '100%';
+            if (video) {
+                const vid = document.createElement('video');
+                vid.src = video.src;
+                vid.autoplay = true;
+                vid.loop = true;
+                vid.muted = true;
+                vid.controls = true;
+                vid.style.maxWidth = '90vw';
+                vid.style.maxHeight = '60vh';
+                vid.style.display = 'block';
+                vertical.appendChild(vid);
+            } else if (img) {
+                const image = document.createElement('img');
+                image.src = img.src;
+                image.alt = img.alt || '';
+                image.style.maxWidth = '90vw';
+                image.style.maxHeight = '60vh';
+                image.style.display = 'block';
+                vertical.appendChild(image);
+            }
+            if (caption) {
+                const cap = document.createElement('div');
+                cap.textContent = caption;
+                cap.style.cssText = 'color:#fff;text-align:center;font-size:1.2rem;margin-top:1.5rem;text-shadow:2px 2px 8px #000;width:100%;';
+                vertical.appendChild(cap);
+            }
+            content.appendChild(vertical);
+            modal.style.opacity = '1';
+            modal.style.pointerEvents = 'auto';
+            document.body.style.overflow = 'hidden';
+        };
+        // Helper: close modal
+        const closeModal = () => {
+            modal.style.opacity = '0';
+            modal.style.pointerEvents = 'none';
+            document.body.style.overflow = '';
+            setTimeout(() => { content.innerHTML = ''; }, 200);
+            preventOpen = true;
+            setTimeout(() => { preventOpen = false; }, 400); // Prevent immediate re-open
+        };
+        // Navigation
+        const showPrev = () => openModal((currentIndex - 1 + slopcadeItems.length) % slopcadeItems.length);
+        const showNext = () => openModal((currentIndex + 1) % slopcadeItems.length);
+
+        // Event listeners for modal controls
+        closeBtn.addEventListener('click', closeModal);
+        prevBtn.addEventListener('click', showPrev);
+        nextBtn.addEventListener('click', showNext);
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (modal.style.opacity !== '1') return;
+            if (e.key === 'Escape') closeModal();
+            if (e.key === 'ArrowLeft') showPrev();
+            if (e.key === 'ArrowRight') showNext();
+        });
+        // Click outside content closes
+        modal.addEventListener('mousedown', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        // Touch outside content closes
+        modal.addEventListener('touchstart', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        // Swipe navigation (mobile)
+        let touchStartX = 0;
+        let touchEndX = 0;
+        modal.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 1) touchStartX = e.touches[0].clientX;
+        });
+        modal.addEventListener('touchend', (e) => {
+            if (touchStartX === 0) return;
+            touchEndX = e.changedTouches[0].clientX;
+            const dx = touchEndX - touchStartX;
+            if (Math.abs(dx) > 60) {
+                if (dx > 0) showPrev();
+                else showNext();
+            }
+            touchStartX = 0;
+            touchEndX = 0;
+        });
+
+        // Double-tap and long-press detection for mobile, single click for desktop
+        slopcadeItems.forEach((item, idx) => {
+            // Skip text-only items
             if (item.classList.contains('slopcade-text-item')) return;
-            
-            const mediaSrc = img ? img.src : video.src;
-            const isVideo = !!video;
-            let previewWidth = 500;
-            let previewHeight = 500;
-            
-            // Load media to get natural dimensions
-            if (isVideo) {
-                const tempVideo = document.createElement('video');
-                tempVideo.onloadedmetadata = function() {
-                    const aspectRatio = this.videoWidth / this.videoHeight;
-                    const isMobile = window.innerWidth <= 900;
-                    const baseSize = isMobile ? 300 : 500;
-                    
-                    if (aspectRatio > 1) {
-                        // Wider than tall
-                        previewWidth = baseSize;
-                        previewHeight = baseSize / aspectRatio;
-                    } else {
-                        // Taller than wide or square
-                        previewHeight = baseSize;
-                        previewWidth = baseSize * aspectRatio;
-                    }
-                };
-                tempVideo.src = mediaSrc;
-            } else {
-                const tempImg = new Image();
-                tempImg.onload = function() {
-                    const aspectRatio = this.naturalWidth / this.naturalHeight;
-                    const isMobile = window.innerWidth <= 900;
-                    const baseSize = isMobile ? 300 : 500;
-                    
-                    if (aspectRatio > 1) {
-                        // Wider than tall
-                        previewWidth = baseSize;
-                        previewHeight = baseSize / aspectRatio;
-                    } else {
-                        // Taller than wide or square
-                        previewHeight = baseSize;
-                        previewWidth = baseSize * aspectRatio;
-                    }
-                };
-                tempImg.src = mediaSrc;
-            }
-            
-            // Handle positioning for click/tap
-            function updatePreviewPosition(e) {
-                const offsetX = 20;
-                const offsetY = -20;
-                const padding = 20;
-                
-                // Get viewport dimensions
-                const viewportWidth = window.innerWidth;
-                const viewportHeight = window.innerHeight;
-                
-                // For touch events, use touch coordinates
-                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-                
-                // Calculate initial positions
-                let previewX = clientX + offsetX;
-                let previewY = clientY + offsetY;
-                
-                // Horizontal positioning logic
-                if (previewX + previewWidth > viewportWidth - padding) {
-                    // Try to show on the left side
-                    previewX = clientX - previewWidth - offsetX;
-                    // If still off-screen on left, constrain to right edge
-                    if (previewX < padding) {
-                        previewX = viewportWidth - previewWidth - padding;
-                    }
-                }
-                // Ensure not off left edge
-                if (previewX < padding) {
-                    previewX = padding;
-                }
-                
-                // Vertical positioning logic
-                if (previewY < padding) {
-                    // Show below cursor
-                    previewY = clientY + Math.abs(offsetY);
-                }
-                if (previewY + previewHeight > viewportHeight - padding) {
-                    // Try to show above cursor
-                    previewY = clientY - previewHeight + offsetY;
-                    // If still off-screen, constrain to bottom
-                    if (previewY < padding) {
-                        previewY = viewportHeight - previewHeight - padding;
-                    }
-                }
-                // Final check - ensure not off bottom
-                if (previewY + previewHeight > viewportHeight - padding) {
-                    previewY = viewportHeight - previewHeight - padding;
-                }
-                // Final check - ensure not off top
-                if (previewY < padding) {
-                    previewY = padding;
-                }
-                
-                // Update preview element position and size
-                previewElement.style.left = `${Math.max(padding, Math.min(previewX, viewportWidth - previewWidth - padding))}px`;
-                previewElement.style.top = `${Math.max(padding, Math.min(previewY, viewportHeight - previewHeight - padding))}px`;
-                previewElement.style.width = `${previewWidth}px`;
-                previewElement.style.height = `${previewHeight}px`;
-            }
-            
-            // Handle click/tap
-            item.addEventListener('click', function(e) {
+            // Mouse click: always open modal, regardless of screen size
+            item.addEventListener('click', (e) => {
+                if (preventOpen) return;
                 e.preventDefault();
-                e.stopPropagation();
-                
-                // If this item is already active, close the preview
-                if (activeItem === item) {
-                    previewElement.classList.remove('show');
-                    activeItem = null;
-                    // Clean up video element if it exists
-                    if (previewElement.innerHTML) {
-                        previewElement.innerHTML = '';
-                    }
-                    return;
-                }
-                
-                // Set this as the active item
-                activeItem = item;
-                
-                if (isVideo) {
-                    // For videos, create a video element in the preview
-                    previewElement.innerHTML = `<video src="${mediaSrc}" autoplay loop muted style="width: 100%; height: 100%; object-fit: contain;"></video>`;
-                    previewElement.style.backgroundImage = '';
-                } else {
-                    // For images, use background image
-                    previewElement.style.backgroundImage = `url(${mediaSrc})`;
-                    previewElement.innerHTML = '';
-                }
-                previewElement.classList.add('show');
-                updatePreviewPosition(e);
+                openModal(idx);
             });
-            
-            // Handle touch events for mobile
-            item.addEventListener('touchstart', function(e) {
-                // Prevent default to avoid triggering click
-                e.preventDefault();
-                
-                // If this item is already active, close the preview
-                if (activeItem === item) {
-                    previewElement.classList.remove('show');
-                    activeItem = null;
-                    // Clean up video element if it exists
-                    if (previewElement.innerHTML) {
-                        previewElement.innerHTML = '';
-                    }
-                    return;
+            // Mobile: double-tap or long-press
+            item.addEventListener('touchend', (e) => {
+                if (window.innerWidth > 900) return; // Only mobile
+                if (preventOpen) return;
+                if (longPressTimer) {
+                    clearTimeout(longPressTimer);
+                    longPressTimer = null;
                 }
-                
-                // Set this as the active item
-                activeItem = item;
-                
-                if (isVideo) {
-                    // For videos, create a video element in the preview
-                    previewElement.innerHTML = `<video src="${mediaSrc}" autoplay loop muted style="width: 100%; height: 100%; object-fit: contain;"></video>`;
-                    previewElement.style.backgroundImage = '';
+                const now = Date.now();
+                if (lastTapTarget === item && now - lastTouchTime < 600) {
+                    e.preventDefault();
+                    openModal(idx);
+                    lastTouchTime = 0;
+                    lastTapTarget = null;
                 } else {
-                    // For images, use background image
-                    previewElement.style.backgroundImage = `url(${mediaSrc})`;
-                    previewElement.innerHTML = '';
+                    lastTouchTime = now;
+                    lastTapTarget = item;
+                    // Show hint on first tap
+                    if (!hintShown) {
+                        const hint = document.createElement('div');
+                        hint.textContent = 'Double-tap or long-press to preview';
+                        hint.style.cssText = 'position:absolute;left:50%;top:10%;transform:translateX(-50%);background:rgba(0,0,0,0.8);color:#fff;padding:8px 16px;border-radius:8px;font-size:1rem;z-index:10000;pointer-events:none;';
+                        item.appendChild(hint);
+                        hintShown = true;
+                        hintTimeout = setTimeout(() => {
+                            hint.remove();
+                            hintShown = false;
+                        }, 1200);
+                    }
                 }
-                previewElement.classList.add('show');
-                updatePreviewPosition(e);
             });
-        });
-        
-        // Close preview when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!previewElement.contains(e.target) && !e.target.closest('.slopcade-item')) {
-                previewElement.classList.remove('show');
-                activeItem = null;
-                // Clean up video element if it exists
-                if (previewElement.innerHTML) {
-                    previewElement.innerHTML = '';
+            item.addEventListener('touchstart', (e) => {
+                if (window.innerWidth > 900) return;
+                if (preventOpen) return;
+                if (longPressTimer) clearTimeout(longPressTimer);
+                longPressTimer = setTimeout(() => {
+                    openModal(idx);
+                    longPressTimer = null;
+                }, 400); // 400ms long-press
+            });
+            item.addEventListener('touchmove', (e) => {
+                if (longPressTimer) {
+                    clearTimeout(longPressTimer);
+                    longPressTimer = null;
                 }
-            }
-        });
-        
-        // Close preview when touching outside (mobile)
-        document.addEventListener('touchstart', function(e) {
-            if (!previewElement.contains(e.target) && !e.target.closest('.slopcade-item')) {
-                previewElement.classList.remove('show');
-                activeItem = null;
-                // Clean up video element if it exists
-                if (previewElement.innerHTML) {
-                    previewElement.innerHTML = '';
+            });
+            item.addEventListener('touchcancel', (e) => {
+                if (longPressTimer) {
+                    clearTimeout(longPressTimer);
+                    longPressTimer = null;
                 }
-            }
+            });
         });
     }
 }
