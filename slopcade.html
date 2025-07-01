@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DR ALBRIGHT PRESENTS SLOPCADE</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="SLOPCADE - D.R. Albright's showcase of current game development projects including Toy Soldiers 2: Finest Hour, American Indian Wars, and Liberty Baby Saves the Globe.">
+    <meta name="keywords" content="game development, indie games, Toy Soldiers 2, American Indian Wars, Liberty Baby, D.R. Albright, Signal Studios, game prototypes">
+    <meta name="author" content="D.R. Albright">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="DR ALBRIGHT PRESENTS SLOPCADE">
+    <meta property="og:description" content="D.R. Albright's showcase of current game development projects including Toy Soldiers 2: Finest Hour, American Indian Wars, and Liberty Baby Saves the Globe.">
+    <meta property="og:image" content="images/portrait.jpg">
+    <meta property="og:url" content="https://mostlypeaceful.github.io/dr-albright/slopcade.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DR ALBRIGHT PRESENTS SLOPCADE">
+    <meta name="twitter:description" content="D.R. Albright's showcase of current game development projects.">
+    <meta name="twitter:image" content="images/portrait.jpg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        body {
+            overflow-x: hidden;
+            padding-top: 60px; /* Space for sticky nav */
+        }
+        .neo-main-container {
+            background: var(--neo-pure-white);
+            position: relative;
+            overflow-x: hidden;
+            /* No overflow-y here, let html/body handle scroll */
+        }
+        .slopcade-hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            width: 100%;
+            padding: 2rem;
+            background: var(--neo-purple);
+            position: relative;
+            box-sizing: border-box;
+        }
+        .slopcade-hero-content {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+
+        .slopcade-title-present {
+            font-family: 'Exo', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--neo-purple, #9a089a);
+            text-align: center;
+            margin-bottom: 0.5rem;
+            text-shadow: var(--neo-border-thick, 6px) 0 var(--neo-brutal-shadow, #222);
+            letter-spacing: 0.1em;
+        }
+
+        .slopcade-title-main {
+            font-family: 'Exo', sans-serif;
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 900;
+            color: var(--neo-purple);
+            text-align: center;
+            margin-bottom: 1rem;
+            text-shadow: 8px 8px 0px black;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .slopcade-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--neo-deep-black);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            max-width: 800px;
+        }
+        #slopcade-gallery {
+            width: 100%;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .slopcade-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            width: 100%;
+        }
+        .slopcade-item {
+            background: var(--neo-pure-white, #fff);
+            border: none;
+            box-shadow: none;
+            border-radius: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            z-index: 1;
+            box-sizing: border-box;
+            min-height: 0;
+        }
+        .slopcade-item img,
+        .slopcade-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .slopcade-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--neo-deep-black);
+            color: var(--neo-purple);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-align: center;
+            padding: 0.5rem 0.2rem;
+            box-sizing: border-box;
+            text-shadow: 1px 1px 2px #111;
+            z-index: 2;
+        }
+        
+        /* Hover Preview Styles */
+        .slopcade-item {
+            cursor: pointer;
+        }
+        
+        .slopcade-preview {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 500px;
+            height: 500px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: transparent;
+            z-index: 2147483647;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            pointer-events: none;
+            border: none;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+            transform: translateZ(0);
+        }
+        
+        .slopcade-preview.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Text-only grid items (headers/titles) */
+        .slopcade-text-item {
+            background: var(--neo-purple);
+            border: none;
+            box-shadow: none;
+            border-radius: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            position: relative;
+            margin: 0;
+            padding: var(--neo-space-sm, 1rem);
+            z-index: 1;
+            text-align: center;
+            box-sizing: border-box;
+            min-height: 0;
+        }
+        
+        .slopcade-text-content {
+            color: var(--neo-deep-black);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            text-align: left;
+            height: 100%;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+        
+        .slopcade-text-header {
+            font-family: 'Exo', sans-serif;
+            font-weight: 900;
+            font-size: clamp(0.8rem, 3vw, 1.8rem);
+            line-height: 1.1;
+    
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            word-break: break-word;
+            hyphens: auto;
+            margin-bottom: 0.5rem;
+        }
+        
+        .slopcade-text-subtext {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: clamp(0.6rem, 2vw, 1rem);
+            line-height: 1.2;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            text-transform: none;
+            letter-spacing: 0.02em;
+            word-break: break-word;
+            hyphens: auto;
+            opacity: 0.9;
+        }
+        /* ASCIINATOR3000 Section Styles */
+        .asciinator-section {
+            min-height: 100vh;
+            width: 100%;
+            background-image: url('images/muh.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+        
+        .asciinator-content {
+            text-align: center;
+            max-width: 1000px;
+            width: 100%;
+        }
+        
+        .asciinator-title {
+            font-family: 'Exo', sans-serif;
+            font-size: clamp(2rem, 6vw, 6rem);
+            font-weight: 900;
+            color: var(--neo-purple);
+            text-shadow: 8px 8px 0px var(--neo-deep-black);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        
+        /* Navigation button hover and active states */
+        .neo-nav-button.neo-bg-black.neo-color-purple:hover,
+        .neo-nav-button.neo-bg-black.neo-color-purple:active,
+        .neo-nav-button.neo-bg-black.neo-color-purple:focus {
+            color: var(--neo-pure-white) !important;
+        }
+        
+        @media (max-width: 900px) {
+            .slopcade-hero {
+                padding: 1rem;
+            }
+            .slopcade-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            /* Fix mobile grid items - FORCE SQUARE */
+            .slopcade-item,
+            .slopcade-text-item {
+                aspect-ratio: 1 / 1 !important;
+                position: relative;
+                z-index: 1;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                width: 100% !important;
+                height: auto !important;
+            }
+            
+            /* Ensure captions are visible on mobile */
+            .slopcade-caption {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 3;
+                font-size: 0.8rem;
+                padding: 0.3rem 0.1rem;
+                background: var(--neo-deep-black);
+            }
+            
+            /* Responsive text for mobile */
+            .slopcade-text-header {
+                font-size: clamp(0.6rem, 2.5vw, 1.2rem);
+                margin-bottom: 0.3rem;
+            }
+            
+            .slopcade-text-subtext {
+                font-size: clamp(0.5rem, 1.8vw, 0.8rem);
+            }
+            
+            /* ASCIINATOR3000 mobile styles */
+            .asciinator-section {
+                background-attachment: scroll;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- STICKY NAVIGATION -->
+    <nav class="neo-nav-sticky">
+        <div class="neo-nav-container">
+            <div class="neo-nav-brand">D.R. ALBRIGHT</div>
+            <div class="neo-nav-menu">
+                <a href="index.html#profile" class="neo-nav-link neo-nav-button neo-bg-pink">HOME</a>
+             
+                <a href="#asciinator3000" class="neo-nav-link neo-nav-button neo-bg-black neo-color-purple"><span style="color: var(--neo-hot-pink);">A</span>SC<span style="color: var(--neo-hot-pink);">I</span>Inator 3000</a>
+              
+                <a href="#toy-soldiers" class="neo-nav-link neo-nav-button neo-bg-black neo-color-purple">TS2: FH</a>
+
+                <a href="#indian-wars" class="neo-nav-link neo-nav-button neo-bg-black neo-color-purple">AIW</a>
+
+                <a href="#liberty-baby" class="neo-nav-link neo-nav-button neo-bg-black neo-color-purple">LB</a>
+
+                <a href="slopcade.html" class="neo-nav-link neo-nav-button neo-bg-black neo-color-purple">SLOPCADE</a>
+            </div>
+            <div class="neo-nav-mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="neo-main-container">
+        <section id="slopcade-hero" class="slopcade-hero">
+            <div class="slopcade-hero-content">
+                <h1 class="slopcade-title-main">SLOPCADE</h1>
+                <p class="slopcade-subtitle">Projects I am currently working on solo in various stages of development. Eventually I'll finish at least one of them. I think. Maybe?</p>
+            </div>
+        </section>
+        <section id="slopcade-gallery">
+            <div class="slopcade-gallery">
+                <!-- Text Header Item TS2FH-->
+                <div id="toy-soldiers" class="slopcade-text-item">
+                    <div class="slopcade-text-content">
+                        <div class="slopcade-text-header">TOY SOLDIERS 2:<br>FINEST HOUR</div>
+                        <div class="slopcade-text-subtext">The proposed sequel for Toy Soldiers and Toy Soldiers: Cold War.</div>
+                    </div>
+                </div>
+                <div class="slopcade-item">
+                    <img src="images/ts2fh-clear-the-way-logog.png" alt="Clear the Way" />
+                    <div class="slopcade-caption">CLEAR THE WAY</div>
+                </div>
+                <div class="slopcade-item">
+                    <video src="images/ts2-air-land-sea.mp4" autoplay loop muted></video>
+                    <div class="slopcade-caption">AIR! LAND! SEA!</div>
+                </div>
+                <div class="slopcade-item">
+                    <img src="images/web_TS2FHbg.jpg" alt="Don't Tread on Me" />
+                    <div class="slopcade-caption">DON'T TREAD ON ME</div>
+                    
+                </div>
+                <div class="slopcade-item">
+                    <img src="images/ts2finesthour_ranger.png" alt="Courage" />
+                    <div class="slopcade-caption">COURAGE</div>
+                </div>
+                <div class="slopcade-item">
+                    <img src="images/ts2-room.jpg" alt="Customize your diorama" />
+                    <div class="slopcade-caption">CUSTOMIZE</div>
+                </div>
+                <div class="slopcade-item">
+                    <img src="images/ts2-ger-88.jpg" alt="German Flak 8.8 Turret" />
+                    <div class="slopcade-caption">GERMAN FLAK 8.8</div>
+                </div>
+          
+                <div class="slopcade-item">
+                    <img src="images/ts2-p40.jpg" alt="Patton" />
+                    <div class="slopcade-caption">P-40</div>
+                </div>
+
+                <div class="slopcade-item">
+                    <img src="images/ts2-patton.jpg" alt="P-40" />
+                    <div class="slopcade-caption">3RD ARMY</div>
+                </div>
+
+                <div class="slopcade-item">
+                    <img src="images/ts2-bombing-run.jpg" alt="Bombing Run" />
+                    <div class="slopcade-caption">BOMBING RUN</div>
+                </div>
+
+                <div class="slopcade-item">
+                    <img src="images/explodingnazis.jpg" alt="Mini-games" />
+                    <div class="slopcade-caption">MINI GAMES</div>
+                </div>
+
+                <div class="slopcade-item">
+                    <img src="images/ts2-medic.jpg" alt="Medic" />
+                    <div class="slopcade-caption">MEDIC</div>
+                </div>
+
+
+              <!-- Text Header Item American Indian Wars-->
+     <div id="indian-wars" class="slopcade-text-item">
+        <div class="slopcade-text-content">
+            <div class="slopcade-text-header">THE AMERICAN<br>INDIAN WARS</div>
+            <div class="slopcade-text-subtext">A web-based historical strategy game exploring the tragic conflicts between the US and Native Americans from 1850-1890. "Next-gen ASCII" if there is such a thing.</div>
+        </div>
+    </div>
+    <div class="slopcade-item">
+        <video src="images/dousewMouth.mp4" autoplay loop muted></video>
+        <div class="slopcade-caption">WHO ARE YOU?</div>
+    </div>
+    <div class="slopcade-item">
+        <img src="images/aiw-chiefs.png" alt="American Indian Wars" />
+        <div class="slopcade-caption">THE AMERICAN INDIAN WARS</div>
+    </div>
+ 
+    <div class="slopcade-item">
+        <img src="images/aiw-flight.png" alt="the Flight of the Nez Perce" />
+        <div class="slopcade-caption">THE FLIGHT</div>
+    </div>
+    <div class="slopcade-item">
+        <img src="images/aiw-map.png" alt="the Flight of the Nez Perce" />
+        <div class="slopcade-caption">IDAHO TERRITORY</div>
+    </div>
+    <div class="slopcade-item">
+        <img src="images/aiw-judgement.png" alt="the American Indian Wars" />
+        <div class="slopcade-caption">JUDGEMENT</div>
+    </div>
+    <div class="slopcade-item">
+        <video src="images/aiw-telegraphgame.mp4" autoplay loop muted></video>
+        <div class="slopcade-caption">ACTION TELEGRAPH</div>
+    </div>
+    <div class="slopcade-item">
+        <img src="images/aiws-gen-howard.png" alt="Howard" />
+        <div class="slopcade-caption">GEN HOWARD</div>
+    </div>
+
+    <div class="slopcade-item">
+        <img src="images/aiw-lewiston.png" alt="Lewiston" />
+        <div class="slopcade-caption">LEWISTON</div>
+    </div>
+
+    <div class="slopcade-item">
+        <video src="images/weather.mp4" autoplay loop muted></video>
+        <div class="slopcade-caption">WEATHER</div>
+    </div>
+
+
+    <div class="slopcade-item">
+    <img src="images/col-sturgis.png " alt="Sturgis" />
+    <div class="slopcade-caption">COL STURGIS</div>
+</div>
+
+
+<div class="slopcade-item">
+    <img src="images/aiw-child.png" alt="Nez Perce Baby" />
+    <div class="slopcade-caption">INFANT</div>
+</div>
+
+   
+             
+                      <!-- Text Header Item Liberty Baby -->
+                      <div id="liberty-baby" class="slopcade-text-item">
+                        <div class="slopcade-text-content">
+                            <div class="slopcade-text-header">LIBERTY BABY<br>SAVES THE GLOBE</div>
+                            <div class="slopcade-text-subtext">"A satirical 2D action adventure, loot collecting, rogue-like, shooter card-battler simulation" concerning American exceptionalism vs globalist collectivism.</div>
+                        </div>
+                    </div>
+                <div class="slopcade-item">
+                    <img src="images/gogriftme.png" alt="crackhead" />
+                    <div class="slopcade-caption">GO GRIFT ME</div>
+                </div>
+                <div class="slopcade-item">
+                    <img src="images/battle.gif" alt="Clot Shotter" />
+                    <div class="slopcade-caption">CLOT SHOTTER</div>
+                </div>
+           
+                <div class="slopcade-item">
+                    <img src="images/margenx.png" alt="Margenx" />
+                    <div class="slopcade-caption">ENEMIES</div>
+                </div>            
+                <div class="slopcade-item">
+                    <img src="images/globotarduniversity.png" alt="Globotard University" />
+                    <div class="slopcade-caption">SEVEN SUBSIDIARIES</div>
+                </div>
+                <div class="slopcade-item">
+                    <img src="images/starcucks.gif" alt="Starcucks" />
+                    <div class="slopcade-caption">STARCUCKS</div>
+                </div>
+                
+                <div class="slopcade-item">
+                    <img src="images/queentardling.png" alt="Queen Tardling" />
+                    <div class="slopcade-caption">NPC QUEEN</div>
+                </div>
+                <div class="slopcade-item">
+                    <img src="images/machines.gif" alt="AR-76" />
+                    <div class="slopcade-caption">AR-76</div>
+                </div>
+               
+                <div class="slopcade-item">
+                    <img src="images/green.gif" alt="Green" />
+                    <div class="slopcade-caption">G.I.H.</div>
+                </div>
+                <div class="slopcade-item">
+                    <img src="images/olebloodnguts.png" alt="Ole Blood N Guts" />
+                    <div class="slopcade-caption">OLE BLOOD N GUTS</div>
+                </div>
+                
+                <div class="slopcade-item">
+                    <img src="images/msnpc.gif" alt="MS NPC" />
+                    <div class="slopcade-caption">MSNPC STUDIOS</div>
+                </div>
+                <div class="slopcade-item">
+                    <img src="images/plandemicdancers.png" alt="Plandemic Dancers" />
+                    <div class="slopcade-caption">PLANDEMIC DANCERS</div>
+                </div>
+                
+                <!-- Add more items here as needed -->
+            </div>
+        </section>
+
+        <section id="asciinator3000" class="asciinator-section">
+            <div class="asciinator-content">
+                <h2 class="asciinator-title"><span style="color: var(--neo-hot-pink);">A</span>SC<span style="color: var(--neo-hot-pink);">I</span>Inator 3000</h2>
+            </div>
+        </section>
+    </div>
+          <script src="neobrutalism.js" defer></script>
+
+</body>
+</html> 
