@@ -732,7 +732,17 @@ class NeoBrutalism {
                 vid.autoplay = true;
                 vid.loop = true;
                 vid.muted = true;
-                vid.controls = true;
+                // Only show controls on desktop
+                if (window.innerWidth > 900) {
+                    vid.controls = true;
+                } else {
+                    vid.controls = false;
+                    // Tap to pause/play on mobile
+                    vid.addEventListener('click', (e) => {
+                        if (vid.paused) vid.play();
+                        else vid.pause();
+                    });
+                }
                 vid.style.maxWidth = '90vw';
                 vid.style.maxHeight = '60vh';
                 vid.style.display = 'block';
@@ -789,13 +799,13 @@ class NeoBrutalism {
         modal.addEventListener('touchstart', (e) => {
             if (e.target === modal) closeModal();
         });
-        // Swipe navigation (mobile)
+        // Swipe navigation (mobile) - ensure it works anywhere in the modal
         let touchStartX = 0;
         let touchEndX = 0;
-        modal.addEventListener('touchstart', (e) => {
-            if (e.touches.length === 1) touchStartX = e.touches[0].clientX;
-        });
-        modal.addEventListener('touchend', (e) => {
+        const swipeHandlerStart = (e) => {
+            if (e.touches && e.touches.length === 1) touchStartX = e.touches[0].clientX;
+        };
+        const swipeHandlerEnd = (e) => {
             if (touchStartX === 0) return;
             touchEndX = e.changedTouches[0].clientX;
             const dx = touchEndX - touchStartX;
@@ -805,7 +815,15 @@ class NeoBrutalism {
             }
             touchStartX = 0;
             touchEndX = 0;
-        });
+        };
+        // Remove old listeners if any
+        modal.removeEventListener('touchstart', swipeHandlerStart);
+        modal.removeEventListener('touchend', swipeHandlerEnd);
+        // Add to modal and content (so it works over video/image)
+        modal.addEventListener('touchstart', swipeHandlerStart);
+        modal.addEventListener('touchend', swipeHandlerEnd);
+        content.addEventListener('touchstart', swipeHandlerStart);
+        content.addEventListener('touchend', swipeHandlerEnd);
 
         // Double-tap and long-press detection for mobile, single click for desktop
         slopcadeItems.forEach((item, idx) => {
