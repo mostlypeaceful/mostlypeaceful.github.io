@@ -11,11 +11,6 @@ class NeoBrutalism {
 
     init() {
         this.setupScrollAnimations();
-        this.setupFloatingUFOs();
-        this.setupKineticTypography();
-        this.setupScrollytelling();
-        this.setupInteractiveElements();
-        this.setupCursorEffects();
         this.setupBladeNavigation();
         this.setupMobileMenu();
         this.setupPortraitToggle();
@@ -45,386 +40,21 @@ class NeoBrutalism {
         animatedElements.forEach(el => observer.observe(el));
     }
 
-    /* ========================================
-       FLOATING UFO ELEMENTS
-    ======================================== */
-    setupFloatingUFOs() {
-        const ufoContainer = document.createElement('div');
-        ufoContainer.className = 'neo-ufo-container';
-        ufoContainer.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        `;
-        document.body.appendChild(ufoContainer);
 
-        // Spawn all UFOs at once (no setTimeouts)
-        this.createUFO('circle', 'neo-bg-yellow');
-        this.createUFO('square', 'neo-bg-pink');
-        this.createUFO('triangle', '');
- 
-        this.createUFO('circle', 'neo-bg-purple');
-        this.createUFO('square', 'neo-bg-green');
-    }
 
-    createUFO(type, colorClass) {
-        let ufo;
-        // Parent container
-        ufo = document.createElement('div');
-        ufo.className = 'neo-ufo';
-        ufo.style.position = 'absolute';
-        ufo.style.width = '50px';
-        ufo.style.height = '50px';
-        ufo.style.pointerEvents = 'none';
-        ufo.style.zIndex = '2';
 
-        // Shadow shape (offset, black, no border for circle/square)
-        const shadow = document.createElement('div');
-        shadow.style.position = 'absolute';
-        shadow.style.left = '10%';
-        shadow.style.top = '10%';
-        shadow.style.width = '50px';
-        shadow.style.height = '50px';
-        shadow.style.zIndex = '1';
 
-        // Main shape (on top)
-        const mainShape = document.createElement('div');
-        mainShape.style.position = 'absolute';
-        mainShape.style.left = '0';
-        mainShape.style.top = '0';
-        mainShape.style.width = '50px';
-        mainShape.style.height = '50px';
-        mainShape.style.zIndex = '2';
 
-        // Color palette for triangles (excluding deep black, shadow, and white)
-        const triangleColors = [
-            'var(--neo-electric-blue)',
-            'var(--neo-hot-pink)',
-            'var(--neo-neon-yellow)',
-            'var(--neo-cyan)',
-            'var(--neo-orange)',
-            'var(--neo-lime)',
-            'var(--neo-purple)',
-            'var(--neo-green)'
-        ];
 
-        if (type === 'triangle') {
-            // Shadow triangle
-            shadow.className = 'neo-ufo-triangle';
-            shadow.style.borderLeft = '25px solid transparent';
-            shadow.style.borderRight = '25px solid transparent';
-            shadow.style.borderBottom = '50px solid var(--neo-deep-black)';
-            // Main triangle
-            mainShape.className = 'neo-ufo-triangle';
-            mainShape.style.borderLeft = '25px solid transparent';
-            mainShape.style.borderRight = '25px solid transparent';
-            // Pick a random color for the triangle
-            const randomColor = triangleColors[Math.floor(Math.random() * triangleColors.length)];
-            mainShape.style.borderBottom = `50px solid ${randomColor}`;
-        } else if (type === 'circle') {
-            // Shadow circle
-            shadow.className = 'neo-ufo-circle';
-            shadow.style.background = 'var(--neo-deep-black)';
-            shadow.style.borderRadius = '50%';
-            // Main circle
-            mainShape.className = 'neo-ufo-circle';
-            // Pick a random color for the circle
-            const randomColor = triangleColors[Math.floor(Math.random() * triangleColors.length)];
-            mainShape.style.background = randomColor;
-            mainShape.style.borderRadius = '50%';
-        } else if (type === 'square') {
-            // Shadow square
-            shadow.className = 'neo-ufo-square';
-            shadow.style.background = 'var(--neo-deep-black)';
-            shadow.style.borderRadius = '0';
-            // Main square
-            mainShape.className = 'neo-ufo-square';
-            // Pick a random color for the square
-            const randomColor = triangleColors[Math.floor(Math.random() * triangleColors.length)];
-            mainShape.style.background = randomColor;
-            mainShape.style.borderRadius = '0';
-        }
-        // Append shadow and main shape
-        ufo.appendChild(shadow);
-        ufo.appendChild(mainShape);
-        // Random positioning
-        const x = Math.random() * (window.innerWidth - 100);
-        const y = Math.random() * (window.innerHeight - 100);
-        ufo.style.left = `${x}px`;
-        ufo.style.top = `${y}px`;
-        // Add to container
-        const container = document.querySelector('.neo-ufo-container');
-        if (container) {
-            container.appendChild(ufo);
-        }
-        // Mouse interaction
-        this.addUFOInteraction(ufo);
-    }
 
-    addUFOInteraction(ufo) {
-        let isInteracting = false;
-        document.addEventListener('mousemove', (e) => {
-            if (isInteracting) return;
-            // For triangle, apply transform to parent
-            let target = ufo;
-            if (ufo.classList.contains('neo-ufo-triangle-shadow')) {
-                target = ufo;
-            }
-            const rect = target.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            const deltaX = e.clientX - centerX;
-            const deltaY = e.clientY - centerY;
-            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-            if (distance < 150) {
-                isInteracting = true;
-                const moveX = deltaX * 0.1;
-                const moveY = deltaY * 0.1;
-                target.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.1)`;
-                target.style.transition = 'transform 0.3s ease';
-                setTimeout(() => {
-                    target.style.transform = '';
-                    isInteracting = false;
-                }, 1000);
-            }
-        });
-    }
 
-    /* ========================================
-       KINETIC TYPOGRAPHY
-    ======================================== */
-    setupKineticTypography() {
-        const kineticElements = document.querySelectorAll('.neo-kinetic-text');
-        
-        kineticElements.forEach(element => {
-            const text = element.textContent;
-            element.innerHTML = '';
-            
-            text.split('').forEach((char, index) => {
-                const span = document.createElement('span');
-                span.textContent = char === ' ' ? '\u00A0' : char;
-                span.className = 'letter';
-                span.style.animationDelay = `${index * 0.05}s`;
-                element.appendChild(span);
-            });
-        });
-    }
 
-    /* ========================================
-       SCROLLYTELLING
-    ======================================== */
-    setupScrollytelling() {
-        const scrollElements = document.querySelectorAll('[data-scroll-trigger]');
-        
-        scrollElements.forEach(element => {
-            const trigger = element.dataset.scrollTrigger;
-            const targetElement = document.querySelector(trigger);
-            
-            if (targetElement) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            this.triggerScrollEvent(element, targetElement);
-                        }
-                    });
-                }, { threshold: 0.5 });
-                
-                observer.observe(targetElement);
-            }
-        });
 
-        // Parallax scroll effects
-        window.addEventListener('scroll', () => {
-            this.updateParallaxElements();
-        });
-    }
 
-    triggerScrollEvent(triggerElement, targetElement) {
-        const action = triggerElement.dataset.scrollAction;
-        
-        switch (action) {
-            case 'color-change':
-                this.animateColorChange(targetElement);
-                break;
-            case 'scale-up':
-                this.animateScaleUp(targetElement);
-                break;
-            case 'slide-in':
-                this.animateSlideIn(targetElement);
-                break;
-        }
-    }
 
-    animateColorChange(element) {
-        const colors = ['neo-color-blue', 'neo-color-pink', 'neo-color-yellow'];
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        
-        element.classList.add(randomColor);
-    }
 
-    animateScaleUp(element) {
-        element.style.transform = 'scale(1.1)';
-        element.style.transition = 'transform 0.5s ease';
-        
-        setTimeout(() => {
-            element.style.transform = 'scale(1)';
-        }, 500);
-    }
 
-    animateSlideIn(element) {
-        element.style.transform = 'translateX(-50px)';
-        element.style.opacity = '0';
-        element.style.transition = 'all 0.6s ease';
-        
-        setTimeout(() => {
-            element.style.transform = 'translateX(0)';
-            element.style.opacity = '1';
-        }, 100);
-    }
 
-    updateParallaxElements() {
-        const scrolled = window.pageYOffset;
-        const parallaxElements = document.querySelectorAll('.neo-parallax');
-        
-        parallaxElements.forEach(element => {
-            const speed = element.dataset.parallaxSpeed || 0.5;
-            const yPos = -(scrolled * speed);
-            element.style.transform = `translateY(${yPos}px)`;
-        });
-    }
-
-    /* ========================================
-       INTERACTIVE ELEMENTS
-    ======================================== */
-    setupInteractiveElements() {
-        // Brutal button interactions
-        const buttons = document.querySelectorAll('.neo-button');
-        buttons.forEach(button => {
-            button.addEventListener('mouseenter', (e) => {
-                this.createButtonParticles(e.target);
-            });
-        });
-
-        // Card hover effects
-        const cards = document.querySelectorAll('.neo-card');
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                this.addCardGlow(card);
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                this.removeCardGlow(card);
-            });
-        });
-
-        // Section click animations
-        const sections = document.querySelectorAll('.section');
-        sections.forEach(section => {
-            section.addEventListener('click', (e) => {
-                this.createClickRipple(e);
-            });
-        });
-    }
-
-    createButtonParticles(button) {
-        const rect = button.getBoundingClientRect();
-        
-        for (let i = 0; i < 3; i++) {
-            const particle = document.createElement('div');
-            particle.style.cssText = `
-                position: absolute;
-                width: 6px;
-                height: 6px;
-                background: var(--neo-neon-yellow);
-                border: 2px solid var(--neo-deep-black);
-                left: ${rect.left + Math.random() * rect.width}px;
-                top: ${rect.top + Math.random() * rect.height}px;
-                z-index: 1000;
-                pointer-events: none;
-                animation: particle-burst 0.6s ease forwards;
-            `;
-            
-            document.body.appendChild(particle);
-            
-            setTimeout(() => particle.remove(), 600);
-        }
-    }
-
-    addCardGlow(card) {
-        card.style.boxShadow = `
-            8px 8px 0 var(--neo-brutal-shadow),
-            0 0 20px var(--neo-electric-blue)
-        `;
-    }
-
-    removeCardGlow(card) {
-        card.style.boxShadow = `8px 8px 0 var(--neo-brutal-shadow)`;
-    }
-
-    createClickRipple(event) {
-        const ripple = document.createElement('div');
-        const rect = event.currentTarget.getBoundingClientRect();
-        
-        ripple.style.cssText = `
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: var(--neo-hot-pink);
-            border: 2px solid var(--neo-deep-black);
-            left: ${event.clientX - rect.left - 10}px;
-            top: ${event.clientY - rect.top - 10}px;
-            z-index: 100;
-            pointer-events: none;
-            animation: ripple-effect 0.8s ease forwards;
-        `;
-        
-        event.currentTarget.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 800);
-    }
-
-    /* ========================================
-       CURSOR EFFECTS
-    ======================================== */
-    setupCursorEffects() {
-        const cursor = document.createElement('div');
-        cursor.className = 'neo-cursor';
-        cursor.style.cssText = `
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            background: var(--neo-electric-blue);
-            border: 2px solid var(--neo-deep-black);
-            z-index: 9999;
-            pointer-events: none;
-            mix-blend-mode: difference;
-            transition: transform 0.1s ease;
-        `;
-        
-        document.body.appendChild(cursor);
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX - 10 + 'px';
-            cursor.style.top = e.clientY - 10 + 'px';
-        });
-
-        // Cursor interactions
-        const interactiveElements = document.querySelectorAll('button, a, .neo-button, .neo-card');
-        interactiveElements.forEach(element => {
-            element.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'scale(2)';
-                cursor.style.background = 'var(--neo-hot-pink)';
-            });
-            
-            element.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'scale(1)';
-                cursor.style.background = 'var(--neo-electric-blue)';
-            });
-        });
-    }
 
     /* ========================================
        XBOX 360 BLADE CAROUSEL
@@ -892,43 +522,24 @@ class NeoBrutalism {
 }
 
 /* ========================================
-   ADDITIONAL ANIMATIONS
+   MODERN ANIMATIONS
 ======================================== */
 const additionalStyles = `
-    @keyframes particle-burst {
-        0% {
-            transform: scale(1);
-            opacity: 1;
-        }
-        100% {
-            transform: scale(0) translateY(-50px);
-            opacity: 0;
-        }
+    /* Smooth transitions for modern UI */
+    * {
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     }
-
-    @keyframes ripple-effect {
-        0% {
-            transform: scale(1);
-            opacity: 1;
-        }
-        100% {
-            transform: scale(8);
-            opacity: 0;
-        }
-    }
-
-    .neo-cursor {
-        border-radius: 2px;
-    }
-
-    @media (max-width: 768px) {
-        .neo-cursor {
-            display: none;
-        }
+    
+    /* Focus styles for accessibility */
+    button:focus-visible,
+    a:focus-visible,
+    .neo-button:focus-visible {
+        outline: 2px solid var(--neo-text-secondary);
+        outline-offset: 2px;
     }
 `;
 
-// Inject additional styles
+// Inject modern styles
 const styleSheet = document.createElement('style');
 styleSheet.textContent = additionalStyles;
 document.head.appendChild(styleSheet);

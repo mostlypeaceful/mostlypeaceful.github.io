@@ -34,7 +34,7 @@
             padding-top: 60px; /* Space for sticky nav */
         }
         .neo-main-container {
-            background: var(--neo-pure-white);
+            background: var(--neo-bg-primary);
             position: relative;
             overflow-x: hidden;
             /* No overflow-y here, let html/body handle scroll */
@@ -47,7 +47,7 @@
             min-height: 100vh;
             width: 100%;
             padding: 2rem;
-            background: var(--neo-purple);
+            background: var(--neo-bg-secondary);
             position: relative;
             box-sizing: border-box;
         }
@@ -63,35 +63,34 @@
         
 
         .slopcade-title-present {
-            font-family: 'Exo', sans-serif;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--neo-purple, #9a089a);
+            font-weight: 700;
+            color: var(--neo-text-secondary);
             text-align: center;
             margin-bottom: 0.5rem;
-            text-shadow: var(--neo-border-thick, 6px) 0 var(--neo-brutal-shadow, #222);
             letter-spacing: 0.1em;
         }
 
         .slopcade-title-main {
-            font-family: 'Exo', sans-serif;
+            font-family: 'JetBrains Mono', monospace;
             font-size: clamp(3rem, 8vw, 8rem);
-            font-weight: 900;
-            color: var(--neo-purple);
+            font-weight: 800;
+            color: var(--neo-text-primary);
             text-align: center;
             margin-bottom: 1rem;
-            text-shadow: 8px 8px 0px black;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
         }
         .slopcade-subtitle {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: clamp(1rem, 3vw, 1.5rem);
-            color: var(--neo-deep-black);
+            color: var(--neo-text-secondary);
             text-align: center;
             margin-bottom: 2rem;
-            font-weight: 600;
+            font-weight: 400;
             max-width: 800px;
+            line-height: 1.6;
         }
         #slopcade-gallery {
             width: 100%;
@@ -105,10 +104,9 @@
             width: 100%;
         }
         .slopcade-item {
-            background: var(--neo-pure-white, #fff);
-            border: none;
-            box-shadow: none;
-            border-radius: 0;
+            background: var(--neo-bg-tertiary);
+            border: 1px solid var(--neo-accent-subtle);
+            border-radius: 6px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -121,6 +119,7 @@
             z-index: 1;
             box-sizing: border-box;
             min-height: 0;
+            transition: all var(--neo-speed-fast) ease;
         }
         .slopcade-item img,
         .slopcade-item video {
@@ -134,16 +133,16 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: var(--neo-deep-black);
-            color: var(--neo-purple);
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
+            background: rgba(0, 0, 0, 0.9);
+            color: var(--neo-text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 500;
             text-align: center;
             padding: 0.5rem 0.2rem;
             box-sizing: border-box;
-            text-shadow: 1px 1px 2px #111;
             z-index: 2;
+            letter-spacing: 0.05em;
         }
         
         /* Hover Preview Styles */
@@ -178,10 +177,9 @@
         
         /* Text-only grid items (headers/titles) */
         .slopcade-text-item {
-            background: var(--neo-purple);
-            border: none;
-            box-shadow: none;
-            border-radius: 0;
+            background: var(--neo-bg-elevated);
+            border: 1px solid var(--neo-accent-subtle);
+            border-radius: 6px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -198,7 +196,7 @@
         }
         
         .slopcade-text-content {
-            color: var(--neo-deep-black);
+            color: var(--neo-text-primary);
             display: flex;
             flex-direction: column;
             align-items: flex-start;
@@ -210,29 +208,28 @@
         }
         
         .slopcade-text-header {
-            font-family: 'Exo', sans-serif;
-            font-weight: 900;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
             font-size: clamp(0.8rem, 3vw, 1.8rem);
-            line-height: 1.1;
-    
+            line-height: 1.2;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.02em;
             word-break: break-word;
             hyphens: auto;
             margin-bottom: 0.5rem;
         }
         
         .slopcade-text-subtext {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-weight: 400;
             font-size: clamp(0.6rem, 2vw, 1rem);
-            line-height: 1.2;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            line-height: 1.4;
             text-transform: none;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.01em;
             word-break: break-word;
             hyphens: auto;
-            opacity: 0.9;
+            opacity: 0.8;
+            color: var(--neo-text-secondary);
         }
         /* ASCIINATOR3000 Section Styles */
         .asciinator-section {
@@ -259,14 +256,13 @@
         }
         
         .asciinator-title {
-            font-family: 'Exo', sans-serif;
+            font-family: 'JetBrains Mono', monospace;
             font-size: clamp(2rem, 6vw, 6rem);
-            font-weight: 900;
-            color: var(--neo-purple);
-            text-shadow: 8px 8px 0px var(--neo-deep-black);
+            font-weight: 800;
+            color: var(--neo-text-primary);
             margin: 0;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.05em;
         }
         
         /* Navigation button hover and active states */
