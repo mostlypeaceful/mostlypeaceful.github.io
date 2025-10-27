@@ -1,83 +1,27 @@
-/* ========================================
-   NEUBRUTALISM PURE 90s
-======================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
-/* ========================================
-   CSS VARIABLES - NEUBRUTALISM PALETTE
-======================================== */
 :root {
-    /* Modern Grayscale Dark Mode Palette */
-    --neo-bg-primary: #0a0a0a;
-    --neo-bg-secondary: #161616;
-    --neo-bg-tertiary: #1e1e1e;
-    --neo-bg-elevated: #252525;
-    --neo-bg-accent: #2d2d2d;
-    
-    /* Text Colors */
-    --neo-text-primary: #ffffff;
-    --neo-text-secondary: #a1a1a1;
-    --neo-text-tertiary: #737373;
-    --neo-text-muted: #525252;
-    
-    /* Accent Colors (subtle) */
-    --neo-accent-primary: #ffffff;
-    --neo-accent-secondary: #000000;
-    --neo-accent-subtle: #404040;
-    
-    /* Legacy mappings for compatibility */
-    --neo-electric-blue: #a1a1a1;
-    --neo-hot-pink: #ffffff;
-    --neo-neon-yellow: #d4d4d4;
-    --neo-pure-white: #ffffff;
-    --neo-deep-black: #000000;
-    --neo-brutal-shadow: #000000;
-    --neo-cyan: #a1a1a1;
-    --neo-orange: #d4d4d4;
-    --neo-lime: #a1a1a1;
-    --neo-purple: #737373;
-    --neo-green: #a1a1a1;
-    --neo-light-gray: #2d2d2d;
-    --neo-medium-gray: #525252;
-    --neo-dark-gray: #161616;
-    
-    /* Typography Scale */
-    --neo-font-mega: clamp(3rem, 8vw, 8rem);
-    --neo-font-huge: clamp(2rem, 6vw, 6rem);
-    --neo-font-large: clamp(1.75rem, 4vw, 4rem);
-    --neo-font-medium: clamp(1.2rem, 3vw, 2rem);
-    --neo-font-normal: clamp(1rem, 2vw, 1.5rem);
-    --neo-font-small: clamp(0.5rem, 1.25vw, 1rem);
-    
-    /* Spacing Scale */
-    --neo-space-xs: 0.5rem;
-    --neo-space-sm: 1rem;
-    --neo-space-md: 2rem;
-    --neo-space-lg: 4rem;
-    --neo-space-xl: 8rem;
-    
-    /* Border Weights */
-    --neo-border-thin: 2px;
-    --neo-border-medium: 4px;
-    --neo-border-thick: 8px;
-    --neo-border-mega: 12px;
-    
-    /* Animation Timing */
-    --neo-speed-fast: 0.15s;
-    --neo-speed-medium: 0.3s;
-    --neo-speed-slow: 0.6s;
+    --font-heading: 'JetBrains Mono', monospace;
+    --font-body: 'Inter', sans-serif;
+    --color-bg: #0d0d0d;
+    --color-surface: #161616;
+    --color-surface-alt: #1f1f1f;
+    --color-border: #262626;
+    --color-border-light: #3a3a3a;
+    --color-text: #f5f5f5;
+    --color-text-secondary: #a8a8a8;
+    --color-accent: #ffffff;
+    --max-width: 1200px;
+    --radius: 12px;
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 3rem;
+    --space-xl: 5rem;
+    --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.25);
 }
 
-/* ========================================
-   GLOBAL RESET & BASE STYLES
-======================================== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+*,
 *::before,
 *::after {
     box-sizing: border-box;
@@ -85,1157 +29,437 @@
 
 html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    background: var(--neo-bg-primary);
-    color: var(--neo-text-primary);
-    line-height: 1.5;
-    overflow-x: hidden;
-    cursor: default;
-    padding-top: 60px; /* Space for sticky nav */
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    line-height: 1.6;
 }
 
-/* ========================================
-   STICKY NAVIGATION
-======================================== */
-.neo-nav-sticky {
+main {
+    padding-top: 72px;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover,
+ a:focus-visible {
+    color: var(--color-accent);
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+}
+
+button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.section {
+    padding: var(--space-xl) var(--space-sm);
+}
+
+.section--alt {
+    background: var(--color-surface);
+}
+
+.section__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.section__header {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+}
+
+.section__title {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.section__subtitle {
+    margin: var(--space-xs) auto 0;
+    max-width: 680px;
+    color: var(--color-text-secondary);
+}
+
+.section__subheading {
+    margin: var(--space-lg) 0 var(--space-md);
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.4rem;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border-light);
+    background: var(--color-surface);
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.button:hover,
+.button:focus-visible {
+    transform: translateY(-2px);
+    background: var(--color-surface-alt);
+    border-color: var(--color-accent);
+}
+
+.nav {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    background: var(--neo-bg-secondary);
-    border-bottom: 1px solid var(--neo-bg-accent);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    height: 60px;
+    background: rgba(13, 13, 13, 0.9);
+    border-bottom: 1px solid var(--color-border);
+    backdrop-filter: blur(12px);
+    z-index: 20;
 }
 
-.neo-nav-container {
+.nav__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--space-sm);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--neo-space-md);
-    height: 100%;
+    gap: var(--space-sm);
 }
 
-.neo-nav-brand {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--neo-font-medium);
+.nav__brand {
+    font-family: var(--font-heading);
+    font-size: 1rem;
     font-weight: 700;
-    color: var(--neo-text-primary);
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
 }
 
-.neo-nav-menu {
+.nav__links {
     display: flex;
-    gap: var(--neo-space-md);
+    align-items: center;
+    gap: var(--space-sm);
 }
 
-.neo-nav-link {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--neo-font-small);
-    font-weight: 500;
-    color: var(--neo-text-secondary);
-    text-decoration: none;
+.nav__link {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: var(--neo-space-xs) var(--neo-space-sm);
+    padding: 0.45rem 0.9rem;
+    border-radius: var(--radius);
     border: 1px solid transparent;
-    transition: all var(--neo-speed-fast) ease;
-    letter-spacing: 0.05em;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-.neo-nav-link:hover {
-    color: var(--neo-text-primary);
-    background: var(--neo-bg-elevated);
-    border-color: var(--neo-accent-subtle);
+.nav__link:hover,
+.nav__link:focus-visible {
+    background: var(--color-surface);
+    border-color: var(--color-border-light);
+    color: var(--color-accent);
 }
 
-/* Consistent styling for ALL navigation buttons */
-.neo-nav-button {
-    background: var(--neo-bg-elevated) !important;
-    color: var(--neo-text-primary) !important;
-    border: 1px solid var(--neo-accent-subtle) !important;
-    padding: var(--neo-space-xs) var(--neo-space-sm) !important;
-    font-weight: 500 !important;
-    transition: all var(--neo-speed-fast) ease !important;
-    border-radius: 4px;
-}
-
-.neo-nav-button:hover {
-    background: var(--neo-bg-accent) !important;
-    border-color: var(--neo-text-secondary) !important;
-    transform: translateY(-1px) !important;
-}
-
-.neo-nav-mobile-toggle {
+.nav__toggle {
     display: none;
     flex-direction: column;
-    cursor: pointer;
-    gap: 4px;
-}
-
-.neo-nav-mobile-toggle span {
-    width: 20px;
-    height: 3px;
-    background: var(--neo-deep-black);
-    transition: all var(--neo-speed-fast) ease;
-}
-
-/* ========================================
-   MAIN LAYOUT
-======================================== */
-.neo-main-container {
-    min-height: 100vh;
-    background: var(--neo-bg-primary);
-    position: relative;
-    overflow-x: hidden;
-}
-
-/* ========================================
-   SECTION STYLES - NO SCROLL WITHIN SCROLL
-======================================== */
-.neo-section {
-    min-height: 100vh;
-    padding: var(--neo-space-lg) var(--neo-space-md);
-    position: relative;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
 }
 
-
-
-.neo-section-title {
-    font-size: var(--neo-font-huge);
-    font-family: 'Exo', sans-serif;
-    font-weight: 800;
-    color: var(--neo-deep-black);
-    text-align: center;
-    margin-bottom: var(--neo-space-lg);
-    text-shadow: var(--neo-border-medium) var(--neo-border-medium) 0 var(--neo-brutal-shadow);
-}
-
-/* ========================================
-   HERO SECTION
-======================================== */
-.neo-hero-section {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: var(--neo-bg-primary);
-    position: relative;
-    padding: var(--neo-space-md);
-    box-sizing: border-box;
-}
-
-.neo-hero-flex {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3vw;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    flex-wrap: wrap;
-}
-
-.neo-hero-left {
-    flex: 1 1 300px;
-    min-width: 220px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: left;
-}
-
-.neo-hero-right {
-    flex: 1 1 300px;
-    min-width: 220px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.neo-hero-subtitle {
-    font-size: clamp(1.25rem, 2vw, 1.5rem);
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    color: var(--neo-text-secondary);
-    text-align: left;
-    margin-bottom: 1rem;
-    line-height: 1.6;
-}
-
-.neo-hero-line {
-    width: 100%;
+.nav__toggle span {
+    width: 22px;
     height: 2px;
-    background: var(--neo-accent-subtle);
-    margin: 0.5rem 0 1rem 0;
-    border-radius: 1px;
+    background: var(--color-accent);
+    border-radius: 999px;
+    transition: transform 0.2s ease;
 }
 
-.neo-hero-well-versed {
-    font-size: clamp(1.25rem, 2vw, 1.5rem);
-    font-weight: 400;
-    color: var(--neo-text-secondary);
-    margin-bottom: 1rem;
-    line-height: 1.6;
+.hero {
+    padding-top: var(--space-xl);
 }
 
-.neo-portrait-frame {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    border: 2px solid var(--neo-accent-subtle);
-    margin-bottom: 1.2rem;
-    border-radius: 8px;
-}
-
-.neo-portrait-container {
-    position: relative;
-    display: inline-block;
-}
-
-.neo-email-button {
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--neo-bg-elevated) !important;
-    color: var(--neo-text-primary) !important;
-    border: 1px solid var(--neo-accent-subtle) !important;
-    padding: var(--neo-space-xs) var(--neo-space-sm) !important;
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500 !important;
-    font-size: var(--neo-font-small);
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: all var(--neo-speed-fast) ease !important;
-    white-space: nowrap;
-    z-index: 10;
-    border-radius: 4px;
-    letter-spacing: 0.05em;
-}
-
-.neo-email-button:hover {
-    transform: translateX(-50%) translateY(-2px) !important;
-    background: var(--neo-bg-accent) !important;
-    border-color: var(--neo-text-secondary) !important;
-    color: var(--neo-text-primary) !important;
-}
-
-.neo-email-button i {
-    margin-right: var(--neo-space-xs);
-}
-
-.neo-social-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--neo-space-sm);
-    margin-top: var(--neo-space-lg);
-    width: 100%;
-    max-width: 800px;
-}
-
-/* ========================================
-   EXPERIENCE SECTION - TWO CONTAINERS
-======================================== */
-.neo-experience-flex {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    gap: var(--neo-space-lg);
-    width: 100%;
-    max-width: 1200px;
+.hero__inner {
+    max-width: var(--max-width);
     margin: 0 auto;
-}
-
-.neo-experience-left,
-.neo-experience-right {
-    flex: 1 1 0;
-    min-width: 0;
-}
-
-/* ========================================
-   GAMES SHOWCASE - BLADE CAROUSEL
-======================================== */
-/* Interactive game portfolio with 3D blade-style navigation and smooth transitions */
-.neo-games-section {
-    padding: var(--neo-space-md) var(--neo-space-xs);
-    background: var(--neo-bg-secondary);
-    position: relative;
-}
-
-.neo-games-section-title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-family: 'Exo', sans-serif;
-    font-weight: 800;
-    text-align: center;
-    margin: 0 0 var(--neo-space-md) 0;
-    text-transform: uppercase;
-    text-shadow: var(--neo-border-medium) var(--neo-border-medium) 0 var(--neo-brutal-shadow);
-}
-
-.neo-game-blade-container {
-    width: 100%;
-    min-height: 90vh;
-    position: relative;
-    background: var(--neo-bg-secondary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    --offset-1: min(160px, 15vw);
-    --scale-1: 0.9;
-    --filter-1: brightness(0.7) saturate(0.8);
-
-    --offset-2: min(320px, 28vw);
-    --scale-2: 0.7;
-    --filter-2: brightness(0.5) saturate(0.6);
-
-    --offset-3: min(480px, 40vw);
-    --scale-3: 0.5;
-    --filter-3: brightness(0.3) saturate(0.4);
-}
-
-.neo-game-item {
-    position: absolute;
-    width: min(400px, 30vw);
-    height: min(500px, 80vh);
-    background: var(--neo-bg-tertiary);
-    border: 1px solid var(--neo-accent-subtle);
-    border-radius: 8px;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                filter 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    transform: scale(0.8);
-    overflow: hidden;
-    z-index: 10;
-    filter: brightness(0.7) saturate(0.8);
-    --direction: 1;
-    will-change: transform, filter;
-}
-
-.neo-game-item.active {
-    transform: scale(1);
-    z-index: 20;
-    border-color: var(--neo-text-primary);
-    filter: none;
-    background: var(--neo-bg-elevated);
-}
-
-.neo-game-item.prev,
-.neo-game-item.next {
-    transform: translateX(calc(var(--offset-1) * var(--direction))) scale(var(--scale-1));
-    z-index: 15;
-    filter: var(--filter-1);
-}
-
-.neo-game-item.far-left,
-.neo-game-item.far-right {
-    transform: translateX(calc(var(--offset-2) * var(--direction))) scale(var(--scale-2));
-    z-index: 12;
-    filter: var(--filter-2);
-}
-
-.neo-game-item.far-far-left,
-.neo-game-item.far-far-right {
-    transform: translateX(calc(var(--offset-3) * var(--direction))) scale(var(--scale-3));
-    z-index: 10;
-    filter: var(--filter-3);
-}
-
-.neo-game-item.prev,
-.neo-game-item.far-left,
-.neo-game-item.far-far-left {
-    --direction: -1;
-}
-
-.neo-game-item.offscreen {
-    transform: scale(0);
-    opacity: 0;
-    pointer-events: none;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                opacity 0.2s ease-out;
-}
-
-.neo-game-item-image {
-    width: 100%;
-    object-fit: contain;
-    object-position: center;
-    background: var(--neo-pure-white);
-}
-
-.neo-game-item-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: var(--neo-space-sm);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    background: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(10px);
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.neo-game-item.active .neo-game-item-content {
-    background: var(--neo-deep-black);
-    backdrop-filter: blur(0px);
-}
-
-.neo-game-item.prev .neo-game-item-content,
-.neo-game-item.next .neo-game-item-content {
-    background: var(--neo-deep-black);
-    backdrop-filter: blur(4px);
-}
-
-.neo-game-item.far-left .neo-game-item-content,
-.neo-game-item.far-right .neo-game-item-content {
-    background: var(--neo-deep-black);
-    backdrop-filter: blur(6px);
-}
-
-.neo-game-item-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: clamp(0.8rem, 2vw, 1.1rem);
-    font-weight: 600;
-    color: var(--neo-text-primary);
-    margin-bottom: 2px;
-    text-transform: uppercase;
-    line-height: 1.2;
-    letter-spacing: 0.05em;
-}
-
-.neo-game-item-title a {
-    color: var(--neo-text-primary);
-    text-decoration: none;
-    border-bottom: 2px solid var(--neo-text-secondary);
-    padding-bottom: 1px;
-    transition: all 0.3s ease;
-    display: inline-block;
-}
-
-.neo-game-item-title a:hover {
-    color: var(--neo-accent-primary);
-    border-bottom-color: var(--neo-accent-primary);
-    transform: translateY(-1px);
-}
-
-.neo-game-item-platform {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(0.6rem, 1.5vw, 0.8rem);
-    font-weight: 400;
-    color: var(--neo-text-secondary);
-    margin-bottom: 1px;
-}
-
-.neo-game-item-role {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(0.6rem, 1.5vw, 0.8rem);
-    font-weight: 500;
-    color: var(--neo-text-primary);
-    margin-bottom: 4px;
-}
-
-.neo-game-item-description {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(0.5rem, 1.2vw, 0.7rem);
-    line-height: 1.4;
-    color: var(--neo-text-secondary);
-    opacity: 0.9;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-}
-
-/* ========================================
-   SKILLS SHOWCASE - TECH STACK GRID
-======================================== */
-/* Responsive grid layout for displaying technical skills and expertise categories */
-.neo-skills-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 200px));
-    gap: var(--neo-space-sm);
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto var(--neo-space-lg) auto;
-    justify-content: center;
+    gap: var(--space-lg);
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
-.neo-skill-card {
-    background: #333333;
-    color: var(--neo-text-primary);
-    border: 1px solid var(--neo-accent-subtle);
-    padding: var(--neo-space-xs);
-    text-align: center;
-    transition: all var(--neo-speed-medium) ease;
-    margin: 2px 2px 2px 2px;
-    border-radius: 6px;
+.hero__title {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.05;
 }
 
-.neo-skill-card:hover {
-    background: var(--neo-bg-accent);
-    border-color: var(--neo-text-secondary);
+.hero__tagline {
+    margin: var(--space-xs) 0 0;
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 4vw, 2.6rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+}
+
+.hero__subtitle {
+    margin: var(--space-sm) 0 0;
+    color: var(--color-text-secondary);
+    max-width: 36ch;
+}
+
+.hero__email {
+    margin-top: var(--space-md);
+}
+
+.email-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.6rem 1.1rem;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.email-link:hover,
+.email-link:focus-visible {
     transform: translateY(-2px);
+    background: var(--color-surface-alt);
+    border-color: var(--color-accent);
 }
 
-.neo-skill-icon {
-    font-size: var(--neo-font-medium);
-    margin-bottom: var(--neo-space-xs);
+.hero__portrait {
+    justify-self: center;
+    text-align: center;
 }
 
-.neo-skill-name {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500;
-    font-size: var(--neo-font-small);
-    letter-spacing: 0.05em;
+.hero__portrait img {
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border-light);
+    box-shadow: var(--shadow-soft);
 }
 
-.neo-skills-flex {
+.cards {
+    display: grid;
+    gap: var(--space-sm);
+}
+
+.cards--grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.cards--media {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    justify-items: center;
+}
+
+.card {
+    background: var(--color-surface-alt);
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+    padding: var(--space-md);
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    gap: var(--neo-space-lg);
+    flex-direction: column;
+    gap: var(--space-sm);
+    min-height: 100%;
+}
+
+.card--media {
+    padding: 0;
+    overflow: hidden;
+    width: min(100%, 280px);
+}
+
+.card__media-link {
+    display: block;
+}
+
+.card--media img {
+    border-radius: 0;
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
 }
 
-.neo-skills-left,
-.neo-skills-right {
-    flex: 1 1 0;
-    min-width: 0;
+.card__body {
+    padding: var(--space-sm) var(--space-sm) var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
 }
 
-/* ========================================
-   BRUTAL ACCENTS
-======================================== */
-.neo-accent-line {
-    height: 2px;
-    background: var(--neo-accent-subtle);
-    width: 100px;
-    margin: var(--neo-space-md) auto;
-    border-radius: 1px;
+.card__title {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
-.neo-highlight {
-    background: var(--neo-bg-accent);
-    color: var(--neo-accent-primary) !important;
-    padding: 2px 4px;
-    border: 1px solid var(--neo-accent-subtle);
+.card__meta {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+}
+
+.card__list {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    color: var(--color-text-secondary);
+}
+
+.card__list li::marker {
+    color: var(--color-border-light);
+}
+
+.highlight {
+    display: inline-block;
+    padding: 0.1rem 0.4rem;
+    border-radius: 999px;
+    background: var(--color-border);
+    color: var(--color-accent);
     font-weight: 600;
-    border-radius: 3px;
 }
 
-/* ========================================
-   RESPONSIVE DESIGN - TABLETS & MOBILE
-======================================== */
-/* Main layout responsive styles for tablets and mobile devices */
+.pill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.pill-list li {
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+}
+
 @media (max-width: 900px) {
-    .neo-nav-menu {
-        display: none;
+    .nav__toggle {
+        display: flex;
+    }
+
+    .nav__links {
         position: absolute;
         top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--neo-pure-white);
-        border: var(--neo-border-thick) solid var(--neo-deep-black);
-        border-top: none;
-        box-shadow: 0 var(--neo-border-thick) 0 var(--neo-brutal-shadow);
+        right: var(--space-sm);
+        left: var(--space-sm);
         flex-direction: column;
-        padding: var(--neo-space-sm);
-        gap: var(--neo-space-xs);
-        z-index: 999;
+        background: var(--color-bg);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius);
+        padding: var(--space-sm);
+        display: none;
     }
-    
-    .neo-nav-menu.active {
+
+    .nav__links.is-open {
         display: flex;
     }
     
-    .neo-nav-link {
+    .nav__link {
         width: 100%;
+        justify-content: center;
         text-align: center;
-        padding: var(--neo-space-sm) !important;
-    }
-    
-    .neo-nav-button {
-        margin-bottom: var(--neo-space-xs);
-    }
-    
-    .neo-nav-mobile-toggle {
-        display: flex;
-    }
-    
-    .neo-hero-flex {
-        flex-direction: column;
-        gap: 1.5rem;
-        align-items: center;
-    }
-    
-    .neo-hero-left, .neo-hero-right {
-        align-items: center;
-        min-width: 0;
-        width: 100%;
-    }
-    
-    .neo-hero-subtitle, .neo-hero-well-versed {
-        text-align: left;
-    }
-    
-    .neo-portrait-frame {
-        max-width: 90vw;
-        height: auto;
-    }
-    
-    .neo-experience-flex {
-        flex-direction: column;
-        gap: var(--neo-space-md);
-    }
-    
-    .neo-skills-flex {
-        flex-direction: column;
-        gap: var(--neo-space-md);
-    }
-    
-    .neo-profile-flex {
-        flex-direction: column !important;
-        height: auto;
-        min-height: 100vh;
-        gap: var(--neo-space-md) !important;
-    }
-    
-    .neo-profile-image-container, .neo-profile-text-container {
-        width: 100% !important;
-        max-width: 100vw !important;
-        min-width: 0 !important;
-        height: auto;
-        padding: var(--neo-space-md) 0 0 0;
-        flex: none !important;
-    }
-    
-    .neo-profile-text-container {
-        padding: var(--neo-space-md) !important;
-        align-items: center;
-        text-align: left;
-    }
-    
-    .neo-profile-image {
-        max-width: 90vw;
-        max-height: 40vh;
-    }
-}
-
-/* Mobile phones and small tablets */
-@media (max-width: 768px) {
-    :root {
-        --neo-font-mega: clamp(2rem, 10vw, 4rem);
-        --neo-font-huge: clamp(1.5rem, 8vw, 3rem);
-        --neo-font-large: clamp(1.25rem, 6vw, 2.5rem);
-    }
-    
-    .neo-button {
-        padding: var(--neo-space-xs) var(--neo-space-sm);
-        font-size: var(--neo-font-small);
-    }
-    
-    .neo-card {
-        padding: var(--neo-space-sm);
-    }
-    
-    .neo-skills-container {
-        grid-template-columns: repeat(auto-fit, minmax(80px, 150px));
-        gap: var(--neo-space-xs);
-        max-width: 600px;
-    }
-    
-    .neo-section {
-        padding: var(--neo-space-sm) var(--neo-space-xs);
-    }
-    
-    .neo-section-title {
-        font-size: var(--neo-font-large);
-        margin-bottom: var(--neo-space-sm);
-    }
-    
-    .neo-social-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: var(--neo-space-xs);
-    }
-    
-    .neo-email-button {
-        font-size: clamp(0.6rem, 2vw, 0.8rem) !important;
-        padding: 4px 8px !important;
-        bottom: -10px;
-        white-space: normal;
-        text-align: center;
-        max-width: 90%;
     }
 
-    /* Fix narrow game items on mobile */
-    .neo-game-item {
-        width: min(350px, 85vw);
-        height: min(450px, 70vh);
-    }
-
-    .neo-game-blade-container {
-        --offset-1: min(100px, 25vw);
-        --offset-2: min(200px, 45vw);
-        --offset-3: min(300px, 65vw);
-    }
-    
-    /* Extra small screens (600px and below) */
-    .neo-profile-text-container {
-        padding: var(--neo-space-sm);
-    }
-    
-    .neo-profile-image {
-        max-width: 98vw;
-        max-height: 30vh;
-    }
-}
-
-/* ========================================
-   NEUBRUTALIST TYPOGRAPHY
-======================================== */
-.neo-heading-mega {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--neo-font-mega);
-    text-align: center;
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-    text-transform: uppercase;
-    color: var(--neo-text-primary);
-    margin-bottom: 1rem;
-}
-
-.neo-heading-huge {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--neo-font-huge);
-    text-align: center;
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-    text-transform: uppercase;
-    color: var(--neo-text-primary);
-}
-
-.neo-heading-large {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--neo-font-large);
-    text-align: left;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    margin-bottom: var(--neo-space-sm);
-    line-height: 1.2;
-    text-transform: uppercase;
-    color: var(--neo-text-primary);
-}
-
-.neo-heading-medium {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--neo-font-medium);
-    text-align: left;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    margin-bottom: var(--neo-space-sm);
-    line-height: 1.3;
-    text-transform: uppercase;
-    color: var(--neo-text-primary);
-}
-.neo-body-text {
-    font-family: 'Inter', sans-serif;
-    font-size: var(--neo-font-small);
-    font-weight: 400;
-    line-height: 1.6;
-    color: var(--neo-text-secondary);
-}
-
-.neo-body-bold {
-    font-family: 'Inter', sans-serif;
-    font-size: var(--neo-font-normal);
-    font-weight: 600;
-    line-height: 1.5;
-    color: var(--neo-text-primary);
-}
-
-.neo-body-small {
-    font-family: 'Inter', sans-serif;
-    font-size: var(--neo-font-small);
-    font-weight: 400;
-    line-height: 1.5;
-    color: var(--neo-text-secondary);
-}
-
-.neo-subtitles {
-    font-size: clamp(1rem, 2vw, 1.5rem);
-    font-weight: 500;
-    color: var(--neo-text-secondary);
-    margin-bottom: 1rem;
-}
-
-/* ========================================
-   BRUTALIST UI COMPONENTS
-======================================== */
-.neo-button {
-    display: inline-block;
-    padding: var(--neo-space-sm) var(--neo-space-md);
-    background: var(--neo-bg-elevated);
-    color: var(--neo-text-primary);
-    border: 1px solid var(--neo-accent-subtle);
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500;
-    font-size: var(--neo-font-normal);
-    text-transform: uppercase;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all var(--neo-speed-fast) ease;
-    position: relative;
-    border-radius: 4px;
-    letter-spacing: 0.05em;
-}
-
-.neo-button:hover {
-    background: var(--neo-bg-accent);
-    border-color: var(--neo-text-secondary);
-    transform: translateY(-1px);
-}
-
-.neo-button:active {
-    transform: translateY(0px);
-    background: var(--neo-bg-tertiary);
-}
-
-.neo-card {
-    background: var(--neo-bg-tertiary);
-    border: 1px solid var(--neo-accent-subtle);
-    padding: var(--neo-space-md);
-    position: relative;
-    border-radius: 8px;
-    transition: all var(--neo-speed-fast) ease;
-}
-
-.neo-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--neo-text-secondary);
-    background: var(--neo-bg-elevated);
-}
-
-
-
-
-
-/* ========================================
-   UTILITY CLASSES - COLORS, SPACING & HELPERS
-======================================== */
-/* Utility classes for modern grayscale color scheme */
-.neo-color-primary { color: var(--neo-text-primary) !important; }
-.neo-color-secondary { color: var(--neo-text-secondary) !important; }
-.neo-color-tertiary { color: var(--neo-text-tertiary) !important; }
-.neo-color-muted { color: var(--neo-text-muted) !important; }
-.neo-color-white { color: var(--neo-accent-primary) !important; }
-.neo-color-black { color: var(--neo-accent-secondary) !important; }
-
-/* Legacy color mappings for compatibility */
-.neo-color-blue { color: var(--neo-text-secondary) !important; }
-.neo-color-pink { color: var(--neo-text-primary) !important; }
-.neo-color-yellow { color: var(--neo-text-secondary) !important; }
-.neo-color-purple { color: var(--neo-text-tertiary) !important; }
-.neo-color-green { color: var(--neo-text-secondary) !important; }
-
-.neo-bg-primary { background: var(--neo-bg-primary) !important; }
-.neo-bg-secondary { background: var(--neo-bg-secondary) !important; }
-.neo-bg-tertiary { background: var(--neo-bg-tertiary) !important; }
-.neo-bg-elevated { background: var(--neo-bg-elevated) !important; }
-.neo-bg-accent { background: var(--neo-bg-accent) !important; }
-.neo-bg-white { background: var(--neo-accent-primary) !important; }
-.neo-bg-black { background: var(--neo-accent-secondary) !important; }
-
-/* Legacy background mappings */
-.neo-bg-blue { background: var(--neo-bg-elevated) !important; }
-.neo-bg-pink { background: var(--neo-bg-elevated) !important; }
-.neo-bg-yellow { background: var(--neo-bg-accent) !important; }
-.neo-bg-purple { background: var(--neo-bg-elevated) !important; }
-.neo-bg-green { background: var(--neo-bg-elevated) !important; }
-
-.neo-border-modern {
-    border: 1px solid var(--neo-accent-subtle);
-    border-radius: 4px;
-}
-
-.neo-text-center { text-align: center; }
-.neo-text-left { text-align: left; }
-.neo-text-right { text-align: right; }
-
-.neo-mb-sm { margin-bottom: var(--neo-space-sm); }
-.neo-mb-md { margin-bottom: var(--neo-space-md); }
-.neo-mb-lg { margin-bottom: var(--neo-space-lg); }
-
-.neo-mt-sm { margin-top: var(--neo-space-sm); }
-.neo-mt-md { margin-top: var(--neo-space-md); }
-.neo-mt-lg { margin-top: var(--neo-space-lg); }
-
-/* ========================================
-   PROFILE SECTION - SPECIALIZED LAYOUT
-======================================== */
-/* Dedicated profile page layout with two-column image/text arrangement */
-.neo-profile-flex {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 0;
-    box-sizing: border-box;
-
-}
-
-.neo-profile-image-container {
-    flex: 1 1 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 0;
-    background: var(--neo-pure-white);
-
-}
-
-.neo-profile-image {
-    width: 100%;
-    max-width: 400px;
-    max-height: 80vh;
-    height: auto;
-    object-fit: contain;
-    border: var(--neo-border-thick) solid var(--neo-deep-black);
-    box-shadow: var(--neo-border-thick) var(--neo-border-thick) 0 var(--neo-brutal-shadow);
-    background: var(--neo-pure-white);
-}
-
-.neo-profile-text-container {
-    flex: 1 1 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    min-width: 0;
-    padding: var(--neo-space-lg);
-    text-align: left;
-    box-sizing: border-box;
-}
-
-.neo-profile-text {
-    font-size: var(--neo-font-normal);
-    line-height: 1.6;
-    color: var(--neo-deep-black);
-    word-break: break-word;
-}
-
-.neo-profile-container {
-    display: unset !important;
-    grid-template-columns: unset !important;
-    gap: unset !important;
-    width: unset !important;
-    max-width: unset !important;
-    align-items: unset !important;
-    padding: unset !important;
-}
-
-.neo-profile-snap {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-/* ========================================
-   ACHIEVEMENTS GALLERY - PORTFOLIO LAYOUT
-======================================== */
-/* Grid-based achievement showcase with mixed content types (text + images) */
-.achievements-gallery {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--neo-space-sm);
-    width: 100%;
-    max-width: 1200px;
-    margin: var(--neo-space-sm) auto;
-}
-
-.achievement-text-item {
-    background: var(--neo-bg-elevated);
-    border: 1px solid var(--neo-accent-subtle);
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    aspect-ratio: 1 / 1;
-    position: relative;
-    padding: var(--neo-space-sm);
-    z-index: 1;
-    text-align: center;
-    box-sizing: border-box;
-    min-height: 0;
-}
-
-.achievement-text-content {
-    color: var(--neo-text-primary);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    text-align: left;
-    height: 100%;
-    padding: var(--neo-space-sm);
-    box-sizing: border-box;
-}
-
-.achievement-text-header {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 700;
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    line-height: 1.2;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    word-break: break-word;
-    hyphens: auto;
-    margin-bottom: 1rem;
-}
-
-.achievement-text-subtext {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: clamp(1rem, 2vw, 1.5rem);
-    line-height: 1.4;
-    text-transform: none;
-    letter-spacing: 0.01em;
-    word-break: break-word;
-    hyphens: auto;
-    opacity: 0.8;
-    color: var(--neo-text-secondary);
-}
-
-.achievement-item {
-    background: var(--neo-bg-tertiary);
-    border: 1px solid var(--neo-accent-subtle);
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    overflow: visible;
-    min-height: 300px;
-    position: relative;
-    margin: 0;
-    padding: 0;
-    z-index: 1;
-    box-sizing: border-box;
-    transition: all var(--neo-speed-fast) ease;
-}
-
-.achievement-content {
-    padding: var(--neo-space-sm);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    box-sizing: border-box;
-}
-
-.achievement-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 700;
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    line-height: 1.2;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    margin-bottom: var(--neo-space-xs);
-    word-break: break-word;
-    hyphens: auto;
-    color: var(--neo-text-primary);
-}
-
-.achievement-bullets {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(0.75rem, 2vw, 1rem);
-    line-height: 1.5;
-    box-sizing: border-box;
-    color: var(--neo-text-secondary);
-}
-
-.achievement-bullets li {
-    margin-bottom: 0.2rem;
-    word-break: break-word;
-    hyphens: auto;
-}
-
-.achievement-bullets li:last-child {
-    margin-bottom: 0;
-}
-
-/* ========================================
-   ACHIEVEMENTS SECTION - MOBILE RESPONSIVE
-======================================== */
-/* Responsive styles specific to achievements/slopcade gallery layout */
-@media (max-width: 900px) {
-    .achievements-gallery {
+    .hero__inner {
         grid-template-columns: 1fr;
-        gap: var(--neo-space-xs);
+        text-align: center;
     }
-    
-    .achievement-text-item,
-    .achievement-item {
-        position: relative;
-        z-index: 1;
-        margin: 0;
-        padding: var(--neo-space-xs);
-        overflow: hidden;
-        width: 100% !important;
-        height: auto !important;
+
+    .hero__subtitle {
+        margin-left: auto;
+        margin-right: auto;
     }
-    
-    .achievement-text-header {
-        font-size: clamp(1rem, 2.5vw, 1.5rem);
-        margin-bottom: 0.3rem;
+
+    .hero__portrait img {
+        max-width: 320px;
     }
-    
-    .achievement-text-subtext {
-        font-size: clamp(0.75rem, 2vw, 1rem);
-        line-height: 1.2;
+}
+
+@media (max-width: 600px) {
+    .section {
+        padding: var(--space-lg) var(--space-sm);
     }
-    
-    .achievement-title {
-        font-size: clamp(1rem, 2vw, 1.5rem);
+
+    .card {
+        padding: var(--space-sm);
     }
-    
-    .achievement-bullets {
-        font-size: clamp(0.75rem, 2vw, 1rem);
-        line-height: 1.5;
+
+    .card__body {
+        padding: var(--space-sm);
     }
 } 

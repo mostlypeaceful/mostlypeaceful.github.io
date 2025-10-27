@@ -6,628 +6,446 @@
     <title>D.R. ALBRIGHT | VIDEO GAME DEVELOPER</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="D.R. Albright - Veteran video game developer, founder of Signal Studios, creator of Toy Soldiers franchise. 25+ years experience in AAA game development, art direction, and studio management.">
+    <meta name="description" content="D.R. Albright - Veteran video game developer, founder of Signal Studios, creator of Toy Soldiers franchise. 25+ years of AAA leadership, development, art direction, and studio management.">
     <meta name="keywords" content="video game developer, game development, Signal Studios, Toy Soldiers, game director, AAA games, indie games, game art, Unity, Unreal">
     <meta name="author" content="D.R. Albright">
     
-    <!-- Open Graph Meta Tags -->
+    <!-- Social -->
     <meta property="og:title" content="D.R. ALBRIGHT | VIDEO GAME DEVELOPER">
-    <meta property="og:description" content="Veteran video game developer, founder of Signal Studios, creator of Toy Soldiers franchise. 25+ years experience in AAA game development.">
+    <meta property="og:description" content="Veteran game developer, founder of Signal Studios, creator of Toy Soldiers. 25+ years of AAA experience.">
     <meta property="og:image" content="images/portrait.jpg">
     <meta property="og:url" content="https://mostlypeaceful.github.io/dr-albright">
     <meta property="og:type" content="website">
     
-    <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="D.R. ALBRIGHT | VIDEO GAME DEVELOPER">
     <meta name="twitter:description" content="Veteran video game developer, founder of Signal Studios, creator of Toy Soldiers franchise.">
     <meta name="twitter:image" content="images/portrait.jpg">
     
-    <!-- Neubrutalism CSS -->
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-    <!-- STICKY NAVIGATION -->
-    <nav class="neo-nav-sticky">
-        <div class="neo-nav-container">
-            <div class="neo-nav-brand">D.R. ALBRIGHT</div>
-            <div class="neo-nav-menu">
-                <a href="#home" class="neo-nav-link neo-nav-button neo-bg-elevated">HOME</a>
-                <a href="#achievements" class="neo-nav-link neo-nav-button neo-bg-elevated neo-color-white">CAREER</a>
-                <a href="#games" class="neo-nav-link neo-nav-button neo-bg-elevated neo-color-white">SHIPPED GAMES</a>
-                <a href="#skills" class="neo-nav-link neo-nav-button neo-bg-elevated neo-color-white">KNOWLEDGE</a>
-                <a href="slopcade.html" class="neo-nav-link neo-nav-button neo-bg-black neo-color-white">SLOPCADE</a>
-            </div>
-            <div class="neo-nav-mobile-toggle">
+    <header class="nav">
+        <div class="nav__inner">
+            <a class="nav__brand" href="#home">D.R. ALBRIGHT</a>
+            <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="site-nav">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+                <span class="sr-only">Toggle navigation</span>
+            </button>
+            <nav id="site-nav" class="nav__links" aria-label="Primary">
+                <a class="nav__link" href="#home">Home</a>
+                <a class="nav__link" href="#achievements">Career</a>
+                <a class="nav__link" href="#games">Games</a>
+                <a class="nav__link" href="#skills">Skills</a>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <div class="neo-main-container">
-        
-        <!-- ========================================
-             HERO SECTION
-        ======================================== -->
-        <section id="home" class="neo-hero-section">
-          <div class="neo-hero-flex">
-            <div class="neo-hero-left">
-                <div class="neo-hero-subtitle">
-                    Founded & led <span class="neo-highlight neo-bg-accent neo-color-white">Signal Studios</span>. Former 
-                    <span class="neo-highlight neo-bg-elevated neo-color-white">EA</span>, 
-                    <span class="neo-highlight neo-bg-elevated neo-color-white">THQ</span>, 
-                    <span class="neo-highlight neo-bg-elevated neo-color-white">Zipper Interactive</span>, and 
-                    <span class="neo-highlight neo-bg-elevated neo-color-white">Snowblind Studios</span>. 
-                  </div>
-              <h2 class="neo-heading-large">GAME DEVELOPMENT</h2>
-              <h2 class="neo-hero-subtitle">Thru concept, funding, publishing, greenlight, pre-production, production, post-production, certification, & launch.</h2> 
-              <h2 class="neo-heading-large">A.I. DEVELOPMENT</h2>
-              <h2 class="neo-hero-subtitle">Local and API-based A.I. agents and tools specifically for game development and game business processes.</h2> 
-              <div class="neo-hero-line"></div>
-              
-              <div class="neo-hero-well-versed">
-                Well-versed in all software related disciplines, platforms, techniques, & technologies-including AI.
-              </div>
-      
-     
-              
-              
-            </div>
-            <div class="neo-hero-right">
-              <div class="neo-portrait-container">
-                <img src="images/portrait.jpg" class="neo-portrait-frame" alt="Portrait of D.R. Albright" />
-                <a href="mailto:dralbright3@gmail.com" class="neo-email-button">
-                  <i class="fas fa-envelope"></i> dralbright3@gmail.com
+    <main>
+        <section id="home" class="section hero">
+            <div class="section__inner hero__inner">
+                <div class="hero__copy">
+                    <h2 class="hero__tagline">D.R. Albright | Game Developer</h2>
+                    <p class="hero__subtitle">
+                        Founder of Signal Studios and creator of the Toy Soldiers franchise. Two decades of leadership, development and award-winning releases.
+                    </p>
+                    <div class="hero__email">
+                        <a class="email-link" href="mailto:dralbright3@gmail.com">
+                            <i class="fas fa-envelope"></i>
+                            dralbright3@gmail.com
                 </a>
               </div>
             </div>
+                <figure class="hero__portrait">
+                    <img src="images/portrait.jpg" alt="Portrait of D.R. Albright" data-alt-src="images/clones.jpg">
+                </figure>
           </div>
         </section>
 
-        <!-- ========================================
-             ACHIEVEMENTS SECTION
-        ======================================== -->
-        <section id="achievements" class="neo-section">
-            <div class="achievements-gallery">
-                <!-- Section Title -->
-                <div class="achievement-text-item">
-                    <div class="achievement-text-content">
-                        <div class="achievement-text-header">CAREER<br>ACHIEVEMENTS</div>
-                        <div class="achievement-text-subtext">Key milestones and accomplishments throughout my game development career.</div>
-                        <div style="text-align: center; margin-top: var(--neo-space-sm);">
-                            <a href="docs/DRAlbright-resume-2025.pdf" download="DRAlbright_Resume_2025.pdf" class="neo-button neo-bg-black neo-color-white" style="display: inline-flex; align-items: center; gap: 8px;">
-                                <i class="fas fa-file-pdf"></i> DOWNLOAD RESUME
-                            </a>
-                        </div>
-                    </div>
-                </div>
+        <section id="achievements" class="section section--alt">
+            <div class="section__inner">
+                <header class="section__header">
+                    <h2 class="section__title">Career Highlights</h2>
+                    <p class="section__subtitle">
+                        Selected achievements from 25+ years shipping games, leading studios, and building new IP.
+                    </p>
+                    <a class="button" href="docs/DRAlbright-resume-2025.pdf" download>
+                        <i class="fas fa-file-pdf"></i>
+                        Download Resume
+                    </a>
+                </header>
 
-                <!-- Signal Studios & Toy Soldiers Combined Container -->
-                <div class="achievement-item">
-                    <div class="achievement-content">
-                        <h3 class="achievement-title neo-color-blue">SIGNAL STUDIOS</h3>
-                        <ul class="achievement-bullets">
-                            <li>• Built <span class="neo-highlight neo-bg-elevated">Signal Studios</span> from a 3-person startup</li>
-                            <li>• Grew to <span class="neo-highlight neo-bg-elevated neo-color-white">55-person team</span></li>
-                            <li>• Directly generated over <span class="neo-highlight neo-bg-elevated neo-color-white">$40 million in revenue</span></li>
-                            <li>• Secured over <span class="neo-highlight neo-bg-elevated neo-color-white">$25 million in development funding</span>from key partners such as <span class="neo-highlight neo-bg-elevated neo-color-white">Microsoft</span>, <span class="neo-highlight neo-bg-elevated">Ubisoft</span>, <span class="neo-highlight neo-bg-elevated neo-color-white">Gungho</span>, and <span class="neo-highlight neo-bg-elevated neo-color-white">Facebook (Oculus Rift)</span></li>
-                            <li>• Led development of multiple successful original IPs</li>
-                            <li>• Recognized as a <span class="neo-highlight neo-bg-elevated">top 30 game studio worldwide in 2011</span>by Game Developer Magazine</li>
+                <div class="cards cards--grid">
+                    <article class="card">
+                        <h3 class="card__title">Signal Studios</h3>
+                        <ul class="card__list">
+                            <li>Scaled the studio from 3 founders to a 55-person, multi-disciplinary team.</li>
+                            <li>Generated <span class="highlight">$40M+</span> in revenue and raised <span class="highlight">$25M+</span> in funding with partners such as Microsoft, Ubisoft, Gungho, and Oculus.</li>
+                            <li>Recognized as a Top 30 Game Studio worldwide in 2011 by Game Developer Magazine.</li>
                         </ul>
-                        <h3 class="achievement-title neo-color-blue" style="margin-top: var(--neo-space-sm);">TOY SOLDIERS FRANCHISE</h3>
-                        <ul class="achievement-bullets">
-                            <li>• Created and directed the highly successful <span class="neo-highlight neo-bg-elevated neo-color-white">Toy Soldiers franchise</span></li>
-                            <li>• Sold over <span class="neo-highlight neo-bg-elevated neo-color-white">3 million units</span></li>
-                            <li>• Achieved <span class="neo-highlight neo-bg-elevated">15 million downloads</span></li>
-                            <li>• Twice nominated for <span class="neo-highlight neo-bg-elevated neo-color-white">AIAS D.I.C.E. Strategy Game of the Year</span></li>
-                            <li>• Named one of Kotaku's <span class="neo-highlight neo-bg-elevated">Top 12 Xbox 360 games</span></li>
-                            <li>• Recognized as one of Game Informer's <span class="neo-highlight neo-bg-elevated neo-color-white">Top 10 Tower Defense games of all time</span></li>
-                        </ul>
-                    </div>
-                </div>
+                    </article>
 
-                <!-- AAA Studios & Leadership Combined Container -->
-                <div class="achievement-item">
-                    <div class="achievement-content">
-                        <h3 class="achievement-title neo-color-blue" style="margin-top: var(--neo-space-sm);">AAA STUDIOS</h3>
-                        <ul class="achievement-bullets">
-                            <li>• Shipped over <span class="neo-highlight neo-bg-elevated neo-color-white">20 games</span> throughout career</li>
-                            <li>• Creative lead and team member at A.A.A studios and publishers such as <span class="neo-highlight neo-bg-elevated neo-color-white">EA</span>, <span class="neo-highlight neo-bg-elevated">THQ</span>, <span class="neo-highlight neo-bg-elevated neo-color-white">Zipper Interactive</span>, and <span class="neo-highlight neo-bg-elevated neo-color-white">Snowblind Studios</span>.</li>
-                            <li>• Contributed to A.A.A franchises such as<span class="neo-highlight neo-bg-elevated">Need for Speed</span>,<span class="neo-highlight neo-bg-elevated neo-color-white">Medal of Honor</span>,<span class="neo-highlight neo-bg-elevated neo-color-white">SOCOM</span>,<span class="neo-highlight neo-bg-elevated">and Red Faction II.</span></li>
+                    <article class="card">
+                        <h3 class="card__title">Toy Soldiers Franchise</h3>
+                        <ul class="card__list">
+                            <li>Created and directed the franchise from concept through multi-platform releases.</li>
+                            <li>Sold <span class="highlight">3M+</span> units with <span class="highlight">15M</span> downloads and multiple D.I.C.E. GOTY nominations.</li>
+                            <li>Named in Kotaku's Top 12 Xbox 360 games and Game Informer's Top 10 tower defense titles all time.</li>
                         </ul>
-                        <h3 class="achievement-title neo-color-blue" style="margin-top:var(--neo-space-sm);">LEADERSHIP & MANAGEMENT</h3>
-                        <ul class="achievement-bullets">
-                            <li>• <span class="neo-highlight neo-bg-elevated neo-color-white">Game Production and Pipelines</span></li>
-                            <li>• <span class="neo-highlight neo-bg-elevated">Creative and Design Direction</span></li>
-                            <li>• <span class="neo-highlight neo-bg-elevated neo-color-white">Multi-Platform Release Processes</span></li>
-                            <li>• <span class="neo-highlight neo-bg-elevated">Creative Studio Management</span></li>
-                            <li>• <span class="neo-highlight neo-bg-elevated">Creative Project Management</span></li>
-                            <li>• <span class="neo-highlight neo-bg-elevated neo-color-white">Publisher Partnerships</span></li>
-                            <li>• <span class="neo-highlight neo-bg-elevated neo-color-white">3D & 2D Development</span></li>
-                            <li>• <span class="neo-highlight neo-bg-elevated">AI Development and Integration</span></li>
-                            <li>• <span class="neo-highlight neo-bg-elevated neo-color-white">Proprietary Engine Development</span></li>
-                            <li>• <span class="neo-highlight neo-bg-elevated">Art Tools & Techniques</span></li>
-                        </ul>
-                    </div>
-                </div>
+                    </article>
 
-                <!-- Work History Container -->
-                <div class="achievement-item">
-                    <div class="achievement-content">
-                        <h3 class="achievement-title neo-color-blue">WORK HISTORY</h3>
-                        <ul class="achievement-bullets">
-                            <li>• <span class="neo-highlight neo-bg-elevated neo-color-white">Creative Director, Founder & President</span> - <span class="neo-color-secondary">Signal Studios</span> (2007-2023)</li>
-                            <li>• <span class="neo-highlight neo-bg-elevated neo-color-white">Lead Artist</span> - <span class="neo-color-secondary">Snowblind Studios</span> (2005-2007)</li>
-                            <li>• <span class="neo-highlight neo-bg-elevated neo-color-white">Lead Artist</span> - <span class="neo-color-secondary">Zipper Interactive</span> (2004-2005)</li>
-                            <li>• <span class="neo-highlight neo-bg-elevated neo-color-white">CG Artist III</span> - <span class="neo-color-secondary">Electronic Arts</span> (2001-2002; 2003-2004)</li>
-                            <li>• <span class="neo-highlight neo-bg-elevated neo-color-white">Lead Artist</span> - <span class="neo-color-secondary">THQ</span> (2002-2003)</li>
-                            <li>• <span class="neo-highlight neo-bg-elevated neo-color-white">Environment Artist</span> - <span class="neo-color-secondary">Adrenium Games</span> (2000-2001)</li>
-                            <li>• <span class="neo-highlight neo-bg-elevated neo-color-white">Modeler & Animator</span> - <span class="neo-color-secondary">Newlands & Company</span> (1999)</li>
+                    <article class="card">
+                        <h3 class="card__title">Current Focus</h3>
+                        <ul class="card__list">
+                            <li>Developing <span class="highlight">The American Indian Wars</span>, a primary source, historical strategy experience combining deep rpg exploration with survival, overarching strategic management, narrative and tactical combat.</li>
+                            <li>Building AI-assisted tools for content generation, prototyping, and custom engine workflows.</li>
                         </ul>
-                    </div>
+                    </article>
+
+                    <article class="card">
+                        <h3 class="card__title">AAA Experience</h3>
+                        <ul class="card__list">
+                            <li>Shipped over <span class="highlight">20 games</span> with EA, THQ, Zipper Interactive, Snowblind Studios, and more.</li>
+                            <li>Credits include Need for Speed, Medal of Honor, SOCOM, and Red Faction II across console and PC.</li>
+                        </ul>
+                    </article>
+
+                    <article class="card">
+                        <h3 class="card__title">Leadership</h3>
+                        <ul class="card__list">
+                            <li>Expertise in studio operations, multi-platform pipelines, and publisher partnerships.</li>
+                            <li>Hands-on creative direction spanning art, game design, AI integration, and proprietary tech.</li>
+                        </ul>
+                    </article>
+
+                    <article class="card">
+                        <h3 class="card__title">Work History</h3>
+                        <ul class="card__list">
+                            <li>President, Creative Director &amp; Founder, Signal Studios (2007–2023)</li>
+                            <li>Lead Artist roles at Snowblind Studios, Zipper Interactive, and THQ</li>
+                            <li>CG Artist III at Electronic Arts; early roles at Adrenium Games and Newlands &amp; Company</li>
+                        </ul>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <!-- ========================================
-             GAMES SHOWCASE
-        ======================================== -->
-        <section id="games" class="neo-section neo-games-section">
-  
-            
-            <div class="neo-game-blade-container">
-                <!-- Game Items - Starting with Toy Soldiers HD -->
-                <div class="neo-game-item" data-game="0">
-                    <img src="images/toysoldiers.webp" alt="Toy Soldiers HD" class="neo-game-item-image">
-                    <div class="neo-game-item-content">
-                        <h3 class="neo-game-item-title"><a href="https://store.playstation.com/en-us/product/UP6345-CUSA24211_00-TOYSOLDIERSHDPS4" target="_blank">TOY SOLDIERS: HD</a></h3>
-                        <p class="neo-game-item-platform">[Nintendo Switch | PS4 | X1 | Steam]</p>
-                        <p class="neo-game-item-role">Creator, Developer</p>
-                        <div class="neo-game-item-description">
-                            Enhanced HD remaster of the beloved original with improved graphics, new content, and modern platform support.
-                        </div>
+        <section id="games" class="section">
+            <div class="section__inner">
+                <header class="section__header">
+                    <h2 class="section__title">Games &amp; IP</h2>
+                    <p class="section__subtitle">Recent projects, the Toy Soldiers franchise, and notable collaborations across AAA studios.</p>
+                </header>
+
+                <h3 class="section__subheading">Current Work</h3>
+                <div class="cards cards--media">
+                    <article class="card card--media">
+                        <img src="images/warrior.png" alt="Artwork for The American Indian Wars">
+                        <div class="card__body">
+                            <h4 class="card__title">The American Indian Wars</h4>
+                            <p class="card__meta">A 2D historical RPG blending deep survival, strategic management, and tactical combat. Experience the dramatic 1877 conflict from multiple perspectives: lead the Nez Perce on their desperate flight for freedom, command the U.S. Army forces in pursuit, or as a pioneer caught in the crossfire. It's a historically authentic 'Oregon Trail on crack.' | In Development</p>
+                            <p class="card__meta">Creator, Developer</p>
                     </div>
+                    </article>
+
+                    <article class="card card--media">
+                        <img src="images/muh.gif" alt="ASCIInator 3000 preview">
+                        <div class="card__body">
+                            <h4 class="card__title">ASCIInator 3000</h4>
+                            <p class="card__meta">Knowledge-Based Game Engine and Tools | In Development</p>
+                            <p class="card__meta">Creator, Developer</p>
+                    </div>
+                    </article>
+
+                    <article class="card card--media">
+                        <img src="images/portrait.jpg" alt="Prometheus PDF preview">
+                        <div class="card__body">
+                            <h4 class="card__title">Prometheus PDF</h4>
+                            <p class="card__meta">Transform difficult and damaged PDF documents and images into clean, readable text pages with live tools for OCR repair, redesign, structured output, and illustration. Automatically build an index, webpage, and knowledge base from any amount of your generated data. Non-destructively expand and append to the output.| In Development</p>
+                            <p class="card__meta">Creator, Developer</p>
+                    </div>
+                    </article>
                 </div>
 
-                <div class="neo-game-item" data-game="1">
-                    <img src="images/tscomplete.webp" alt="Toy Soldiers Complete" class="neo-game-item-image">
-                    <div class="neo-game-item-content">
-                        <h3 class="neo-game-item-title"><a href="https://store.steampowered.com/app/262120/Toy_Soldiers_Complete/" target="_blank">TOY SOLDIERS: COMPLETE</a></h3>
-                        <p class="neo-game-item-platform">[Steam]</p>
-                        <p class="neo-game-item-role">Owner, Creator, Developer</p>
-                        <div class="neo-game-item-description">
-                            The complete collection of the award-winning tower defense franchise that revolutionized the genre with its unique WWI toy aesthetic.
-                        </div>
+                <h3 class="section__subheading">Toy Soldiers Franchise</h3>
+                <div class="cards cards--media">
+                    <article class="card card--media">
+                        <img src="images/ts2finesthour_ranger.png" alt="Toy Soldiers 2: Finest Hour concept art">
+                        <div class="card__body">
+                            <h4 class="card__title">Toy Soldiers 2: Finest Hour</h4>
+                            <p class="card__meta">Cancelled</p>
+                            <p class="card__meta">Creator, Developer</p>
                     </div>
+                    </article>
+
+                    <article class="card card--media">
+                        <a class="card__media-link" href="https://store.playstation.com/en-us/product/UP6345-CUSA24211_00-TOYSOLDIERSHDPS4" target="_blank" rel="noopener">
+                            <img src="images/toysoldiers.webp" alt="Toy Soldiers: HD">
+                        </a>
+                        <div class="card__body">
+                            <h4 class="card__title"><a href="https://store.playstation.com/en-us/product/UP6345-CUSA24211_00-TOYSOLDIERSHDPS4" target="_blank" rel="noopener">Toy Soldiers: HD</a></h4>
+                            <p class="card__meta">Nintendo Switch · PS4 · Xbox One · Steam</p>
+                            <p class="card__meta">Creator, Developer</p>
+                    </div>
+                    </article>
+
+                    <article class="card card--media">
+                        <a class="card__media-link" href="https://store.steampowered.com/app/262120/Toy_Soldiers_Complete/" target="_blank" rel="noopener">
+                            <img src="images/tscomplete.webp" alt="Toy Soldiers: Complete">
+                        </a>
+                        <div class="card__body">
+                            <h4 class="card__title"><a href="https://store.steampowered.com/app/262120/Toy_Soldiers_Complete/" target="_blank" rel="noopener">Toy Soldiers: Complete</a></h4>
+                            <p class="card__meta">Steam</p>
+                            <p class="card__meta">Creator, Developer</p>
+                    </div>
+                    </article>
+
+                    <article class="card card--media">
+                        <a class="card__media-link" href="https://www.metacritic.com/game/xbox-360/toy-soldiers" target="_blank" rel="noopener">
+                            <img src="images/toysoldiers360.webp" alt="Toy Soldiers original release">
+                        </a>
+                        <div class="card__body">
+                            <h4 class="card__title"><a href="https://www.metacritic.com/game/xbox-360/toy-soldiers" target="_blank" rel="noopener">Toy Soldiers</a></h4>
+                            <p class="card__meta">Xbox 360 · Steam</p>
+                            <p class="card__meta">Creator, Developer | D.I.C.E. nominated</p>
+                    </div>
+                    </article>
+
+                    <article class="card card--media">
+                        <a class="card__media-link" href="https://www.metacritic.com/game/xbox-360/toy-soldiers-cold-war" target="_blank" rel="noopener">
+                            <img src="images/coldwar.webp" alt="Toy Soldiers: Cold War">
+                        </a>
+                        <div class="card__body">
+                            <h4 class="card__title"><a href="https://www.metacritic.com/game/xbox-360/toy-soldiers-cold-war" target="_blank" rel="noopener">Toy Soldiers: Cold War</a></h4>
+                            <p class="card__meta">Xbox 360</p>
+                            <p class="card__meta">Creator, Developer | D.I.C.E. nominated</p>
+            </div>
+                    </article>
+
+                    <article class="card card--media">
+                        <a class="card__media-link" href="https://youtu.be/tIfU0cyX4jg" target="_blank" rel="noopener">
+                            <img src="images/warchest.webp" alt="Toy Soldiers: Warchest">
+                        </a>
+                        <div class="card__body">
+                            <h4 class="card__title"><a href="https://youtu.be/tIfU0cyX4jg" target="_blank" rel="noopener">Toy Soldiers: Warchest</a></h4>
+                            <p class="card__meta">Xbox One · PS4 · Steam</p>
+                            <p class="card__meta">Executive Producer</p>
+                    </div>
+                    </article>
                 </div>
 
-                <div class="neo-game-item" data-game="2">
-                    <img src="images/toysoldiers360.webp" alt="Toy Soldiers" class="neo-game-item-image">
-                    <div class="neo-game-item-content">
-                        <h3 class="neo-game-item-title"><a href="https://www.metacritic.com/game/xbox-360/toy-soldiers" target="_blank">TOY SOLDIERS</a></h3>
-                        <p class="neo-game-item-platform">[Xbox 360 | Steam]</p>
-                        <p class="neo-game-item-role">Owner, Creator, Developer</p>
-                        <div class="neo-game-item-description">
-                            The original award-winning tower defense game that launched the franchise. WWI toy soldiers come to life in this innovative strategy game.
-                        </div>
+                <h3 class="section__subheading">Signal Studios Originals</h3>
+                <div class="cards cards--media">
+                    <article class="card card--media">
+                        <a class="card__media-link" href="https://store.steampowered.com/app/307880/Savage_Lands/" target="_blank" rel="noopener">
+                            <img src="images/savagelands.webp" alt="Savage Lands key art">
+                        </a>
+                        <div class="card__body">
+                            <h4 class="card__title"><a href="https://store.steampowered.com/app/307880/Savage_Lands/" target="_blank" rel="noopener">Savage Lands</a></h4>
+                            <p class="card__meta">Steam</p>
+                            <p class="card__meta">Executive Producer</p>
                     </div>
+                    </article>
+
+                    <article class="card card--media">
+                        <a class="card__media-link" href="https://store.steampowered.com/app/2113570/Ascend_Reborn/" target="_blank" rel="noopener">
+                            <img src="images/ascendreborn.webp" alt="Ascend: Hand of Kul">
+                        </a>
+                        <div class="card__body">
+                            <h4 class="card__title"><a href="https://store.steampowered.com/app/2113570/Ascend_Reborn/" target="_blank" rel="noopener">Ascend: Hand of Kul</a></h4>
+                            <p class="card__meta">Xbox 360 · Steam</p>
+                            <p class="card__meta">Creator, Developer</p>
+                    </div>
+                    </article>
+
+                    <article class="card card--media">
+                        <a class="card__media-link" href="https://apps.apple.com/us/app/the-sleeping-prince-gameclub/id642606469" target="_blank" rel="noopener">
+                            <img src="images/sleepingprince.webp" alt="The Sleeping Prince on mobile">
+                        </a>
+                        <div class="card__body">
+                            <h4 class="card__title"><a href="https://apps.apple.com/us/app/the-sleeping-prince-gameclub/id642606469" target="_blank" rel="noopener">Sleeping Prince</a></h4>
+                            <p class="card__meta">iOS · Android</p>
+                            <p class="card__meta">Executive Producer</p>
+                    </div>
+                    </article>
                 </div>
 
-                <div class="neo-game-item" data-game="3">
-                    <img src="images/coldwar.webp" alt="Toy Soldiers: Cold War" class="neo-game-item-image">
-                    <div class="neo-game-item-content">
-                        <h3 class="neo-game-item-title"><a href="https://www.metacritic.com/game/xbox-360/toy-soldiers-cold-war" target="_blank">TOY SOLDIERS: COLD WAR</a></h3>
-                        <p class="neo-game-item-platform">[Xbox 360]</p>
-                        <p class="neo-game-item-role">Creator, Owner, Developer</p>
-                        <div class="neo-game-item-description">
-                            The sequel that brought the franchise into the 1980s with helicopters, jets, and modern warfare in toy form.
+                <h3 class="section__subheading">AAA Contributions</h3>
+                <div class="cards cards--media">
+                    <article class="card card--media">
+                        <a class="card__media-link" href="https://en.wikipedia.org/wiki/Justice_League_Heroes" target="_blank" rel="noopener">
+                            <img src="images/justiceleague.webp" alt="Justice League Heroes cover art">
+                        </a>
+                        <div class="card__body">
+                            <h4 class="card__title"><a href="https://en.wikipedia.org/wiki/Justice_League_Heroes" target="_blank" rel="noopener">Justice League Heroes</a></h4>
+                            <p class="card__meta">PS2 · PSP · Xbox</p>
+                            <p class="card__meta">Lead Environment Artist</p>
                         </div>
-                    </div>
+                    </article>
+
+                    <article class="card card--media">
+                        <a class="card__media-link" href="https://www.ea.com/games/need-for-speed/need-for-speed-hot-pursuit-remastered" target="_blank" rel="noopener">
+                            <img src="images/nfshp2.webp" alt="Need for Speed: Hot Pursuit 2 screenshot">
+                        </a>
+                        <div class="card__body">
+                            <h4 class="card__title"><a href="https://www.ea.com/games/need-for-speed/need-for-speed-hot-pursuit-remastered" target="_blank" rel="noopener">Need for Speed: Hot Pursuit 2</a></h4>
+                            <p class="card__meta">GameCube · Xbox · PC · PS2</p>
+                            <p class="card__meta">Environment Artist</p>
+                            </div>
+                    </article>
+
+                    <article class="card card--media">
+                        <a class="card__media-link" href="https://www.ea.com/games/medal-of-honor/medal-of-honor-pacific-assault" target="_blank" rel="noopener">
+                            <img src="images/moh.webp" alt="Medal of Honor: Pacific Assault">
+                        </a>
+                        <div class="card__body">
+                            <h4 class="card__title"><a href="https://www.ea.com/games/medal-of-honor/medal-of-honor-pacific-assault" target="_blank" rel="noopener">Medal of Honor: Pacific Assault</a></h4>
+                            <p class="card__meta">PC</p>
+                            <p class="card__meta">CG Artist III</p>
+                            </div>
+                    </article>
+
+                    <article class="card card--media">
+                        <a class="card__media-link" href="https://www.metacritic.com/game/socom-3-u-s-navy-seals/" target="_blank" rel="noopener">
+                            <img src="images/socom.webp" alt="SOCOM III">
+                        </a>
+                        <div class="card__body">
+                            <h4 class="card__title"><a href="https://www.metacritic.com/game/socom-3-u-s-navy-seals/" target="_blank" rel="noopener">SOCOM III</a></h4>
+                            <p class="card__meta">PS2</p>
+                            <p class="card__meta">Team Artist</p>
+                            </div>
+                    </article>
+
+                    <article class="card card--media">
+                        <a class="card__media-link" href="https://www.metacritic.com/game/socom-u-s-navy-seals-fireteam-bravo/" target="_blank" rel="noopener">
+                            <img src="images/socomfireteambravo.webp" alt="SOCOM: Fireteam Bravo">
+                        </a>
+                        <div class="card__body">
+                            <h4 class="card__title"><a href="https://www.metacritic.com/game/socom-u-s-navy-seals-fireteam-bravo/" target="_blank" rel="noopener">SOCOM: FIRETEAM BRAVO</a></h4>
+                            <p class="card__meta">PSP</p>
+                            <p class="card__meta">Lead Artist</p>
+                            </div>
+                    </article>
+
+                    <article class="card card--media">
+                        <a class="card__media-link" href="https://www.metacritic.com/game/summoner-2/" target="_blank" rel="noopener">
+                            <img src="images/summoner2.webp" alt="Summoner 2">
+                        </a>
+                        <div class="card__body">
+                            <h4 class="card__title"><a href="https://www.metacritic.com/game/summoner-2/" target="_blank" rel="noopener">SUMMONER II</a></h4>
+                            <p class="card__meta">GameCube</p>
+                            <p class="card__meta">Lead Artist</p>
+                            </div>
+                    </article>
+
+                    <article class="card card--media">
+                        <a class="card__media-link" href="https://www.metacritic.com/game/red-faction-ii/" target="_blank" rel="noopener">
+                            <img src="images/redfaction2.webp" alt="Red Faction II">
+                        </a>
+                        <div class="card__body">
+                            <h4 class="card__title"><a href="https://www.metacritic.com/game/red-faction-ii/" target="_blank" rel="noopener">RED FACTION II</a></h4>
+                            <p class="card__meta">GameCube · Xbox · PC</p>
+                            <p class="card__meta">Lead Artist</p>
+                        </div>
+                    </article>
+
+                    <article class="card card--media">
+                        <a class="card__media-link" href="https://www.metacritic.com/game/azurik-rise-of-perathia/" target="_blank" rel="noopener">
+                            <img src="images/azurik.webp" alt="Azurik: Rise of Perathia">
+                        </a>
+                        <div class="card__body">
+                            <h4 class="card__title"><a href="https://www.metacritic.com/game/azurik-rise-of-perathia/" target="_blank" rel="noopener">AZURIK</a></h4>
+                            <p class="card__meta">Xbox</p>
+                            <p class="card__meta">Environment Artist</p>
+                            </div>
+                    </article>
+
+                    <article class="card card--media">
+                        <a class="card__media-link" href="https://en.wikipedia.org/wiki/Harry_Potter:_Quidditch_World_Cup" target="_blank" rel="noopener">
+                            <img src="images/hp.webp" alt="Harry Potter and the Prisoner of Azkaban">
+                        </a>
+                        <div class="card__body">
+                            <h4 class="card__title"><a href="https://en.wikipedia.org/wiki/Harry_Potter:_Quidditch_World_Cup" target="_blank" rel="noopener">HARRY POTTER: POA</a></h4>
+                            <p class="card__meta">PS2 · GameCube · Xbox · PC</p>
+                            <p class="card__meta">Prop Artist</p>
+                            </div>
+                    </article>
+
+                    <article class="card card--media">
+                        <a class="card__media-link" href="https://en.wikipedia.org/wiki/Star_Trek:_Legacy" target="_blank" rel="noopener">
+                            <img src="images/startrek.webp" alt="Star Trek: Legacy">
+                        </a>
+                        <div class="card__body">
+                            <h4 class="card__title"><a href="https://en.wikipedia.org/wiki/Star_Trek:_Legacy" target="_blank" rel="noopener">STAR TREK: LEGACY</a></h4>
+                            <p class="card__meta">Xbox Arcade</p>
+                            <p class="card__meta">Artist</p>
+                            </div>
+                    </article>
+
+                    <article class="card card--media">
+                        <a class="card__media-link" href="https://en.wikipedia.org/wiki/Dungeons_%26_Dragons_Online" target="_blank" rel="noopener">
+                            <img src="images/dnd.webp" alt="Dungeons & Dragons: Online">
+                        </a>
+                        <div class="card__body">
+                            <h4 class="card__title"><a href="https://en.wikipedia.org/wiki/Dungeons_%26_Dragons_Online" target="_blank" rel="noopener">D&D: ONLINE</a></h4>
+                            <p class="card__meta">PC</p>
+                            <p class="card__meta">Artist</p>
+                            </div>
+                    </article>
+
+                    <article class="card card--media">
+                        <a class="card__media-link" href="https://en.wikipedia.org/wiki/Microsoft_Flight_Simulator_2004:_A_Century_of_Flight" target="_blank" rel="noopener">
+                            <img src="images/flightsim.webp" alt="Microsoft Flight Sim X">
+                        </a>
+                        <div class="card__body">
+                            <h4 class="card__title"><a href="https://en.wikipedia.org/wiki/Microsoft_Flight_Simulator_2004:_A_Century_of_Flight" target="_blank" rel="noopener">FLIGHT SIM X</a></h4>
+                            <p class="card__meta">PC</p>
+                            <p class="card__meta">Contract Artist</p>
+                        </div>
+                    </article>
                 </div>
+                            </div>
+        </section>
 
-                <div class="neo-game-item" data-game="4">
-                    <img src="images/warchest.webp" alt="Toy Soldiers: Warchest" class="neo-game-item-image">
-                    <div class="neo-game-item-content">
-                        <h3 class="neo-game-item-title"><a href="https://youtu.be/tIfU0cyX4jg" target="_blank">TOY SOLDIERS: WARCHEST</a></h3>
-                        <p class="neo-game-item-platform">[X1 | PS4 | Steam]</p>
-                        <p class="neo-game-item-role">Executive Producer, Developer</p>
-                        <div class="neo-game-item-description">
-                            Fantasy-themed expansion featuring licensed armies from popular franchises including He-Man and G.I. Joe.
-                        </div>
-                    </div>
-                </div>
+        <section id="skills" class="section section--alt">
+            <div class="section__inner">
+                <header class="section__header">
+                    <h2 class="section__title">Skills</h2>
+                    <p class="section__subtitle">
+                        Proficient in modern game development, AI integration, and studio leadership.
+                    </p>
+                </header>
 
-                <div class="neo-game-item" data-game="5">
-                    <img src="images/savagelands.webp" alt="Savage Lands" class="neo-game-item-image">
-                    <div class="neo-game-item-content">
-                        <h3 class="neo-game-item-title"><a href="https://store.steampowered.com/app/307880/Savage_Lands/" target="_blank">SAVAGE LANDS</a></h3>
-                        <p class="neo-game-item-platform">[Steam]</p>
-                        <p class="neo-game-item-role">Executive Producer, Developer</p>
-                        <div class="neo-game-item-description">
-                            Fantasy survival game combining crafting, building, and monster hunting in a dark medieval world.
-                        </div>
-                    </div>
-                </div>
+                <div class="cards cards--grid">
+                    <article class="card">
+                        <h3 class="card__title">Development Toolset 20 plus years experience</h3>
+                        <ul class="card__list">
+                            <li>Engines: Unity, Unreal Engine, Godot, proprietary engine-Sig Engine, worked with and created a variety of proprietary engines and tools</li>
+                            <li>Expert: Adobe Photoshop, Autodesk Maya, Vegas, Adobe Illustrator, ZBrush, Aseprite, Blender, Premiere Pro, After Effects</li>
+                            <li>Production workflow: Visual Studio, VS Code, Git, Perforce, Plastic SCM, JIRA, Cursor, Claude Code</li>
+                        </ul>
+                    </article>
 
-                <div class="neo-game-item" data-game="6">
-                    <img src="images/ascendreborn.webp" alt="Ascend: Hand of Kul" class="neo-game-item-image">
-                    <div class="neo-game-item-content">
-                        <h3 class="neo-game-item-title"><a href="https://store.steampowered.com/app/2113570/Ascend_Reborn/" target="_blank">ASCEND: HAND OF KUL</a></h3>
-                        <p class="neo-game-item-platform">[Xbox 360 | Steam]</p>
-                        <p class="neo-game-item-role">Creator, Owner, Developer</p>
-                        <div class="neo-game-item-description">
-                            Free-to-play action RPG featuring massive scale battles and innovative social gameplay mechanics.
-                        </div>
-                    </div>
-                </div>
+                    <article class="card">
+                        <h3 class="card__title">Code &amp; Platforms</h3>
+                        <ul class="card__list">
+                            <li>Languages: C#, JS, TypeScript, Python, CSS</li>
+                            <li>Shipped on Platforms: Xbox, PlayStation, Nintendo, Steam, Web, Mobile</li>
+                            <li>Multi-platform start to finish shipping experience across mobile,console and PC ecosystems</li>
+                        </ul>
+                    </article>
 
-                
-
-                <div class="neo-game-item" data-game="7">
-                    <img src="images/sleepingprince.webp" alt="Sleeping Prince" class="neo-game-item-image">
-                    <div class="neo-game-item-content">
-                        <h3 class="neo-game-item-title"><a href="https://apps.apple.com/us/app/the-sleeping-prince-gameclub/id642606469" target="_blank">SLEEPING PRINCE</a></h3>
-                        <p class="neo-game-item-platform">[iOS | Android]</p>
-                        <p class="neo-game-item-role">Executive Producer</p>
-                        <div class="neo-game-item-description">
-                            Mobile puzzle adventure featuring beautiful hand-drawn art and innovative touch-based gameplay.
-                        </div>
-                    </div>
-                </div>
-                <div class="neo-game-item" data-game="16">
-                    <img src="images/justiceleague.webp" alt="Justice League Heroes" class="neo-game-item-image">
-                    <div class="neo-game-item-content">
-                        <h3 class="neo-game-item-title"><a href="https://en.wikipedia.org/wiki/Justice_League_Heroes" target="_blank">JUSTICE LEAGUE HEROES</a></h3>
-                        <p class="neo-game-item-platform">[PS2 | PSP | Xbox]</p>
-                        <p class="neo-game-item-role">Lead Environment Artist</p>
-                        <div class="neo-game-item-description">
-                            Superhero action-RPG featuring iconic DC Comics characters in cooperative gameplay adventures.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="neo-game-item" data-game="8">
-                    <img src="images/nfshp2.webp" alt="Need for Speed: Hot Pursuit 2" class="neo-game-item-image">
-                    <div class="neo-game-item-content">
-                        <h3 class="neo-game-item-title"><a href="https://www.ea.com/games/need-for-speed/need-for-speed-hot-pursuit-remastered" target="_blank">NEED FOR SPEED: HOT PURSUIT 2</a></h3>
-                        <p class="neo-game-item-platform">[GC | Xbox | PC | PS2]</p>
-                        <p class="neo-game-item-role">Environment Artist</p>
-                        <div class="neo-game-item-description">
-                            High-speed racing action with exotic supercars and intense police chases across stunning environments.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="neo-game-item" data-game="9">
-                    <img src="images/moh.webp" alt="Medal of Honor: Pacific Assault" class="neo-game-item-image">
-                    <div class="neo-game-item-content">
-                        <h3 class="neo-game-item-title"><a href="https://www.ea.com/games/medal-of-honor/medal-of-honor-pacific-assault" target="_blank">MEDAL OF HONOR: PACIFIC ASSAULT</a></h3>
-                        <p class="neo-game-item-platform">[PC]</p>
-                        <p class="neo-game-item-role">CG Artist III</p>
-                        <div class="neo-game-item-description">
-                            WWII first-person shooter focusing on the Pacific Theater with cinematic battles and authentic historical detail.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="neo-game-item" data-game="10">
-                    <img src="images/socom.webp" alt="SOCOM III" class="neo-game-item-image">
-                    <div class="neo-game-item-content">
-                        <h3 class="neo-game-item-title"><a href="https://www.metacritic.com/game/socom-3-u-s-navy-seals/" target="_blank">SOCOM III</a></h3>
-                        <p class="neo-game-item-platform">[PS2]</p>
-                        <p class="neo-game-item-role">Team Artist</p>
-                        <div class="neo-game-item-description">
-                            Tactical third-person shooter featuring Navy SEAL operations with online multiplayer combat.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="neo-game-item" data-game="11">
-                    <img src="images/socomfireteambravo.webp" alt="SOCOM: Fireteam Bravo" class="neo-game-item-image">
-                    <div class="neo-game-item-content">
-                        <h3 class="neo-game-item-title"><a href="https://www.metacritic.com/game/socom-u-s-navy-seals-fireteam-bravo/" target="_blank">SOCOM: FIRETEAM BRAVO</a></h3>
-                        <p class="neo-game-item-platform">[PSP]</p>
-                        <p class="neo-game-item-role">Lead Artist</p>
-                        <div class="neo-game-item-description">
-                            Portable tactical shooter bringing the SOCOM experience to handheld with cross-platform connectivity.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="neo-game-item" data-game="12">
-                    <img src="images/summoner2.webp" alt="Summoner 2" class="neo-game-item-image">
-                    <div class="neo-game-item-content">
-                        <h3 class="neo-game-item-title"><a href="https://www.metacritic.com/game/summoner-2/" target="_blank">SUMMONER II: A GODDESS REBORN</a></h3>
-                        <p class="neo-game-item-platform">[GC]</p>
-                        <p class="neo-game-item-role">Lead Artist</p>
-                        <div class="neo-game-item-description">
-                            Fantasy action-RPG featuring shapeshifting abilities and epic magical battles in a rich fantasy world.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="neo-game-item" data-game="13">
-                    <img src="images/redfaction2.webp" alt="Red Faction II" class="neo-game-item-image">
-                    <div class="neo-game-item-content">
-                        <h3 class="neo-game-item-title"><a href="https://www.metacritic.com/game/red-faction-ii/" target="_blank">RED FACTION II</a></h3>
-                        <p class="neo-game-item-platform">[GC | Xbox | PC]</p>
-                        <p class="neo-game-item-role">Lead Artist</p>
-                        <div class="neo-game-item-description">
-                            Destructible environment shooter featuring revolutionary Geo-Mod technology and intense combat scenarios.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="neo-game-item" data-game="15">
-                    <img src="images/azurik.webp" alt="Azurik: Rise of Perathia" class="neo-game-item-image">
-                    <div class="neo-game-item-content">
-                        <h3 class="neo-game-item-title"><a href="https://www.metacritic.com/game/azurik-rise-of-perathia/" target="_blank">AZURIK: RISE OF PERATHIA</a></h3>
-                        <p class="neo-game-item-platform">[Xbox]</p>
-                        <p class="neo-game-item-role">Environment Artist</p>
-                        <div class="neo-game-item-description">
-                            Adventure platformer featuring elemental magic and exploration in a mystical fantasy realm.
-                        </div>
-                    </div>
-                </div>
-
-             
-
-                <div class="neo-game-item" data-game="17">
-                    <img src="images/hp.webp" alt="Harry Potter and the Prisoner of Azkaban" class="neo-game-item-image">
-                    <div class="neo-game-item-content">
-                        <h3 class="neo-game-item-title"><a href="https://en.wikipedia.org/wiki/Harry_Potter:_Quidditch_World_Cup" target="_blank">HARRY POTTER AND THE PRISONER OF AZKABAN</a></h3>
-                        <p class="neo-game-item-platform">[PS2 | GC | Xbox | PC]</p>
-                        <p class="neo-game-item-role">Prop Artist</p>
-                        <div class="neo-game-item-description">
-                            Magical adventure game bringing the wizarding world to life with authentic Harry Potter gameplay.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="neo-game-item" data-game="18">
-                    <img src="images/startrek.webp" alt="Star Trek: Shattered Universe" class="neo-game-item-image">
-                    <div class="neo-game-item-content">
-                        <h3 class="neo-game-item-title"><a href="https://en.wikipedia.org/wiki/Star_Trek:_Legacy" target="_blank">STAR TREK: LEGACY</a></h3>
-                        <p class="neo-game-item-platform">[Xbox Arcade]</p>
-                        <p class="neo-game-item-role">Artist</p>
-                        <div class="neo-game-item-description">
-                            Space combat game featuring starship battles and tactical fleet combat.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="neo-game-item" data-game="19">
-                    <img src="images/dnd.webp" alt="Dungeons & Dragons: Heroes" class="neo-game-item-image">
-                    <div class="neo-game-item-content">
-                        <h3 class="neo-game-item-title"><a href="https://en.wikipedia.org/wiki/Dungeons_%26_Dragons_Online" target="_blank">DUNGEONS & DRAGONS: ONLINE</a></h3>
-                        <p class="neo-game-item-platform">[PC]</p>
-                        <p class="neo-game-item-role">Artist</p>
-                        <div class="neo-game-item-description">
-                            Massive multiplayer online D&D game bringing classic tabletop adventures to the digital realm.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="neo-game-item" data-game="20">
-                    <img src="images/flightsim.webp" alt="Microsoft Flight Sim X" class="neo-game-item-image">
-                    <div class="neo-game-item-content">
-                        <h3 class="neo-game-item-title"><a href="https://en.wikipedia.org/wiki/Microsoft_Flight_Simulator_2004:_A_Century_of_Flight" target="_blank">MICROSOFT FLIGHT SIM X</a></h3>
-                        <p class="neo-game-item-platform">[PC]</p>
-                        <p class="neo-game-item-role">Contract Artist</p>
-                        <div class="neo-game-item-description">
-                            Realistic flight simulation celebrating a century of aviation with authentic aircraft and detailed environments.
-                        </div>
-                    </div>
+           
                 </div>
             </div>
         </section>
-
-        <!-- ========================================
-             SKILLS SECTION
-        ======================================== -->
-        <section id="skills" class="neo-section">
-            <div class="achievements-gallery">
-                <!-- Section Title -->
-                <div class="achievement-text-item">
-                    <div class="achievement-text-content">
-                        <div class="achievement-text-header">KNOWLEDGE</div>
-                        <div class="achievement-text-subtext">Technical skills, tools, and platforms mastered throughout my 25 year development career. For the last few years, I've been mostly exploring how AI can be applied as a tool for game development and user experience.</div>
-                    </div>
-                </div>
-
-                <!-- Development Tools & Engines Category -->
-                <div class="achievement-item">
-                    <div class="achievement-content">
-                        <h3 class="achievement-title neo-color-blue">DEVELOPMENT TOOLS & ENGINES</h3>
-                        <div class="neo-skills-container">
-                            <div class="neo-skill-card">
-                                <div class="neo-skill-icon"><i class="fab fa-unity"></i></div>
-                                <div class="neo-skill-name">UNITY</div>
-                            </div>
-                            
-                            <div class="neo-skill-card neo-bg-elevated">
-                                <div class="neo-skill-icon"><img src="images/unreal.webp" alt="Unreal" style="width: 40px; height: 40px; filter: invert(1);"></div>
-                                <div class="neo-skill-name">UNREAL</div>
-                            </div>
-                            
-                            <div class="neo-skill-card neo-bg-elevated">
-                                <div class="neo-skill-icon"><i class="fas fa-paint-brush"></i></div>
-                                <div class="neo-skill-name">ADOBE</div>
-                            </div>
-                            
-                            <div class="neo-skill-card neo-bg-elevated neo-color-white">
-                                <div class="neo-skill-icon"><i class="fas fa-drafting-compass"></i></div>
-                                <div class="neo-skill-name">AUTODESK</div>
-                            </div>
-                            
-                            <div class="neo-skill-card neo-bg-elevated">
-                                <div class="neo-skill-icon"><i class="fas fa-cubes"></i></div>
-                                <div class="neo-skill-name">ZBRUSH</div>
-                            </div>
-                            
-                            <div class="neo-skill-card neo-bg-elevated">
-                                <div class="neo-skill-icon"><i class="fas fa-tasks"></i></div>
-                                <div class="neo-skill-name">JIRA</div>
-                            </div>
-                            
-                            <div class="neo-skill-card neo-bg-elevated">
-                                <div class="neo-skill-icon"><i class="fas fa-laptop-code"></i></div>
-                                <div class="neo-skill-name">VISUAL STUDIO</div>
-                            </div>
-                            
-                            <div class="neo-skill-card neo-bg-elevated">
-                                <div class="neo-skill-icon"><i class="fas fa-file-code"></i></div>
-                                <div class="neo-skill-name">VS CODE</div>
-                            </div>
-                            
-                            <div class="neo-skill-card neo-bg-elevated neo-color-white">
-                                <div class="neo-skill-icon"><i class="fab fa-github"></i></div>
-                                <div class="neo-skill-name">GIT</div>
-                            </div>
-                            
-                            <div class="neo-skill-card">
-                                <div class="neo-skill-icon"><i class="fas fa-code-branch"></i></div>
-                                <div class="neo-skill-name">PERFORCE</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Code & Platforms Category -->
-                <div class="achievement-item">
-                    <div class="achievement-content">
-                        <h3 class="achievement-title neo-color-blue">CODE & PLATFORMS</h3>
-                        <div class="neo-skills-container">
-                            <div class="neo-skill-card neo-bg-elevated neo-color-white">
-                                <div class="neo-skill-icon"><i class="fab fa-js"></i></div>
-                                <div class="neo-skill-name">JS</div>
-                            </div>
-                            
-                            <div class="neo-skill-card">
-                                <div class="neo-skill-icon"><i class="fas fa-code"></i></div>
-                                <div class="neo-skill-name">C#</div>
-                            </div>
-                            
-                            <div class="neo-skill-card neo-bg-elevated">
-                                <div class="neo-skill-icon"><i class="fab fa-css3-alt"></i></div>
-                                <div class="neo-skill-name">CSS</div>
-                            </div>
-                            
-                            <div class="neo-skill-card neo-bg-elevated">
-                                <div class="neo-skill-icon"><i class="fab fa-python"></i></div>
-                                <div class="neo-skill-name">PYTHON</div>
-                            </div>
-                            
-                            <div class="neo-skill-card">
-                                <div class="neo-skill-icon"><i class="fab fa-xbox"></i></div>
-                                <div class="neo-skill-name">XBOX</div>
-                            </div>
-                            
-                            <div class="neo-skill-card neo-bg-elevated">
-                                <div class="neo-skill-icon"><i class="fab fa-playstation"></i></div>
-                                <div class="neo-skill-name">PLAYSTATION</div>
-                            </div>
-                            
-                            <div class="neo-skill-card neo-bg-elevated">
-                                <div class="neo-skill-icon"><i class="fas fa-gamepad"></i></div>
-                                <div class="neo-skill-name">NINTENDO</div>
-                            </div>
-                            
-                            <div class="neo-skill-card neo-bg-elevated neo-color-white">
-                                <div class="neo-skill-icon"><i class="fab fa-steam"></i></div>
-                                <div class="neo-skill-name">STEAM</div>
-                            </div>
-                            
-                            <div class="neo-skill-card neo-bg-elevated">
-                                <div class="neo-skill-icon"><i class="fas fa-globe"></i></div>
-                                <div class="neo-skill-name">WEB</div>
-                            </div>
-                            
-                            <div class="neo-skill-card">
-                                <div class="neo-skill-icon"><i class="fas fa-mobile-alt"></i></div>
-                                <div class="neo-skill-name">MOBILE</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- AI Category -->
-                <div class="achievement-item">
-                    <div class="achievement-content">
-                        <h3 class="achievement-title neo-color-blue">AI</h3>
-                        <div class="neo-skills-container">
-                            
-                               
-                            <div class="neo-skill-card">
-                                <div class="neo-skill-icon"><i class="fas fa-microchip"></i></div>
-                                <div class="neo-skill-name">OLLAMA</div>
-                            </div>
-                            
-                            <div class="neo-skill-card neo-bg-elevated neo-color-white">
-                                <div class="neo-skill-icon"><i class="fas fa-robot"></i></div>
-                                <div class="neo-skill-name">CLAUDE CODE</div>
-                            </div>
-                            
-                            <div class="neo-skill-card neo-bg-elevated">
-                                <div class="neo-skill-icon"><i class="fas fa-user-secret"></i></div>
-                                <div class="neo-skill-name">AGENT</div>
-                            </div>
-
-                            <div class="neo-skill-card neo-bg-elevated">
-                                <div class="neo-skill-icon"><i class="fas fa-user-secret"></i></div>
-                                <div class="neo-skill-name">LOCAL AI</div>
-                            </div>
-                    
-                            
-                        
-                         
-                            
-                            <div class="neo-skill-card neo-bg-elevated neo-color-white">
-                                <div class="neo-skill-icon"><i class="fas fa-robot"></i></div>
-                                <div class="neo-skill-name">MCP</div>
-                            </div>
-                            
-                    
-                            
-                            <div class="neo-skill-card neo-bg-elevated">
-                                <div class="neo-skill-icon"><i class="fas fa-link"></i></div>
-                                <div class="neo-skill-name">LANGCHAIN</div>
-                            </div>
-                            
-                            <div class="neo-skill-card neo-bg-elevated neo-color-white">
-                                <div class="neo-skill-icon"><i class="fas fa-brain"></i></div>
-                                <div class="neo-skill-name">GEMINI</div>
-                            </div>
-                            
-                            <div class="neo-skill-card neo-bg-elevated">
-                                <div class="neo-skill-icon"><i class="fab fa-google"></i></div>
-                                <div class="neo-skill-name">GOOGLE CLOUD</div>
-                            </div>
-                            
-                            <div class="neo-skill-card neo-bg-elevated">
-                                <div class="neo-skill-icon"><i class="fas fa-terminal"></i></div>
-                                <div class="neo-skill-name">CURSOR</div>
-                            </div>
-                            
-                            <div class="neo-skill-card neo-bg-elevated">
-                                <div class="neo-skill-icon"><i class="fas fa-cogs"></i></div>
-                                <div class="neo-skill-name">AI DEV</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-         
+    </main>
 
     <!-- Load Neubrutalism JavaScript (deferred for better performance) -->
     <script src="neobrutalism.js" defer></script>
-    
 
 </body>
 </html> 
