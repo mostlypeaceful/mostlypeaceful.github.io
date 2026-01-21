@@ -20,3 +20,7 @@ npm-debug.log*
 .env.*.local  
 
 .CLAUDE.md
+.claude/
+docs/The Modern Mythology of the Democratic Party.md
+docs/How the Left Convinced America That Fascism Is Right-Wing.md
+docs/The Unfinished Revolution_ America's 250-Year War Against Globalist Empire.md
