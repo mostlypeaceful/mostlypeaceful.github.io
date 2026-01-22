@@ -325,6 +325,64 @@ a.keywords__item:visited {
     color: var(--color-text-secondary);
 }
 
+/* Box Art Hover Popup */
+.keywords__item[data-boxart] {
+    position: relative;
+}
+
+.keywords__item[data-boxart]::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-0.5rem);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid var(--color-surface);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 100;
+    margin-bottom: -1px;
+}
+
+.keywords__item[data-boxart]::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-0.5rem);
+    width: 200px;
+    height: 280px;
+    background-image: var(--boxart-url);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 99;
+    margin-bottom: 8px;
+}
+
+.keywords__item[data-boxart]:hover::before,
+.keywords__item[data-boxart]:focus::before {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.keywords__item[data-boxart]:hover::after,
+.keywords__item[data-boxart]:focus::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+
 /* ============================================
    DESKTOP LAYOUT
    ============================================ */
@@ -439,5 +497,11 @@ a.keywords__item:visited {
 
     .keywords__item {
         font-size: 0.65rem;
+    }
+
+    /* Smaller popup on mobile */
+    .keywords__item[data-boxart]::after {
+        width: 150px;
+        height: 210px;
     }
 }
