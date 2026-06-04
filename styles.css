@@ -293,6 +293,14 @@ button {
     outline: none;
 }
 
+.portfolio__bottom-nav {
+    width: min(var(--max-width), calc(100% - 2rem));
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0 0 2rem;
+}
+
 /* ============================================
    VIDEO SECTION
    ============================================ */
@@ -645,8 +653,11 @@ a.keywords__item:visited {
     }
 
     .current-project__grid {
-        grid-template-columns: 1fr;
-        justify-content: stretch;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .current-card:nth-child(3) {
+        grid-column: 1 / -1;
     }
 
     .current-card h2 {
@@ -708,7 +719,7 @@ a.keywords__item:visited {
     }
 
     .shipped-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 0.45rem;
     }
 
@@ -725,5 +736,20 @@ a.keywords__item:visited {
     .keywords__item[data-boxart]::after {
         width: 150px;
         height: 210px;
+    }
+}
+
+@media (max-width: 899px) and (orientation: landscape) {
+    .current-project__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .current-card:nth-child(3) {
+        grid-column: auto;
+    }
+
+    .shipped-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.6rem;
     }
 }
