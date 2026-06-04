@@ -645,8 +645,8 @@ a.keywords__item:visited {
     }
 
     .current-project__grid {
-        grid-template-columns: repeat(auto-fit, minmax(210px, 240px));
-        justify-content: center;
+        grid-template-columns: 1fr;
+        justify-content: stretch;
     }
 
     .current-card h2 {
@@ -708,12 +708,12 @@ a.keywords__item:visited {
     }
 
     .shipped-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 0.45rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 0.75rem;
     }
 
     .shipped-grid .keywords__item {
-        font-size: 0.5rem;
+        font-size: 0.62rem;
         line-height: 1.15;
     }
 
