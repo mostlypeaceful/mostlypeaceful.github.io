@@ -96,6 +96,7 @@ button {
 
 .current-hero img {
     width: 100%;
+    min-width: 400px;
     max-width: 100%;
     height: auto;
     border-radius: 0;
@@ -146,9 +147,9 @@ button {
 
 .current-card__body {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    min-height: 210px;
     height: auto;
-    overflow: auto;
+    overflow: visible;
     padding: 0.55rem;
 }
 
@@ -513,6 +514,57 @@ a.keywords__item:visited {
     transform: translateX(-50%) translateY(0);
 }
 
+.shipped-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.8rem;
+    line-height: 1.25;
+}
+
+.shipped-grid .keywords__item {
+    display: block;
+    min-width: 0;
+    color: var(--color-text-secondary);
+    font-size: 0.68rem;
+    line-height: 1.25;
+}
+
+.shipped-grid .keywords__item::after,
+.shipped-grid .keywords__item:last-child::after {
+    content: '';
+}
+
+.shipped-grid .keywords__item[data-boxart]::before {
+    content: '';
+    position: static;
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    height: auto;
+    margin: 0 0 0.45rem;
+    border: 1px solid var(--color-border-light);
+    border-radius: 0;
+    background-image: var(--boxart-url);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: none;
+    opacity: 1;
+    transform: none;
+    pointer-events: none;
+}
+
+.shipped-grid .keywords__item[data-boxart]::after {
+    content: '';
+    display: none;
+}
+
+.shipped-grid .keywords__item[data-boxart]:hover::before,
+.shipped-grid .keywords__item[data-boxart]:focus::before {
+    opacity: 1;
+    transform: none;
+}
+
 
 /* ============================================
    DESKTOP LAYOUT
@@ -593,7 +645,17 @@ a.keywords__item:visited {
     }
 
     .current-project__grid {
-        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(210px, 240px));
+        justify-content: center;
+    }
+
+    .current-card h2 {
+        font-size: 0.72rem;
+    }
+
+    .current-card p,
+    .current-card a {
+        font-size: 0.62rem;
     }
 
     .portfolio__video-container {
@@ -643,6 +705,20 @@ a.keywords__item:visited {
 
     .keywords__item {
         font-size: 0.65rem;
+    }
+
+    .shipped-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.45rem;
+    }
+
+    .shipped-grid .keywords__item {
+        font-size: 0.5rem;
+        line-height: 1.15;
+    }
+
+    .shipped-grid .keywords__item[data-boxart]::before {
+        margin-bottom: 0.3rem;
     }
 
     /* Smaller popup on mobile */
