@@ -708,12 +708,12 @@ a.keywords__item:visited {
     }
 
     .shipped-grid {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 0.75rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.45rem;
     }
 
     .shipped-grid .keywords__item {
-        font-size: 0.62rem;
+        font-size: 0.5rem;
         line-height: 1.15;
     }
 
